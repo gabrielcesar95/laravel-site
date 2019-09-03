@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'Cesdev',
+    'title' => 'Site',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Ces</b>dev',
+    'logo' => '<b>Si</b>te',
 
-    'logo_mini' => '<b>C</b>dv',
+    'logo_mini' => '<b>S</b>t',
 
     /*
     |--------------------------------------------------------------------------
