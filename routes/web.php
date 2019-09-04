@@ -44,6 +44,7 @@ Route::group(['prefix' => 'adm', 'namespace' => 'Admin', 'as' => 'admin.'], func
 
     Route::group(['prefix' => 'usuarios', 'namespace' => 'User', 'as' => 'user.'], function () {
         Route::get('/', 'UserController@index')->name('index');
+        Route::post('busca', 'UserController@index')->name('search');
 
     });
 

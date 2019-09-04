@@ -1,0 +1,6 @@
+[data-sort]:hover{
+    cursor: pointer;
+}
+[data-sort].asc{
+
+}

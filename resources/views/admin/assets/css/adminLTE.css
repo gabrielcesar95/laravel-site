@@ -98,7 +98,7 @@ body{
 }
 .main-footer{
     background: #fff;
-    padding: 15px;
+    padding: 1rem;
     color: #444;
     border-top: 1px solid #d2d6de;
 }
@@ -145,7 +145,7 @@ body{
 /* Content */
 .content{
     min-height: 250px;
-    padding: 15px;
+    padding: 1rem;
     margin-right: auto;
     margin-left: auto;
     padding-left: 15px;
@@ -329,7 +329,7 @@ a:focus{
 }
 .content-header{
     position: relative;
-    padding: 15px 15px 0 15px;
+    padding: 15px 1rem 0 1rem;
 }
 .content-header > h1{
     margin: 0;
@@ -384,7 +384,7 @@ a:focus{
     color: #fff;
     border: 0;
     margin: 0;
-    padding: 15px 15px;
+    padding: 1rem 1rem;
 }
 @media (max-width: 991px){
     .navbar-custom-menu .navbar-nav > li{
@@ -1113,7 +1113,7 @@ a:focus{
     font-size: 12px;
 }
 .navbar-nav > .user-menu > .dropdown-menu > .user-body{
-    padding: 15px;
+    padding: 1rem;
     border-bottom: 1px solid #f4f4f4;
     border-top: 1px solid #ddd;
 }
@@ -2312,7 +2312,7 @@ a:focus{
 .btn-app{
     border-radius: 3px;
     position: relative;
-    padding: 15px 5px;
+    padding: 1rem 5px;
     margin: 0 0 10px 10px;
     min-width: 80px;
     height: 60px;
