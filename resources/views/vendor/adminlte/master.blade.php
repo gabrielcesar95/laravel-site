@@ -7,27 +7,16 @@
     <title>@yield('title_prefix', config('adminlte.title_prefix', ''))
         @yield('title', config('adminlte.title', 'AdminLTE 2'))
         @yield('title_postfix', config('adminlte.title_postfix', ''))</title>
-    <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    {{-- Bootstrap 3.3.7 --}}
-    {{-- <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/bootstrap/dist/css/bootstrap.min.css') }}"> --}}
-    {{-- Font Awesome --}}
-    {{-- <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/font-awesome/css/all.min.css') }}"> --}}
-    {{-- Ionicons --}}
-    {{-- <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}"> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- Compiled Mix CSS --}}
     <link rel="stylesheet" href="{{ mix('admin/assets/css/admin.css') }}">
     <link rel="stylesheet" href="{{ mix('admin/assets/css/styles.css') }}">
     <!-- Compiled Mix JS -->
-    {{-- <script type="text/javascript" src="{{ mix('admin/assets/js/manifest.js') }}"></script> --}}
-    {{-- <script type="text/javascript" src="{{ mix('admin/assets/js/vendor.js') }}"></script> --}}
     <script type="text/javascript" src="{{ mix('admin/assets/js/scripts.js') }}"></script>
 
     @include('adminlte::plugins', ['type' => 'css'])
-
-    {{-- Theme style --}}
-    {{-- <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}"> --}}
 
     @yield('adminlte_css')
 
@@ -41,10 +30,6 @@
 <body class="hold-transition @yield('body_class')">
 
 @yield('body')
-
-{{--<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>--}}
-{{--<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>--}}
-{{--<script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>--}}
 
 @include('adminlte::plugins', ['type' => 'js'])
 

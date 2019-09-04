@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+
 Route::group(['name' => 'auth'], function () {
     // Login
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -39,4 +41,10 @@ Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
 
 Route::group(['prefix' => 'adm', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     Route::get('/', 'DashboardController@index')->name('index');
+
+    Route::group(['prefix' => 'usuarios', 'namespace' => 'User', 'as' => 'user.'], function () {
+        Route::get('/', 'UserController@index')->name('index');
+
+    });
+
 });
