@@ -4,3 +4,7 @@
 [data-sort].asc{
 
 }
+
+.c-pointer{
+    cursor: pointer;
+}

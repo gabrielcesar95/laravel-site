@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\User;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
@@ -15,11 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->filter();
+        $data = User::paginate(env('APP_RESULTS_PER_PAGE'));
 
-        dump($users);
-
-        return view('admin.user.index', compact('users'));
+        return view('admin.user.index', compact('data'));
     }
 
     /**
@@ -88,10 +87,34 @@ class UserController extends Controller
         //
     }
 
-    public function filter()
+    public function filter(Request $request)
     {
-        $users = User::all();
+        $params = Arr::except(array_filter($request->all(), function ($p) {
+            return $p !== null;
+        }), '_order');
+        $order = $request->all()['_order'] ?? '';
 
-        return $users;
+        if ($params) {
+            $data = User::where(function ($query) use ($params) {
+                foreach ($params as $param => $props) {
+                    if (is_array($props)) {
+                        switch ($props['operator']) {
+                            case 'LIKE':
+                                $query->where($param, 'LIKE', "%{$props['value']}%");
+                                break;
+
+                            default:
+                                $query->where($param, $props['operator'] ?? '=', $props['value']);
+                        }
+                    } else {
+                        $query->where($param, $props);
+                    }
+                }
+            })->paginate(env('APP_RESULTS_PER_PAGE'));
+        } else {
+            $data = User::paginate(env('APP_RESULTS_PER_PAGE'));
+        }
+
+        return view('admin.user.index_list', compact('data'));
     }
 }

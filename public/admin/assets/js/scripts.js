@@ -18529,6 +18529,42 @@ window.$ = window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_1___default.a;
 jquery__WEBPACK_IMPORTED_MODULE_1___default()(function () {
   jquery__WEBPACK_IMPORTED_MODULE_1___default()('[data-toggle="tooltip"]').tooltip();
 });
+/*
+ **********************************************************************
+ *************************** EVENT HANDLERS ***************************
+ **********************************************************************
+*/
+
+jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '[data-search-form]', function (event) {
+  event.preventDefault();
+  var form = {
+    method: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).attr('method'),
+    action: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).attr('action'),
+    data: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).serialize()
+  }; // form.data += '&_order=name_asc';
+
+  console.log(form);
+  jquery__WEBPACK_IMPORTED_MODULE_1___default.a.ajax({
+    type: form.method,
+    url: form.action,
+    timeout: 10000,
+    dataType: "html",
+    processData: false,
+    contentType: false,
+    data: form.data,
+    beforeSend: function beforeSend() {
+      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#main-list').html('');
+    },
+    success: function success(response) {
+      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#main-list').html(response);
+      console.log('request succesful');
+    },
+    error: function error(xhr, status) {
+      console.log([status, xhr]);
+      alert(status + ':\n' + xhr);
+    }
+  });
+});
 
 /***/ }),
 
@@ -18539,7 +18575,7 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Projetos\laravel-site\resources\views\admin\assets\js\scripts.js */"./resources/views/admin/assets/js/scripts.js");
+module.exports = __webpack_require__(/*! G:\Projetos\app\resources\views\admin\assets\js\scripts.js */"./resources/views/admin/assets/js/scripts.js");
 
 
 /***/ })
