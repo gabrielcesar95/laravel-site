@@ -18531,9 +18531,43 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(function () {
 });
 /*
  **********************************************************************
+ ****************************** FUNCTIONS *****************************
+ **********************************************************************
+*/
+
+function ajaxSearch(options) {
+  if (options.page && options.data) {
+    options.data = options.data + ('&_page=' + options.page);
+  }
+
+  jquery__WEBPACK_IMPORTED_MODULE_1___default.a.ajax({
+    type: options.method,
+    url: options.action,
+    timeout: 10000,
+    dataType: "html",
+    processData: false,
+    contentType: false,
+    data: options.data,
+    beforeSend: function beforeSend() {
+      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#main-list').html(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<div>').addClass('w-100 d-flex justify-content-center py-5').append(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<div>').addClass('spinner-border text-primary').attr({
+        'role': 'status'
+      }).append(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<span>').addClass('sr-only').text('Carreando'))));
+    },
+    success: function success(response) {
+      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#main-list').html(response);
+    },
+    error: function error(xhr, status) {
+      console.log([status, xhr]);
+      alert(status + ':\n' + xhr);
+    }
+  });
+}
+/*
+ **********************************************************************
  *************************** EVENT HANDLERS ***************************
  **********************************************************************
 */
+
 
 jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '[data-search-form]', function (event) {
   event.preventDefault();
@@ -18541,29 +18575,21 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '[data-sear
     method: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).attr('method'),
     action: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).attr('action'),
     data: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).serialize()
-  }; // form.data += '&_order=name_asc';
-
-  console.log(form);
-  jquery__WEBPACK_IMPORTED_MODULE_1___default.a.ajax({
-    type: form.method,
-    url: form.action,
-    timeout: 10000,
-    dataType: "html",
-    processData: false,
-    contentType: false,
-    data: form.data,
-    beforeSend: function beforeSend() {
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#main-list').html('');
-    },
-    success: function success(response) {
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#main-list').html(response);
-      console.log('request succesful');
-    },
-    error: function error(xhr, status) {
-      console.log([status, xhr]);
-      alert(status + ':\n' + xhr);
-    }
-  });
+  };
+  ajaxSearch(form);
+});
+jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('click', '[data-search-page]', function (event) {
+  event.preventDefault();
+  var href = jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).attr('href');
+  var search_form = jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).find('[data-search-form]');
+  var page = href.substr(href.indexOf('?page=') + 6);
+  var options = {
+    method: search_form.attr('method'),
+    action: search_form.attr('action'),
+    page: page,
+    data: search_form.serialize()
+  };
+  ajaxSearch(options);
 });
 
 /***/ }),

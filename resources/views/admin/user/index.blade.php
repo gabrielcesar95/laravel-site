@@ -39,12 +39,14 @@
             <button class="btn btn-info text-white d-flex mb-auto" type="button" data-toggle="collapse" data-target="#filters-accordion" aria-expanded="true" aria-controls="filters-accordion">
                 Filtros
             </button>
+
             <button class="btn btn-success ml-auto d-flex align-items-center">
                 <i class="material material-add mr-1"></i> Novo Usuário
             </button>
         </div>
-
-        @include('admin.user.index_list')
+        <div id="main-list">
+            @include('admin.user.index_list')
+        </div>
     </section>
 @stop
 

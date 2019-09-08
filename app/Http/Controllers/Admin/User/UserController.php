@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::paginate(env('APP_RESULTS_PER_PAGE'));
+        $data = User::where('active', 1)->paginate(env('APP_RESULTS_PER_PAGE'));
 
         return view('admin.user.index', compact('data'));
     }
@@ -91,8 +91,9 @@ class UserController extends Controller
     {
         $params = Arr::except(array_filter($request->all(), function ($p) {
             return $p !== null;
-        }), '_order');
-        $order = $request->all()['_order'] ?? '';
+        }), ['_order', '_page']);
+        $order = $request->get('_order') ?? '';
+        $page = $request->get('_page') ?? 1;
 
         if ($params) {
             $data = User::where(function ($query) use ($params) {
@@ -110,7 +111,7 @@ class UserController extends Controller
                         $query->where($param, $props);
                     }
                 }
-            })->paginate(env('APP_RESULTS_PER_PAGE'));
+            })->paginate(env('APP_RESULTS_PER_PAGE'), ['*'], 'page', $page);
         } else {
             $data = User::paginate(env('APP_RESULTS_PER_PAGE'));
         }
