@@ -20,7 +20,7 @@ class UserController extends Controller
             'column' => 'id',
             'direction' => 'asc'
         ];
-        $data = User::where('active', 1)->orderBy($order['column'])->paginate(env('APP_RESULTS_PER_PAGE'));
+        $data = User::where('active', 1)->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
 
         return view('admin.user.index', compact('data', 'order'));
     }
