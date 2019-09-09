@@ -20,6 +20,11 @@ function ajaxSearch(options) {
         options.data = options.data + ('&_page=' + options.page);
     }
     
+    if (options.order && options.data) {
+        options.data = options.data + ('&_order=' + options.order.column);
+        options.data = options.data + ('&_order_direction=' + options.order.direction);
+    }
+    
     $.ajax({
         type: options.method,
         url: options.action,
@@ -80,12 +85,35 @@ $(document).on('click', '[data-search-page]', function (event) {
     let href = $(this).attr('href');
     let search_form = $(document).find('[data-search-form]');
     let page = href.substr(href.indexOf('?page=') + 6);
+    let order = $('#main-list').find('th a[data-search-order-active]');
     
     let options = {
         method: search_form.attr('method'),
         action: search_form.attr('action'),
+        data: search_form.serialize(),
         page: page,
-        data: search_form.serialize()
+        order: {
+            column: order.data('search-order'),
+            direction: order.data('search-order-direction') == 'asc' ? 'desc' : 'asc'
+        }
     };
     ajaxSearch(options);
+});
+
+$(document).on('click', '[data-search-order]', function (event) {
+    event.preventDefault();
+    
+    let search_form = $(document).find('[data-search-form]');
+    let options = {
+        method: search_form.attr('method'),
+        action: search_form.attr('action'),
+        data: search_form.serialize(),
+        order: {
+            column: $(this).data('search-order'),
+            direction: $(this).data('search-order-direction')
+        }
+    };
+    
+    ajaxSearch(options);
+    
 });

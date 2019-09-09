@@ -18540,6 +18540,11 @@ function ajaxSearch(options) {
     options.data = options.data + ('&_page=' + options.page);
   }
 
+  if (options.order && options.data) {
+    options.data = options.data + ('&_order=' + options.order.column);
+    options.data = options.data + ('&_order_direction=' + options.order.direction);
+  }
+
   jquery__WEBPACK_IMPORTED_MODULE_1___default.a.ajax({
     type: options.method,
     url: options.action,
@@ -18583,11 +18588,30 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('click', '[data-searc
   var href = jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).attr('href');
   var search_form = jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).find('[data-search-form]');
   var page = href.substr(href.indexOf('?page=') + 6);
+  var order = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#main-list').find('th a[data-search-order-active]');
   var options = {
     method: search_form.attr('method'),
     action: search_form.attr('action'),
+    data: search_form.serialize(),
     page: page,
-    data: search_form.serialize()
+    order: {
+      column: order.data('search-order'),
+      direction: order.data('search-order-direction') == 'asc' ? 'desc' : 'asc'
+    }
+  };
+  ajaxSearch(options);
+});
+jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('click', '[data-search-order]', function (event) {
+  event.preventDefault();
+  var search_form = jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).find('[data-search-form]');
+  var options = {
+    method: search_form.attr('method'),
+    action: search_form.attr('action'),
+    data: search_form.serialize(),
+    order: {
+      column: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).data('search-order'),
+      direction: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).data('search-order-direction')
+    }
   };
   ajaxSearch(options);
 });

@@ -16,9 +16,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::where('active', 1)->paginate(env('APP_RESULTS_PER_PAGE'));
+        $order = [
+            'column' => 'id',
+            'direction' => 'asc'
+        ];
+        $data = User::where('active', 1)->orderBy($order['column'])->paginate(env('APP_RESULTS_PER_PAGE'));
 
-        return view('admin.user.index', compact('data'));
+        return view('admin.user.index', compact('data', 'order'));
     }
 
     /**
@@ -91,12 +95,17 @@ class UserController extends Controller
     {
         $params = Arr::except(array_filter($request->all(), function ($p) {
             return $p !== null;
-        }), ['_order', '_page']);
-        $order = $request->get('_order') ?? '';
+        }), ['_order', '_order_direction', '_page']);
+
+        $order = [
+            'column' => $request->get('_order') ?? 'id',
+            'direction' => $request->get('_order_direction') ?? 'asc'
+        ];
+
         $page = $request->get('_page') ?? 1;
 
         if ($params) {
-            $data = User::where(function ($query) use ($params) {
+            $data = User::where(function ($query) use ($params, $order) {
                 foreach ($params as $param => $props) {
                     if (is_array($props)) {
                         switch ($props['operator']) {
@@ -111,11 +120,11 @@ class UserController extends Controller
                         $query->where($param, $props);
                     }
                 }
-            })->paginate(env('APP_RESULTS_PER_PAGE'), ['*'], 'page', $page);
+            })->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'), ['*'], 'page', $page);
         } else {
-            $data = User::paginate(env('APP_RESULTS_PER_PAGE'));
+            $data = User::orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
         }
 
-        return view('admin.user.index_list', compact('data'));
+        return view('admin.user.index_list', compact('data', 'order'));
     }
 }

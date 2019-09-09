@@ -3,24 +3,60 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">
-                <span class="d-flex align-items-center text-bold text-white" data-sort="id">
-                    # <i class="ml-1 material material-arrow-downward"></i>
-                </span>
+                <div class="d-flex align-items-center">
+                    <a href="" class="text-bold text-white" data-search-order="id" data-search-order-direction="{{ (isset($order) && $order['column'] == 'id' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'id' ? 'data-search-order-active' : '') }}>
+                        #
+                    </a>
+                    @if(isset($order) && $order['column'] == 'id')
+                        @if($order['direction'] == 'desc')
+                            <i class="ml-1 material material-arrow-downward"></i>
+                        @else
+                            <i class="ml-1 material material-arrow-upward"></i>
+                        @endif
+                    @endif
+                </div>
             </th>
             <th scope="col">
-                <span class="d-flex align-items-center text-bold text-white" data-sort="name">
-                    Nome
-                </span>
+                <div class="d-flex align-items-center">
+                    <a href="" class="text-bold text-white" data-search-order="name" data-search-order-direction="{{ (isset($order) && $order['column'] == 'name' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'name' ? 'data-search-order-active' : '') }}>
+                        Nome
+                    </a>
+                    @if(isset($order) && $order['column'] == 'name')
+                        @if($order['direction'] == 'desc')
+                            <i class="ml-1 material material-arrow-downward"></i>
+                        @else
+                            <i class="ml-1 material material-arrow-upward"></i>
+                        @endif
+                    @endif
+                </div>
             </th>
             <th scope="col">
-                <span class="d-flex align-items-center text-bold text-white" data-sort="email">
-                    E-mail
-                </span>
+                <div class="d-flex align-items-center">
+                    <a href="" class="text-bold text-white" data-search-order="email" data-search-order-direction="{{ (isset($order) && $order['column'] == 'email' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'email' ? 'data-search-order-active' : '') }}>
+                        E-mail
+                    </a>
+                    @if(isset($order) && $order['column'] == 'email')
+                        @if($order['direction'] == 'desc')
+                            <i class="ml-1 material material-arrow-downward"></i>
+                        @else
+                            <i class="ml-1 material material-arrow-upward"></i>
+                        @endif
+                    @endif
+                </div>
             </th>
             <th scope="col">
-                <span class="d-flex align-items-center text-bold text-white" data-sort="last-login">
-                    Último Acesso
-                </span>
+                <div class="d-flex align-items-center">
+                    <a href="" class="text-bold text-white" data-search-order="last_login" data-search-order-direction="{{ (isset($order) && $order['column'] == 'last_login' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'last_login' ? 'data-search-order-active' : '') }}>
+                        Último Acesso
+                    </a>
+                    @if(isset($order) && $order['column'] == 'last_login')
+                        @if($order['direction'] == 'desc')
+                            <i class="ml-1 material material-arrow-downward"></i>
+                        @else
+                            <i class="ml-1 material material-arrow-upward"></i>
+                        @endif
+                    @endif
+                </div>
             </th>
             <th scope="col" class="text-right">
                 <span class="text-bold text-white">
