@@ -7,11 +7,6 @@
         <h1 class="mr-auto">Usuários</h1>
     </div>
 @stop
-{{-- TODO: Concluído - criação do form de filtro com o package Aire --}}
-{{-- TODO: Concluído - esboço do visual da tabela --}}
-{{-- TODO: Aquisição dos dados por ajax no carregamento do form (controller) --}}
-{{-- TODO: Aquisição dos dados por ajax na filtragem --}}
-{{-- TODO: Fazer filtro por ajax conforme: https://www.webslesson.info/2018/09/laravel-pagination-using-ajax.html --}}
 @section('content')
     <section>
         <div class="accordion" id="filters">
@@ -40,7 +35,7 @@
                 Filtros
             </button>
 
-            <button class="btn btn-success ml-auto d-flex align-items-center" data-trigger-popup="{{ route('admin.user.create') }}">
+            <button class="btn btn-success ml-auto d-flex align-items-center" data-trigger-popup="{{ route('admin.user.create') }}" data-popup-size="lg">
                 <i class="material material-add mr-1"></i> Novo Usuário
             </button>
         </div>

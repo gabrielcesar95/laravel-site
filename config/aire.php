@@ -1,7 +1,7 @@
 <?php
 
 return [
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Default Grouping Behavior
@@ -14,7 +14,7 @@ return [
 	|
 	*/
 	'group_by_default' => true,
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Automatically generate input IDs
@@ -26,7 +26,7 @@ return [
 	|
 	*/
 	'auto_id' => true,
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Default to Verbose Summaries
@@ -39,7 +39,7 @@ return [
 	|
 	*/
 	'verbose_summaries_by_default' => false,
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Default Client-Side Validation
@@ -52,7 +52,7 @@ return [
 	|
 	*/
 	'validate_by_default' => true,
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Client-Side Validation Scripts
@@ -65,7 +65,7 @@ return [
 	*/
 	'inline_validation' => true,
 	'validation_script_path' => env('APP_URL').'/vendor/aire/js/aire.js',
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Default Attributes
@@ -81,7 +81,7 @@ return [
 			'method' => 'POST',
 		],
 	],
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Default Classes
@@ -98,7 +98,7 @@ return [
 	|
 	*/
 	'default_classes' => [],
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Variant Classes
@@ -109,7 +109,7 @@ return [
 	|
 	*/
 	'variant_classes' => [],
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Validation Classes
@@ -127,7 +127,7 @@ return [
 	|
 	*/
 	'validation_classes' => [
-		
+
 		/*
 		|--------------------------------------------------------------------------
 		| Not Validated
@@ -142,7 +142,7 @@ return [
 		|
 		*/
 		'none' => [],
-		
+
 		/*
 		|--------------------------------------------------------------------------
 		| Valid
@@ -156,8 +156,8 @@ return [
 		| See default-theme.php for a full example of configuring class names.
 		|
 		*/
-		'valid' => [],
-		
+		'valid' => ['is-valid'],
+
 		/*
 		|--------------------------------------------------------------------------
 		| Invalid
@@ -171,7 +171,7 @@ return [
 		| See default-theme.php for a full example of configuring class names.
 		|
 		*/
-		'invalid' => [],
+		'invalid' => ['is-invalid'],
 	],
-	
+
 ];

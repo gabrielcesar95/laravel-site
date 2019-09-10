@@ -10,7 +10,17 @@
 @stop
 
 @section('content')
-    <p>teste</p>
+    {{ Aire::open()->route('admin.user.store')->autoComplete('off')->rules(['name' => 'required']) }}
+    <div class="form-row">
+        {{ Aire::input('name', 'Nome')->groupClass('col-md-5') }}
+        {{ Aire::input('email', 'E-Mail')->groupClass('col-md-5') }}
+        {{ Aire::checkboxGroup([1 => 'Ativo'], 'active', 'Situação')->groupClass('col-md-2')}}
+    </div>
+    <div class="form-row">
+        {{ Aire::password('password', 'Senha')->groupClass('col-md-5') }}
+        {{ Aire::password('password_repeat', 'Confirme a Senha')->groupClass('col-md-5') }}
+    </div>
+    {{ Aire::close() }}
 @stop
 
 @section('footer')
