@@ -18527,7 +18527,7 @@ __webpack_require__.r(__webpack_exports__);
 
 window.$ = window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_1___default.a;
 jquery__WEBPACK_IMPORTED_MODULE_1___default()(function () {
-  jquery__WEBPACK_IMPORTED_MODULE_1___default()('[data-toggle="tooltip"]').tooltip();
+  setTooltips();
 });
 /*
  **********************************************************************
@@ -18565,6 +18565,12 @@ function ajaxSearch(options) {
       console.log([status, xhr]);
       alert(status + ':\n' + xhr);
     }
+  });
+}
+
+function setTooltips() {
+  jquery__WEBPACK_IMPORTED_MODULE_1___default()('[data-toggle="tooltip"]').tooltip({
+    placement: 'auto'
   });
 }
 /*
@@ -18614,6 +18620,25 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('click', '[data-searc
     }
   };
   ajaxSearch(options);
+});
+jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('click', '[data-trigger-popup]', function (event) {
+  event.preventDefault();
+  var options = {
+    url: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).data('trigger-popup'),
+    data: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).data('popup-data'),
+    size: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).data('popup-size')
+  };
+  var modal = jquery__WEBPACK_IMPORTED_MODULE_1___default()('.modal:first');
+  jquery__WEBPACK_IMPORTED_MODULE_1___default.a.get({
+    url: options.url,
+    data: options.data,
+    dataType: 'html',
+    success: function success(view) {
+      modal.html(view).modal();
+      modal.find('.modal-dialog').addClass(options.size ? 'modal-' + options.size : '');
+      setTooltips();
+    }
+  });
 });
 
 /***/ }),

@@ -5,7 +5,7 @@ import 'material-icons';
 window.$ = window.jQuery = $;
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
+    setTooltips();
 });
 
 /*
@@ -61,6 +61,13 @@ function ajaxSearch(options) {
     });
 }
 
+function setTooltips() {
+    $('[data-toggle="tooltip"]').tooltip({
+        placement: 'auto'
+    });
+}
+
+
 /*
  **********************************************************************
  *************************** EVENT HANDLERS ***************************
@@ -115,5 +122,32 @@ $(document).on('click', '[data-search-order]', function (event) {
     };
     
     ajaxSearch(options);
+    
+});
+
+$(document).on('click', '[data-trigger-popup]', function (event) {
+    event.preventDefault();
+    
+    let options = {
+        url: $(this).data('trigger-popup'),
+        data: $(this).data('popup-data'),
+        size: $(this).data('popup-size')
+    };
+    
+    let modal = $('.modal:first');
+    
+    $.get({
+        url: options.url,
+        data: options.data,
+        dataType: 'html',
+        success: function (view) {
+            
+            modal.html(view).modal();
+            
+            modal.find('.modal-dialog').addClass(options.size ? 'modal-' + options.size : '');
+            
+            setTooltips();
+        }
+    })
     
 });

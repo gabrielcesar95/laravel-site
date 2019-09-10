@@ -40,7 +40,7 @@
                 Filtros
             </button>
 
-            <button class="btn btn-success ml-auto d-flex align-items-center">
+            <button class="btn btn-success ml-auto d-flex align-items-center" data-trigger-popup="{{ route('admin.user.create') }}">
                 <i class="material material-add mr-1"></i> Novo Usuário
             </button>
         </div>
@@ -51,5 +51,7 @@
 @stop
 
 @push('js')
+    <script>
 
+    </script>
 @endpush
