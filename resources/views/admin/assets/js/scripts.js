@@ -4,6 +4,8 @@ import 'material-icons';
 
 window.$ = window.jQuery = $;
 
+require('bootstrap4-toggle');
+
 $(function () {
     setTooltips();
 });
@@ -67,12 +69,24 @@ function setTooltips() {
     });
 }
 
+function setToggles() {
+    $('[data-toggle="toggle"]').bootstrapToggle();
+}
+
 
 /*
  **********************************************************************
  *************************** EVENT HANDLERS ***************************
  **********************************************************************
 */
+
+$(document).on('click', '[data-trigger-submit]', function (event) {
+    event.preventDefault();
+    
+    $('#' + $(this).data('trigger-submit')).submit();
+});
+
+/* **************************** FILTERS **************************** */
 
 $(document).on('submit', '[data-search-form]', function (event) {
     event.preventDefault();
@@ -125,6 +139,8 @@ $(document).on('click', '[data-search-order]', function (event) {
     
 });
 
+/* **************************** POP-UP ***************************** */
+
 $(document).on('click', '[data-trigger-popup]', function (event) {
     event.preventDefault();
     
@@ -147,7 +163,14 @@ $(document).on('click', '[data-trigger-popup]', function (event) {
             modal.find('.modal-dialog').addClass(options.size ? 'modal-' + options.size : '');
             
             setTooltips();
+            setToggles();
         }
     })
     
+});
+
+$(document).on('submit', '.modal-dialog form', function (event) {
+    event.preventDefault();
+    
+    console.log('submit no form do popup');
 });

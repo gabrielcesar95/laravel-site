@@ -26,6 +26,7 @@
         "jquery": "^3.4",
         "popper.js": "^1.15",
         "material-icons": "^0.3",
-        "icheck-bootstrap": "^3.0"
+        "icheck-bootstrap": "^3.0",
+        "bootstrap4-toggle": "^3.5"
     }
 }

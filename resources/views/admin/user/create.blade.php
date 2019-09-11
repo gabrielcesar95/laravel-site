@@ -10,19 +10,19 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->route('admin.user.store')->autoComplete('off')->rules(['name' => 'required']) }}
+    {{ Aire::open()->id('user_create')->route('admin.user.store')->autoComplete('off') }}
     <div class="form-row">
-        {{ Aire::input('name', 'Nome')->groupClass('col-md-5') }}
-        {{ Aire::input('email', 'E-Mail')->groupClass('col-md-5') }}
-        {{ Aire::checkboxGroup([1 => 'Ativo'], 'active', 'Situação')->groupClass('col-md-2')}}
+        {{ Aire::input('name', 'Nome')->groupClass('form-group col-md-5') }}
+        {{ Aire::input('email', 'E-Mail')->groupClass('form-group col-md-5') }}
+        {{ Aire::input('active', 'Situação')->type('checkbox')->groupClass('form-group col-md-2')->data('toggle', 'toggle')->data('width', '100%')->data('on', 'Ativo')->data('off', 'Inativo')->data('onstyle', 'success')->data('offstyle', 'danger')->value(1)->checked() }}
     </div>
     <div class="form-row">
-        {{ Aire::password('password', 'Senha')->groupClass('col-md-5') }}
-        {{ Aire::password('password_repeat', 'Confirme a Senha')->groupClass('col-md-5') }}
+        {{ Aire::password('password', 'Senha')->groupClass('form-group col-md-4') }}
+        {{ Aire::password('password_repeat', 'Confirme a Senha')->groupClass('form-group col-md-4') }}
     </div>
     {{ Aire::close() }}
 @stop
 
 @section('footer')
-    <button type="button" class="btn btn-primary">Salvar</button>
+    <button class="btn btn-primary" data-trigger-submit="user_create">Salvar</button>
 @stop

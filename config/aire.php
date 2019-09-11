@@ -156,7 +156,7 @@ return [
 		| See default-theme.php for a full example of configuring class names.
 		|
 		*/
-		'valid' => ['is-valid'],
+		'valid' => ['input' => 'is-valid'],
 
 		/*
 		|--------------------------------------------------------------------------
@@ -171,7 +171,7 @@ return [
 		| See default-theme.php for a full example of configuring class names.
 		|
 		*/
-		'invalid' => ['is-invalid'],
+		'invalid' => ['input' => 'is-invalid'],
 	],
 
 ];
