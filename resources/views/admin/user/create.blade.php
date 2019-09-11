@@ -10,6 +10,8 @@
 @stop
 
 @section('content')
+    <div id="alerts"></div>
+
     {{ Aire::open()->id('user_create')->route('admin.user.store')->autoComplete('off') }}
     <div class="form-row">
         {{ Aire::input('name', 'Nome')->groupClass('form-group col-md-5') }}
@@ -18,7 +20,7 @@
     </div>
     <div class="form-row">
         {{ Aire::password('password', 'Senha')->groupClass('form-group col-md-4') }}
-        {{ Aire::password('password_repeat', 'Confirme a Senha')->groupClass('form-group col-md-4') }}
+        {{ Aire::password('password_confirmation', 'Confirme a Senha')->groupClass('form-group col-md-4') }}
     </div>
     {{ Aire::close() }}
 @stop

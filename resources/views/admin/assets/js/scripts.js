@@ -172,5 +172,94 @@ $(document).on('click', '[data-trigger-popup]', function (event) {
 $(document).on('submit', '.modal-dialog form', function (event) {
     event.preventDefault();
     
-    console.log('submit no form do popup');
+    let form = $(this);
+    let modal = $(this).parents('.modal-dialog');
+    let request = {
+        method: form.attr('method'),
+        action: form.attr('action'),
+        data: new FormData(form[0]),
+        alerts_div: modal.find('#alerts')
+    };
+    
+    $.ajax({
+        type: request.method,
+        url: request.action,
+        timeout: 10000,
+        dataType: "json",
+        processData: false,
+        contentType: false,
+        async: true,
+        data: request.data,
+        beforeSend: function () {
+            window.loading = Swal.fire({
+                html: $('<div>')
+                    .addClass('w-100 d-flex justify-content-center py-5')
+                    .append(
+                        $('<div>')
+                            .addClass('spinner-border text-primary')
+                            .attr({
+                                'role': 'status'
+                            })
+                            .append(
+                                $('<span>')
+                                    .addClass('sr-only')
+                                    .text('Carreando')
+                            )
+                    ),
+                customClass: {
+                    popup: 'bg-transparent'
+                },
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                showConfirmButton: false
+            });
+        },
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (xhr, status) {
+            if (xhr.status == 422 && xhr.responseJSON.errors) {
+                request.alerts_div.find('div.alert').remove();
+                
+                $.each(xhr.responseJSON.errors, function (key, error) {
+                    request.alerts_div.append(
+                        $('<div>')
+                            .addClass('alert alert-danger alert-dismissable fade show mb-1 py-1')
+                            .attr({
+                                'role': 'alert'
+                            })
+                            .append(
+                                error
+                            )
+                            .append(
+                                $('<button>')
+                                    .addClass('close')
+                                    .attr({
+                                        'type': 'button',
+                                        'data-dismiss': 'alert',
+                                        'aria-label': 'Fechar'
+                                    })
+                                    .append(
+                                        $('<span>')
+                                            .attr({
+                                                'aria-hidden': 'true'
+                                            })
+                                            .html('&times;')
+                                    )
+                            )
+                    );
+                    
+                    form.find('[name="' + key + '"]').addClass('is-invalid');
+                });
+            } else {
+                console.log([status, xhr]);
+                alert(status + ':\n' + xhr);
+            }
+        },
+        complete: function (xhr, status) {
+            loading.close();
+        }
+    });
+    
 });
