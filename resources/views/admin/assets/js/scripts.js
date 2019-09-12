@@ -3,8 +3,10 @@ import $ from 'jquery';
 import 'material-icons';
 
 window.$ = window.jQuery = $;
+window.toastr = require('toastr');
 
 require('bootstrap4-toggle');
+
 
 $(function () {
     setTooltips();
@@ -139,6 +141,23 @@ $(document).on('click', '[data-search-order]', function (event) {
     
 });
 
+$(document).on('click', '[data-search-clear]', function (event) {
+    let form = $(document).find('[data-search-form]:first');
+    let inputs = {
+        inputs: form.find('input[name$="[value]"]'),
+        selects: form.find('select'),
+    };
+    
+    inputs.inputs.val('');
+    $(inputs.selects).each(function (key, val) {
+        let option = $(this).find('option:first');
+        
+        $(this).val(option.val());
+    });
+    
+    form.submit();
+});
+
 /* **************************** POP-UP ***************************** */
 
 $(document).on('click', '[data-trigger-popup]', function (event) {
@@ -216,7 +235,9 @@ $(document).on('submit', '.modal-dialog form', function (event) {
             });
         },
         success: function (response) {
-            console.log(response);
+            if (response.redirect) {
+                window.location.href = response.redirect;
+            }
         },
         error: function (xhr, status) {
             if (xhr.status == 422 && xhr.responseJSON.errors) {

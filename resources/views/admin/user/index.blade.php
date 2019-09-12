@@ -7,6 +7,7 @@
         <h1 class="mr-auto">Usuários</h1>
     </div>
 @stop
+
 @section('content')
     <section>
         <div class="accordion" id="filters">

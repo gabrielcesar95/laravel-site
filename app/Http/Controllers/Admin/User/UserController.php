@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -44,7 +45,20 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        dd($request->all());
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->active = $request->active;
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        session()->flash('message', ['type' => 'success', 'message' => "Usuário <strong>{$user->name}</strong> cadastrado!"]);
+
+        return response()->json(['redirect' => route('admin.user.index')]);
     }
 
     /**

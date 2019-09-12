@@ -95,7 +95,7 @@
                 <td colspan="5" class="text-danger text-center">
                     <span class="d-block text-bold">Nenhum usuário encontrado</span>
                     <div class="btn-toolbar mt-1 justify-content-center" role="toolbar" aria-label="Ações">
-                        <button class="btn btn-sm btn-outline-danger d-flex align-items-center">
+                        <button class="btn btn-sm btn-outline-danger d-flex align-items-center" data-search-clear>
                             <i class="material material-youtube-searched-for mr-1"></i> Limpar Filtros
                         </button>
                     </div>

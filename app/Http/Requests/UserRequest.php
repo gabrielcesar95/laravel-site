@@ -31,7 +31,8 @@ class UserRequest extends FormRequest
             ],
             'email' => [
                 'required',
-                'email'
+                'email',
+                'unique:users,email,id,' . request()->id
             ],
             'active' => [
                 'boolean'
