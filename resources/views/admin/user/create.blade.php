@@ -1,9 +1,13 @@
 @extends('admin.layouts.popup')
 
 @section('title', 'Novo Usuário')
+@section('icon', 'account-plus')
 
 @section('header')
-    <h5 class="modal-title text-bold" id="modal-label">@yield('title')</h5>
+    <h5 class="modal-title text-bold" id="modal-label">
+        <i class="mr-1 mdi mdi-@yield('icon')"></i>
+        @yield('title')
+    </h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>

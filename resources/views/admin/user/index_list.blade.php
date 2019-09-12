@@ -9,9 +9,9 @@
                     </a>
                     @if(isset($order) && $order['column'] == 'id')
                         @if($order['direction'] == 'desc')
-                            <i class="ml-1 material material-arrow-downward"></i>
+                            <i class="ml-1 mdi mdi-arrow-down"></i>
                         @else
-                            <i class="ml-1 material material-arrow-upward"></i>
+                            <i class="ml-1 mdi mdi-arrow-up"></i>
                         @endif
                     @endif
                 </div>
@@ -23,9 +23,9 @@
                     </a>
                     @if(isset($order) && $order['column'] == 'name')
                         @if($order['direction'] == 'desc')
-                            <i class="ml-1 material material-arrow-downward"></i>
+                            <i class="ml-1 mdi mdi-arrow-down"></i>
                         @else
-                            <i class="ml-1 material material-arrow-upward"></i>
+                            <i class="ml-1 mdi mdi-arrow-up"></i>
                         @endif
                     @endif
                 </div>
@@ -37,9 +37,9 @@
                     </a>
                     @if(isset($order) && $order['column'] == 'email')
                         @if($order['direction'] == 'desc')
-                            <i class="ml-1 material material-arrow-downward"></i>
+                            <i class="ml-1 mdi mdi-arrow-down"></i>
                         @else
-                            <i class="ml-1 material material-arrow-upward"></i>
+                            <i class="ml-1 mdi mdi-arrow-up"></i>
                         @endif
                     @endif
                 </div>
@@ -51,9 +51,9 @@
                     </a>
                     @if(isset($order) && $order['column'] == 'last_login')
                         @if($order['direction'] == 'desc')
-                            <i class="ml-1 material material-arrow-downward"></i>
+                            <i class="ml-1 mdi mdi-arrow-down"></i>
                         @else
-                            <i class="ml-1 material material-arrow-upward"></i>
+                            <i class="ml-1 mdi mdi-arrow-up"></i>
                         @endif
                     @endif
                 </div>
@@ -75,10 +75,10 @@
                 <td class="text-right">
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                         <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.user.show', $row->id) }}" data-toggle="tooltip" data-placement="top" title="Visualizar">
-                            <i class="material material-remove-red-eye"></i>
+                            <i class="mdi mdi-eye"></i>
                         </button>
                         <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.user.edit', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Editar">
-                            <i class="material material-create"></i>
+                            <i class="mdi mdi-pencil"></i>
                         </button>
                         <div class="btn-group" role="group">
                             <button id="row-ID-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -98,7 +98,7 @@
                     <span class="d-block text-bold">Nenhum usuário encontrado</span>
                     <div class="btn-toolbar mt-1 justify-content-center" role="toolbar" aria-label="Ações">
                         <button class="btn btn-sm btn-outline-danger d-flex align-items-center" data-search-clear>
-                            <i class="material material-youtube-searched-for mr-1"></i> Limpar Filtros
+                            <i class="mdi mdi-filter-remove mr-1"></i> Limpar Filtros
                         </button>
                     </div>
                 </td>

@@ -22,11 +22,11 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@mdi/font": "^4.4.95",
         "bootstrap": "^4.3",
         "bootstrap4-toggle": "^3.5",
         "icheck-bootstrap": "^3.0",
         "jquery": "^3.4",
-        "material-icons": "^0.3",
         "popper.js": "^1.15",
         "toastr": "^2.1.4"
     }

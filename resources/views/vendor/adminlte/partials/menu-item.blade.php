@@ -8,7 +8,7 @@
             <input type="text" name="{{ $item['input_name'] }}" class="form-control" placeholder="{{ $item['text'] }}">
             <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="d-flex btn btn-flat">
-                    <i class="material material-search"></i>
+                    <i class="mdi mdi-search"></i>
                 </button>
             </span>
         </div>
@@ -16,7 +16,7 @@
 @else
     <li class="{{ $item['class'] }}">
         <a href="{{ $item['href'] }}" @if (isset($item['target'])) target="{{ $item['target'] }}" @endif>
-            <i class="mr-2 material material-{{ $item['icon'] ?? '' }} {{ isset($item['icon_color']) ? 'text-' . $item['icon_color'] : '' }}"></i>
+            <i class="mr-2 mdi mdi-{{ $item['icon'] ?? '' }} {{ isset($item['icon_color']) ? 'text-' . $item['icon_color'] : '' }}"></i>
             <span>
                 {{ $item['text'] }}
             </span>
@@ -29,7 +29,7 @@
                 </span>
             @elseif (isset($item['submenu']))
                 {{-- <span class="ml-auto mr-1 submenu-caret"> --}}
-                {{-- <i class="material material-keyboard-arrow-left"></i> --}}
+                {{-- <i class="mdi mdi-keyboard-arrow-left"></i> --}}
                 {{-- </span> --}}
             @endif
         </a>

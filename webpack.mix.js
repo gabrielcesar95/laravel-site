@@ -68,6 +68,7 @@ mix
         'resources/views/admin/assets/css/styles.css',
     ], 'public/admin/assets/css/styles.css')
     .copyDirectory('resources/views/admin/assets/css/skins', 'public/admin/assets/css/skins')
+    .copyDirectory('resources/views/admin/assets/fonts', 'public/admin/assets/fonts')
     .options({
         processCssUrls: false,
     })

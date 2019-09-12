@@ -21,7 +21,7 @@
                         {{ Aire::hidden('email[operator]')->value('LIKE') }}
                         {{ Aire::select(['1' => 'Ativo', '0' => 'Inativo'], 'active', 'Situação')->groupClass('col-md-2')->value(1) }}
                         <div class="col-md-1 d-flex mt-sm-2">
-                            {{ Aire::submit()->class('w-100 d-flex mt-auto align-items-center justify-content-center')->labelHtml('<i class="material material-search"></i><span class="sr-only">Buscar</span>')->style('height: calc(1.6em + 0.75rem + 2px);') }}
+                            {{ Aire::submit()->class('w-100 d-flex mt-auto align-items-center justify-content-center')->labelHtml('<i class="mdi mdi-magnify"></i><span class="sr-only">Buscar</span>')->style('height: calc(1.6em + 0.75rem + 2px);') }}
                         </div>
                     </div>
                     {{ Aire::close() }}
@@ -33,11 +33,11 @@
     <section class="mt-2">
         <div class="btn-toolbar mb-1" role="toolbar" aria-label="Ações Disponíveis">
             <button class="btn btn-info text-white d-flex mb-auto" type="button" data-toggle="collapse" data-target="#filters-accordion" aria-expanded="true" aria-controls="filters-accordion">
-                Filtros
+                <i class="mdi mdi-filter mr-1"></i> Filtros
             </button>
 
             <button class="btn btn-success ml-auto d-flex align-items-center" data-trigger-popup="{{ route('admin.user.create') }}" data-popup-size="lg">
-                <i class="material material-add mr-1"></i> Novo Usuário
+                <i class="mdi mdi-plus-circle mr-1"></i> Novo Usuário
             </button>
         </div>
         <div id="main-list">

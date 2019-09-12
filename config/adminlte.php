@@ -132,18 +132,18 @@ return [
         [
             'text' => 'Dashboard',
             'url' => 'adm',
-            'icon' => 'folder',
+            'icon' => 'chart-line',
         ],
         ['header' => 'Usuários'],
         [
             'text' => 'Usuários',
             'url' => 'adm/usuarios',
-            'icon' => 'people',
+            'icon' => 'account',
         ],
         [
             'text' => 'Grupos de Acesso',
             'url' => 'adm/usuarios/papeis',
-            'icon' => 'vpn-key',
+            'icon' => 'key-variant',
         ],
     ],
 

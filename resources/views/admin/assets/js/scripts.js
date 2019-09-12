@@ -7,7 +7,6 @@ window.toastr = require('toastr');
 
 require('bootstrap4-toggle');
 
-
 $(function () {
     setTooltips();
 });
