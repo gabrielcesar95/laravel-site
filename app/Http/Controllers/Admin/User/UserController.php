@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -112,6 +113,13 @@ class UserController extends Controller
         return response()->json(['redirect' => route('admin.user.index')]);
     }
 
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('admin.user.delete', compact('user'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -120,7 +128,16 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($id == Auth::id()) {
+            session()->flash('message', ['type' => 'error', 'message' => "Hey! Você não pode deletar a si mesmo 😉"]);
+        } else {
+            $user = User::findOrFail($id);
+            $user->delete();
+
+            session()->flash('message', ['type' => 'success', 'message' => "Usuário <strong>{$user->name}</strong> deletado!"]);
+        }
+
+        return response()->json(['redirect' => route('admin.user.index')]);
     }
 
     public function filter(Request $request)

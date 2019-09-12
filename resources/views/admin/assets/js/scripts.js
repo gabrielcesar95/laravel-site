@@ -243,6 +243,8 @@ $(document).on('submit', '.modal-dialog form', function (event) {
             if (xhr.status == 422 && xhr.responseJSON.errors) {
                 request.alerts_div.find('div.alert').remove();
                 
+                console.log(xhr.responseJSON);
+                
                 $.each(xhr.responseJSON.errors, function (key, error) {
                     request.alerts_div.append(
                         $('<div>')

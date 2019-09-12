@@ -12,7 +12,7 @@
 @section('content')
     <div id="alerts"></div>
 
-    {{ Aire::open()->id('user_create')->route('admin.user.update', $user->id)->method('PUT')->bind($user)->autoComplete('off') }}
+    {{ Aire::open()->id('user_update')->route('admin.user.update', $user->id)->method('PUT')->bind($user)->autoComplete('off') }}
     <div class="form-row">
         {{ Aire::input('name', 'Nome')->groupClass('form-group col-md-5') }}
         {{ Aire::input('email', 'E-Mail')->groupClass('form-group col-md-5') }}
@@ -26,5 +26,8 @@
 @stop
 
 @section('footer')
-    <button class="btn btn-primary" data-trigger-submit="user_create">Salvar</button>
+    <div class="btn-toolbar w-100 justify-content-between" role="toolbar" aria-label="Ações Disponíveis">
+        <button class="btn btn-light" data-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" data-trigger-submit="user_update">Salvar</button>
+    </div>
 @stop

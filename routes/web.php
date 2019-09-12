@@ -75,6 +75,7 @@ Route::group(['prefix' => 'adm', 'namespace' => 'Admin', 'as' => 'admin.'], func
         Route::get('/alterar/{id}', 'UserController@edit')->name('edit');
         Route::put('/alterar/{id}', 'UserController@update')->name('update');
         // DELETE
+        Route::get('/deletar/{id}', 'UserController@delete')->name('delete');
         Route::delete('/deletar/{id}', 'UserController@destroy')->name('destroy');
     });
 

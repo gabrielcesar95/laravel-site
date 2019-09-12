@@ -26,5 +26,8 @@
 @stop
 
 @section('footer')
-    <button class="btn btn-primary" data-trigger-submit="user_create">Salvar</button>
+    <div class="btn-toolbar w-100 justify-content-between" role="toolbar" aria-label="Ações Disponíveis">
+        <button class="btn btn-light" data-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" data-trigger-submit="user_create">Confirmar</button>
+    </div>
 @stop

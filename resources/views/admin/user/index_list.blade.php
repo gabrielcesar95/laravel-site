@@ -84,7 +84,9 @@
                             <button id="row-ID-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             </button>
                             <div class="dropdown-menu" aria-labelledby="row-ID-dropdown">
-                                <span class="dropdown-item c-pointer" data-popup-toggle="{{ route('admin.user.destroy', $row->id) }}" href="#">Deletar</span>
+                                @if($row->id !== Auth::id())
+                                    <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.user.delete', $row->id) }}" href="#">Deletar</span>
+                                @endif
                             </div>
                         </div>
                     </div>

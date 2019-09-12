@@ -4553,7 +4553,7 @@
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/material-icons/iconfont/material-icons.css?c430":
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/material-icons/iconfont/material-icons.css":
 /*!*************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--7-1!./node_modules/postcss-loader/src??ref--7-2!./node_modules/material-icons/iconfont/material-icons.css ***!
   \*************************************************************************************************************************************************/
@@ -15349,7 +15349,7 @@ module.exports = "/fonts/vendor/material-icons/iconMaterialIcons-Regular.woff2?0
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../css-loader??ref--7-1!../../postcss-loader/src??ref--7-2!./material-icons.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/material-icons/iconfont/material-icons.css?c430");
+var content = __webpack_require__(/*! !../../css-loader??ref--7-1!../../postcss-loader/src??ref--7-2!./material-icons.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/material-icons/iconfont/material-icons.css");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -19229,6 +19229,7 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '.modal-dia
     error: function error(xhr, status) {
       if (xhr.status == 422 && xhr.responseJSON.errors) {
         request.alerts_div.find('div.alert').remove();
+        console.log(xhr.responseJSON);
         jquery__WEBPACK_IMPORTED_MODULE_1___default.a.each(xhr.responseJSON.errors, function (key, error) {
           request.alerts_div.append(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<div>').addClass('alert alert-danger alert-dismissable fade show mb-1 py-1').attr({
             'role': 'alert'
@@ -19261,7 +19262,7 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '.modal-dia
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! G:\Projetos\app\resources\views\admin\assets\js\scripts.js */"./resources/views/admin/assets/js/scripts.js");
+module.exports = __webpack_require__(/*! C:\Projetos\laravel-site\resources\views\admin\assets\js\scripts.js */"./resources/views/admin/assets/js/scripts.js");
 
 
 /***/ })
