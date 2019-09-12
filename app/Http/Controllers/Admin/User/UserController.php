@@ -69,7 +69,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('admin.user.show', compact('user'));
     }
 
     /**
@@ -80,7 +82,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -92,7 +96,20 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        dd($request->all());
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->active = $request->active;
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        session()->flash('message', ['type' => 'success', 'message' => "Usuário <strong>{$user->name}</strong> alterado!"]);
+
+        return response()->json(['redirect' => route('admin.user.index')]);
     }
 
     /**

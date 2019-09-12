@@ -32,14 +32,15 @@ class UserRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                'unique:users,email,id,' . request()->id
+                'unique:users,email,' . $this->id
             ],
             'active' => [
                 'boolean'
             ],
             'password' => [
-                'required',
-                'confirmed'
+                'nullable',
+                'confirmed',
+                'min:5'
             ],
             'password_confirmation' => [
                 'required_with:password'
@@ -47,3 +48,5 @@ class UserRequest extends FormRequest
         ];
     }
 }
+
+// TODO: Adicionar textos de validação

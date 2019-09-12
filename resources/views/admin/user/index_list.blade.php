@@ -74,10 +74,10 @@
                 <td>A programar: Logs de acesso</td>
                 <td class="text-right">
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                        <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-popup-toggle="{{ route('admin.user.show', $row->id) }}" data-toggle="tooltip" data-placement="top" title="Visualizar">
+                        <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.user.show', $row->id) }}" data-toggle="tooltip" data-placement="top" title="Visualizar">
                             <i class="material material-remove-red-eye"></i>
                         </button>
-                        <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-popup-toggle="{{ route('admin.user.edit', $row->id) }}" data-toggle="tooltip" data-placement="top" title="Editar">
+                        <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.user.edit', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Editar">
                             <i class="material material-create"></i>
                         </button>
                         <div class="btn-group" role="group">
