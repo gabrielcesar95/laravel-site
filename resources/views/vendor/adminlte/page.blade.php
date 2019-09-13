@@ -24,7 +24,7 @@
                                 {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
                             </a>
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                                <i class="fa fa-bars"></i>
+                                <i class="mdi mdi-menu"></i>
                             </button>
                         </div>
 
@@ -48,7 +48,7 @@
                             <nav class="navbar navbar-static-top" role="navigation">
                                 <!-- Sidebar toggle button-->
                                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                                    <i class="material material-menu"></i>
+                                    <i class="mdi mdi-menu"></i>
                                     <span class="sr-only">{{ trans('adminlte::adminlte.toggle_navigation') }}</span>
                                 </a>
                             @endif
@@ -58,13 +58,13 @@
                                         <li>
                                             @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
                                                 <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
-                                                    <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                                    <i class="mdi mdi-power"></i> {{ trans('adminlte::adminlte.log_out') }}
                                                 </a>
                                             @else
                                                 <a href="#"
                                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                                 >
-                                                    <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                                    <i class="mdi mdi-power"></i> {{ trans('adminlte::adminlte.log_out') }}
                                                 </a>
                                                 <form id="logout-form" action="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" method="POST" style="display: none;">
                                                     @if(config('adminlte.logout_method'))

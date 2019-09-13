@@ -251,7 +251,7 @@ a:focus{
     background-color: transparent;
     background-image: none;
     box-sizing: border-box;
-    padding: 8px;
+    padding: 0 4px;
     display: flex;
     align-items: center;
 }
@@ -5533,6 +5533,3 @@ hr{
     min-height: calc(1.6em + 0.75rem + 2px);
 }
 
-.mdi:before{
-    font-size: 18px;
-}
