@@ -142,7 +142,7 @@ return [
         ],
         [
             'text' => 'Grupos de Acesso',
-            'url' => 'adm/usuarios/papeis',
+            'url' => 'adm/grupos',
             'icon' => 'key-variant',
         ],
     ],

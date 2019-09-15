@@ -3,6 +3,7 @@ import $ from 'jquery';
 
 window.$ = window.jQuery = $;
 window.toastr = require('toastr');
+window.SimpleBar = require('simplebar/dist/simplebar');
 
 require('bootstrap4-toggle');
 

@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuários')
+@section('title', 'Grupos de Acesso')
 
 @section('content_header')
     <div class="row px-3">
-        <h1 class="mr-auto">Usuários</h1>
+        <h1 class="mr-auto">Grupos de Acesso</h1>
     </div>
 @stop
 
@@ -13,7 +13,7 @@
         <div class="accordion" id="filters">
             <div id="filters-accordion" class="collapse mb-1" aria-labelledby="filters-heading" data-parent="#filters">
                 <div class="col-12 p-0">
-                    {{ Aire::open()->route('admin.user.search')->autoComplete('off')->method('get')->data('search-form', true) }}
+                    {{ Aire::open()->route('admin.role.search')->autoComplete('off')->method('get')->data('search-form', true) }}
                     <div class="form-row">
                         {{ Aire::input('name[value]', 'Nome')->groupClass('col-md-4 col-lg-3') }}
                         {{ Aire::hidden('name[operator]')->value('LIKE') }}
@@ -36,12 +36,12 @@
                 <i class="mdi mdi-filter mr-1"></i> Filtros
             </button>
 
-            <button class="btn btn-success ml-auto d-flex align-items-center" data-trigger-popup="{{ route('admin.user.create') }}" data-popup-size="lg">
-                <i class="mdi mdi-plus-circle mr-1"></i> Novo Usuário
+            <button class="btn btn-success ml-auto d-flex align-items-center" data-trigger-popup="{{ route('admin.role.create') }}" data-popup-size="sm">
+                <i class="mdi mdi-plus-circle mr-1"></i> Novo Grupo
             </button>
         </div>
         <div id="main-list">
-            @include('admin.user.index_list')
+            @include('admin.role.index_list')
         </div>
     </section>
 @stop
