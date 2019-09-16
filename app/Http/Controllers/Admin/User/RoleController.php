@@ -33,26 +33,24 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::all();
+        $permissionList = Permission::all();
 
-        if ($permissions) {
-            $list = [];
-            foreach ($permissions as $key => $permission) {
-                $index = explode('_', $permission->name)[0];
+        if ($permissionList) {
+            $permissions = [];
+            foreach ($permissionList as $key => $permission) {
+                $index = $permission->group;
 
-                if (!isset($list[$index])) {
-                    $list[$index] = [
+                if (!isset($permissions[$index])) {
+                    $permissions[$index] = [
                         $permission
                     ];
                 } else {
-                    $list[$index][] = $permission;
+                    $permissions[$index][] = $permission;
                 }
             }
-
-
         }
 
-        return view('admin.role.create', compact('list'));
+        return view('admin.role.create', compact('permissions'));
     }
 
     /**
