@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\Traits\Authorizable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,6 +13,8 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    use Authorizable;
+
     /**
      * Display a listing of the resource.
      *

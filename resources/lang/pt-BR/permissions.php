@@ -14,21 +14,21 @@ return [
         'user' => [
             'role' => 'Usuários',
             'permissions' => [
-                'user_index' => 'Listagem/Busca',
-                'user_show' => 'Dados Detalhados',
-                'user_create' => 'Cadastro',
-                'user_edit' => 'Edição',
-                'user_delete' => 'Exclusão'
+                'user@index' => 'Listagem/Busca',
+                'user@show' => 'Dados Detalhados',
+                'user@create' => 'Cadastro',
+                'user@edit' => 'Edição',
+                'user@delete' => 'Exclusão'
             ]
         ],
         'role' => [
             'role' => 'Grupos de Acesso',
             'permissions' => [
-                'role_index' => 'Listagem/Busca',
-                'role_show' => 'Dados Detalhados',
-                'role_create' => 'Cadastro',
-                'role_edit' => 'Edição',
-                'role_delete' => 'Exclusão'
+                'role@index' => 'Listagem/Busca',
+                'role@show' => 'Dados Detalhados',
+                'role@create' => 'Cadastro',
+                'role@edit' => 'Edição',
+                'role@delete' => 'Exclusão'
             ]
         ],
     ],

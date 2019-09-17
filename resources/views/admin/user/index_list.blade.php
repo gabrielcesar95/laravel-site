@@ -73,22 +73,28 @@
                 <td>{{ $row->email }}</td>
                 <td>A programar: Logs de acesso</td>
                 <td class="text-right">
-                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                        <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.user.show', $row->id) }}" data-toggle="tooltip" data-placement="top" title="Visualizar">
-                            <i class="mdi mdi-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.user.edit', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Editar">
-                            <i class="mdi mdi-pencil"></i>
-                        </button>
-                        <div class="btn-group" role="group">
-                            <button id="row-ID-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="btn-group" role="group" aria-label="Ações">
+                        @can('user@show')
+                            <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.user.show', $row->id) }}" data-toggle="tooltip" data-placement="top" title="Visualizar">
+                                <i class="mdi mdi-eye"></i>
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="row-ID-dropdown">
-                                @if($row->id !== Auth::id())
-                                    <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.user.delete', $row->id) }}" href="#">Deletar</span>
-                                @endif
+                        @endcan
+                        @can('user@edit')
+                            <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.user.edit', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Editar">
+                                <i class="mdi mdi-pencil"></i>
+                            </button>
+                        @endcan
+                        @can('user@delete')
+                            <div class="btn-group" role="group">
+                                <button id="row-ID-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="row-ID-dropdown">
+                                    @if($row->id !== Auth::id())
+                                        <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.user.delete', $row->id) }}" href="#">Deletar</span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+                        @endcan
                     </div>
                 </td>
             </tr>

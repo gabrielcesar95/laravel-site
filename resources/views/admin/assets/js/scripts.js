@@ -58,8 +58,7 @@ function ajaxSearch(options) {
             $('#main-list').html(response);
         },
         error: function (xhr, status) {
-            console.log([status, xhr]);
-            alert(status + ':\n' + xhr);
+            $('#main-list').html('')
         }
     });
 }
@@ -159,6 +158,17 @@ $(document).on('click', '[data-search-clear]', function (event) {
 
 /* **************************** POP-UP ***************************** */
 
+
+$(document).ajaxError(function (event, xhr, settings) {
+    switch (xhr.status) {
+        case 401:
+        case 403:
+            toastr.error("Você não tem permissão para essa atividade");
+            break;
+    }
+});
+
+
 $(document).on('click', '[data-trigger-popup]', function (event) {
     event.preventDefault();
     
@@ -182,7 +192,7 @@ $(document).on('click', '[data-trigger-popup]', function (event) {
             
             setTooltips();
             setToggles();
-        }
+        },
     })
     
 });
@@ -241,9 +251,6 @@ $(document).on('submit', '.modal-dialog form', function (event) {
         error: function (xhr, status) {
             if (xhr.status == 422 && xhr.responseJSON.errors) {
                 request.alerts_div.find('div.alert').remove();
-                
-                console.log(xhr.responseJSON);
-                
                 $.each(xhr.responseJSON.errors, function (key, error) {
                     request.alerts_div.append(
                         $('<div>')

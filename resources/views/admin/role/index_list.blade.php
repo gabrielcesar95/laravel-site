@@ -43,22 +43,28 @@
                 <td>{{ $row->id }}</td>
                 <td>{{ $row->name }}</td>
                 <td class="text-right">
-                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                        <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.role.show', $row->id) }}" data-toggle="tooltip" data-placement="top" title="Visualizar">
-                            <i class="mdi mdi-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.role.edit', $row->id) }}" data-popup-size="sm" data-toggle="tooltip" data-placement="top" title="Editar">
-                            <i class="mdi mdi-pencil"></i>
-                        </button>
-                        <div class="btn-group" role="group">
-                            <button id="row-ID-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="btn-group" role="group" aria-label="Ações">
+                        @can('role@show')
+                            <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.role.show', $row->id) }}" data-toggle="tooltip" data-placement="top" title="Visualizar">
+                                <i class="mdi mdi-eye"></i>
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="row-ID-dropdown">
-                                @if($row->id !== Auth::id())
-                                    <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.role.delete', $row->id) }}" href="#">Deletar</span>
-                                @endif
+                        @endcan
+                        @can('role@edit')
+                            <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.role.edit', $row->id) }}" data-popup-size="sm" data-toggle="tooltip" data-placement="top" title="Editar">
+                                <i class="mdi mdi-pencil"></i>
+                            </button>
+                        @endcan
+                        @can('role@delete')
+                            <div class="btn-group" role="group">
+                                <button id="row-ID-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="row-ID-dropdown">
+                                    @if($row->id !== Auth::id())
+                                        <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.role.delete', $row->id) }}" href="#">Deletar</span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+                        @endcan
                     </div>
                 </td>
             </tr>

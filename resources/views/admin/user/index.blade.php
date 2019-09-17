@@ -35,10 +35,11 @@
             <button class="btn btn-info text-white d-flex mb-auto" type="button" data-toggle="collapse" data-target="#filters-accordion" aria-expanded="true" aria-controls="filters-accordion">
                 <i class="mdi mdi-filter mr-1"></i> Filtros
             </button>
-
-            <button class="btn btn-success ml-auto d-flex align-items-center" data-trigger-popup="{{ route('admin.user.create') }}" data-popup-size="lg">
-                <i class="mdi mdi-plus-circle mr-1"></i> Novo Usuário
-            </button>
+            @can('user@create')
+                <button class="btn btn-success ml-auto d-flex align-items-center" data-trigger-popup="{{ route('admin.user.create') }}" data-popup-size="lg">
+                    <i class="mdi mdi-plus-circle mr-1"></i> Novo Usuário
+                </button>
+            @endcan
         </div>
         <div id="main-list">
             @include('admin.user.index_list')

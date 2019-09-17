@@ -23697,8 +23697,7 @@ function ajaxSearch(options) {
       jquery__WEBPACK_IMPORTED_MODULE_1___default()('#main-list').html(response);
     },
     error: function error(xhr, status) {
-      console.log([status, xhr]);
-      alert(status + ':\n' + xhr);
+      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#main-list').html('');
     }
   });
 }
@@ -23781,6 +23780,14 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('click', '[data-searc
 });
 /* **************************** POP-UP ***************************** */
 
+jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).ajaxError(function (event, xhr, settings) {
+  switch (xhr.status) {
+    case 401:
+    case 403:
+      toastr.error("Você não tem permissão para essa atividade");
+      break;
+  }
+});
 jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('click', '[data-trigger-popup]', function (event) {
   event.preventDefault();
   var options = {
@@ -23842,7 +23849,6 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '.modal-dia
     error: function error(xhr, status) {
       if (xhr.status == 422 && xhr.responseJSON.errors) {
         request.alerts_div.find('div.alert').remove();
-        console.log(xhr.responseJSON);
         jquery__WEBPACK_IMPORTED_MODULE_1___default.a.each(xhr.responseJSON.errors, function (key, error) {
           request.alerts_div.append(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<div>').addClass('alert alert-danger alert-dismissable fade show mb-1 py-1').attr({
             'role': 'alert'
@@ -23875,7 +23881,7 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '.modal-dia
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! G:\Projetos\laravel-site\resources\views\admin\assets\js\scripts.js */"./resources/views/admin/assets/js/scripts.js");
+module.exports = __webpack_require__(/*! C:\Projetos\laravel-site\resources\views\admin\assets\js\scripts.js */"./resources/views/admin/assets/js/scripts.js");
 
 
 /***/ })

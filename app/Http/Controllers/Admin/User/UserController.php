@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use App\Traits\Authorizable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    use Authorizable;
+
     /**
      * Display a listing of the resource.
      *
