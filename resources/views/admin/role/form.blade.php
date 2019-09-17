@@ -11,7 +11,7 @@
                 @foreach($permissions as $key => $group)
                     <span class="py-0">{{ __("permissions.roles.{$key}.role") }}</span>
                     @foreach($group as $permission)
-                        {{ Aire::input('permissions[]')->type('checkbox')->data('toggle', 'toggle')->data('style', 'mb-1 w-100')->data('on', __("permissions.roles.{$key}.permissions.{$permission->name}"))->data('off', __("permissions.roles.{$key}.permissions.{$permission->name}"))->data('onstyle', 'success')->data('offstyle', 'light')->value($permission->id)->checked(isset($role->permissions) && in_array($permission->id, $role->permissions))->withoutGroup() }}
+                        {{ Aire::input('permissions[]')->type('checkbox')->data('toggle', 'toggle')->data('style', 'mb-1 w-100')->data('on', __("permissions.roles.{$key}.permissions.{$permission->name}"))->data('off', __("permissions.roles.{$key}.permissions.{$permission->name}"))->data('onstyle', 'success')->data('offstyle', 'light')->value($permission->id)->checked(isset($role->permissions) && $role->permissions->contains($permission->id))->withoutGroup() }}
                     @endforeach
                 @endforeach
             </div>

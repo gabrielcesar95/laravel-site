@@ -13,7 +13,7 @@
     <div id="alerts"></div>
 
     <p>
-        Confirma a exclusão do usuário
+        Confirma a exclusão do grupo de acesso
         <span class="text-bold">{{ $user->name }}</span>
         ?
     </p>

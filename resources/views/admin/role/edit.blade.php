@@ -14,7 +14,7 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('user_update')->route('admin.role.update', $user->id)->method('PUT')->bind($user)->autoComplete('off') }}
+    {{ Aire::open()->id('user_update')->route('admin.role.update', $role->id)->method('PUT')->bind($role)->autoComplete('off') }}
     @include('admin.role.form')
     {{ Aire::close() }}
 @stop

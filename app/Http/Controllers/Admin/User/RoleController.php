@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
+use Illuminate\Support\Arr;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -18,10 +20,10 @@ class RoleController extends Controller
     public function index()
     {
         $order = [
-            'column' => 'id',
+            'column' => 'name',
             'direction' => 'asc'
         ];
-        $data = Role::orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
+        $data = Role::where('visible', 1)->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
 
         return view('admin.role.index', compact('data', 'order'));
     }
@@ -33,22 +35,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permissionList = Permission::all();
-
-        if ($permissionList) {
-            $permissions = [];
-            foreach ($permissionList as $key => $permission) {
-                $index = $permission->group;
-
-                if (!isset($permissions[$index])) {
-                    $permissions[$index] = [
-                        $permission
-                    ];
-                } else {
-                    $permissions[$index][] = $permission;
-                }
-            }
-        }
+        $permissions = $this->sortPermissions(Permission::all());
 
         return view('admin.role.create', compact('permissions'));
     }
@@ -56,12 +43,16 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\UserRequest $request
+     * @param \Illuminate\Http\RoleRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(RoleRequest $request)
     {
         $role = Role::create(['name' => $request->name]);
+
+        if ($request->permissions) {
+            $role->syncPermissions($request->permissions);
+        }
 
         session()->flash('message', ['type' => 'success', 'message' => "Grupo <strong>{$role->name}</strong> cadastrado!"]);
 
@@ -76,9 +67,11 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = Role::findOrFail($id);
 
-        return view('admin.role.show', compact('user'));
+        $permissions = $this->sortPermissions(Permission::all());
+
+        return view('admin.role.show', compact('user', 'permissions'));
     }
 
     /**
@@ -89,9 +82,11 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $role = Role::findOrFail($id);
 
-        return view('admin.role.edit', compact('user'));
+        $permissions = $this->sortPermissions(Permission::all());
+
+        return view('admin.role.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -101,9 +96,9 @@ class RoleController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(RoleRequest $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = Role::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->active = $request->active;
@@ -121,7 +116,7 @@ class RoleController extends Controller
 
     public function delete($id)
     {
-        $user = User::findOrFail($id);
+        $user = Role::findOrFail($id);
 
         return view('admin.role.delete', compact('user'));
     }
@@ -134,16 +129,12 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        if ($id == Auth::id()) {
-            session()->flash('message', ['type' => 'error', 'message' => "Hey! Você não pode deletar a si mesmo 😉"]);
-        } else {
-            $user = User::findOrFail($id);
-            $user->delete();
+        $role = Role::findOrFail($id);
+        $role->delete();
 
-            session()->flash('message', ['type' => 'success', 'message' => "Usuário <strong>{$user->name}</strong> deletado!"]);
-        }
+        session()->flash('message', ['type' => 'success', 'message' => "Grupo de Acesso <strong>{$role->name}</strong> deletado!"]);
 
-        return response()->json(['redirect' => route('admin.user.index')]);
+        return response()->json(['redirect' => route('admin.role.index')]);
     }
 
     public function filter(Request $request)
@@ -160,7 +151,7 @@ class RoleController extends Controller
         $page = $request->get('_page') ?? 1;
 
         if ($params) {
-            $data = User::where(function ($query) use ($params, $order) {
+            $data = Role::where('visible', 1)->where(function ($query) use ($params, $order) {
                 foreach ($params as $param => $props) {
                     if (is_array($props)) {
                         switch ($props['operator']) {
@@ -177,9 +168,33 @@ class RoleController extends Controller
                 }
             })->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'), ['*'], 'page', $page);
         } else {
-            $data = User::orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
+            $data = Role::orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
         }
 
         return view('admin.role.index_list', compact('data', 'order'));
+    }
+
+    /**
+     * Organize permissions on a multidimensional array
+     *
+     * @param array $permissionList
+     * @return array
+     */
+    public function sortPermissions(Collection $permissionList)
+    {
+        $permissions = [];
+        foreach ($permissionList as $key => $permission) {
+            $index = $permission->group;
+
+            if (!isset($permissions[$index])) {
+                $permissions[$index] = [
+                    $permission
+                ];
+            } else {
+                $permissions[$index][] = $permission;
+            }
+        }
+
+        return $permissions;
     }
 }

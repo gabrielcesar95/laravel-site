@@ -20,6 +20,16 @@ return [
                 'user_edit' => 'Edição',
                 'user_delete' => 'Exclusão'
             ]
-        ]
+        ],
+        'role' => [
+            'role' => 'Grupos de Acesso',
+            'permissions' => [
+                'role_index' => 'Listagem/Busca',
+                'role_show' => 'Dados Detalhados',
+                'role_create' => 'Cadastro',
+                'role_edit' => 'Edição',
+                'role_delete' => 'Exclusão'
+            ]
+        ],
     ],
 ];

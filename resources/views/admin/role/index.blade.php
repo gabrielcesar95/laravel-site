@@ -17,9 +17,6 @@
                     <div class="form-row">
                         {{ Aire::input('name[value]', 'Nome')->groupClass('col-md-4 col-lg-3') }}
                         {{ Aire::hidden('name[operator]')->value('LIKE') }}
-                        {{ Aire::input('email[value]', 'E-Mail')->groupClass('col-md-4 col-lg-3')->data('operator', 'LIKE') }}
-                        {{ Aire::hidden('email[operator]')->value('LIKE') }}
-                        {{ Aire::select(['1' => 'Ativo', '0' => 'Inativo'], 'active', 'Situação')->groupClass('col-md-2')->value(1) }}
                         <div class="col-md-1 d-flex mt-2 mt-md-0">
                             {{ Aire::submit()->class('w-100 d-flex mt-auto align-items-center justify-content-center')->labelHtml('<i class="mdi mdi-magnify"></i><span class="sr-only">Buscar</span>')->style('height: calc(1.6em + 0.75rem + 2px);') }}
                         </div>
