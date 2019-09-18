@@ -24,10 +24,13 @@ class PermissionsTablesSeeder extends Seeder
     private function seedRoles()
     {
         if (Role::where('name', 'user')->count() < 1) {
-            Role::create(['name' => 'user']);
+            Role::create(['name' => 'user', 'visible' => 0]);
         }
         if (Role::where('name', 'admin')->count() < 1) {
-            Role::create(['name' => 'admin']);
+            Role::create(['name' => 'admin', 'visible' => 0]);
+        }
+        if (Role::where('name', 'super')->count() < 1) {
+            Role::create(['name' => 'super', 'visible' => 0]);
         }
     }
 
@@ -69,7 +72,7 @@ class PermissionsTablesSeeder extends Seeder
     private function assignRolesToUsers()
     {
         if ($admin = User::where('email', '95gabrielcesar@gmail.com')->first()) {
-            $admin->assignRole('admin');
+            $admin->assignRole(['admin', 'super']);
         }
     }
 
