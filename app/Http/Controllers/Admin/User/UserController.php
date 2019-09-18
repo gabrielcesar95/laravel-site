@@ -60,6 +60,8 @@ class UserController extends Controller
 
         $user->save();
 
+        $user->assignRole('admin');
+
         session()->flash('message', ['type' => 'success', 'message' => "Usuário <strong>{$user->name}</strong> cadastrado!"]);
 
         return response()->json(['redirect' => route('admin.user.index')]);

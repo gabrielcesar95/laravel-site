@@ -5,6 +5,7 @@
 use App\Models\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,7 @@ $factory->define(User::class, function (Faker $faker) {
 });
 
 $factory->afterCreating(User::class, function ($user, $faker) {
-    $user->assignRole('user');
+    if (Role::where('name', 'user')->count() < 1) {
+        $user->assignRole('user');
+    }
 });
