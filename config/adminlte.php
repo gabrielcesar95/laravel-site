@@ -183,8 +183,6 @@ return [
     |
     */
 
-    // TODO: Instalar os plugins via Mix e carregá-los localmente
-
     'plugins' => [
         [
             'name' => 'Datatables',
@@ -204,7 +202,7 @@ return [
         ],
         [
             'name' => 'Select2',
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',
@@ -220,7 +218,7 @@ return [
         ],
         [
             'name' => 'Chartjs',
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',
@@ -231,7 +229,7 @@ return [
         ],
         [
             'name' => 'Sweetalert2',
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',

@@ -61,6 +61,29 @@ class UserRequest extends FormRequest
             ],
         ];
     }
-}
 
-// TODO: Adicionar textos de validação
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'O campo Nome é obrigatório',
+            'name.min' => 'O campo Nome deve ter no mínimo :min caracteres',
+            'name.max' => 'O campo Nome deve ter no mínimo :max caracteres',
+            'email.required' => 'O campo e-mail é obrigatório',
+            'email.email' => 'O e-mail digitado é inválido',
+            'email.unique' => 'O e-mail digitado já está cadastrado',
+            'active.boolean' => 'Valor inválido para o campo Ativo',
+            'password.confirmed' => 'Os valores de Senha e Confirmação de Senha devem ser iguais',
+            'password.min' => 'O campo Senha deve ter no mínimo :min caracteres',
+            'password_confirmation.required_with' => 'O campo Confirmação de Senha é obrigatório',
+            'roles.array' => 'Valor inválido para os campos de Grupos de Acesso',
+            'roles.*.exists' => 'O Grupo de Acesso selecionado não existe',
+            'permissions.array' => 'Valor inválido para os campos de Permissões Diretas',
+            'permissions.*.exists' => 'A Permissão selecionada não existe',
+        ];
+    }
+}

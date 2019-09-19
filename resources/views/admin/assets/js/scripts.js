@@ -4,6 +4,7 @@ import $ from 'jquery';
 window.$ = window.jQuery = $;
 window.toastr = require('toastr');
 window.SimpleBar = require('simplebar/dist/simplebar');
+window.Swal = require('sweetalert2');
 
 require('bootstrap4-toggle');
 
@@ -49,7 +50,7 @@ function ajaxSearch(options) {
                             .append(
                                 $('<span>')
                                     .addClass('sr-only')
-                                    .text('Carreando')
+                                    .text('Carregando')
                             )
                     )
             );
@@ -231,7 +232,7 @@ $(document).on('submit', '.modal-dialog form', function (event) {
                             .append(
                                 $('<span>')
                                     .addClass('sr-only')
-                                    .text('Carreando')
+                                    .text('Carregando')
                             )
                     ),
                 customClass: {

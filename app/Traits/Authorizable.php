@@ -2,8 +2,6 @@
 
 namespace App\Traits;
 
-//TODO: Seeders/factories das permissões padrão
-
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 

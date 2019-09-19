@@ -35,4 +35,21 @@ class RoleRequest extends FormRequest
             ]
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'O campo Nome é obrigatório',
+            'name.min' => 'O campo Nome deve ter no mínimo :min caracteres',
+            'name.max' => 'O campo Nome deve ter no mínimo :max caracteres',
+            'permissions.required' => 'Selecione ao menos uma Permissão',
+            'permissions.array' => 'Valor inválido para os campos de Permissões',
+            'permissions.*.exists' => 'A Permissão selecionada não existe',
+        ];
+    }
 }

@@ -123,6 +123,10 @@ class UserController extends Controller
 
         $roles = $request->roles ? array_merge($request->roles, ['admin']) : ['admin'];
 
+        if ($user->hasRole('super') && $super = Role::where('name', 'super')->first()) {
+            $roles[] = $super->id;
+        }
+
         $user->save();
         $user->syncRoles($roles);
         $user->syncPermissions($request->permissions);
