@@ -24,10 +24,10 @@
         <div class="form-row">
             <div class="col-md-6">
                 <h4>Grupos de Acesso</h4>
-                <div>
-                    @if($roles = Spatie\Permission\Models\Role::where('visible', 1)->orderBy('name')->get())
+                <div class="overflow-auto" style="max-height: 300px;" data-simplebar>
+                    @if(count($roles))
                         @foreach($roles as $role)
-                            {{ Aire::input('roles[]')->type('checkbox')->data('toggle', 'toggle')->data('style', 'mb-1 w-100')->data('on', $role->name)->data('off', $role->name)->data('onstyle', 'success')->data('offstyle', 'light')->value($role->id)->checked(isset($role->permissions) && $role->permissions->contains($role->id))->withoutGroup() }}
+                            {{ Aire::input('roles[]')->type('checkbox')->data('toggle', 'toggle')->data('style', 'mb-1 w-100')->data('on', $role->name)->data('off', $role->name)->data('onstyle', 'success')->data('offstyle', 'light')->value($role->id)->checked(isset($user) && $user->hasRole($role->id))->withoutGroup() }}
                         @endforeach
                     @else
                         Nenhum grupo encontrado
@@ -36,7 +36,18 @@
             </div>
             <div class="col-md-6">
                 <h4>Permissões Diretas</h4>
-
+                <div class="overflow-auto" style="max-height: 300px;" data-simplebar>
+                    @if(count($permissions))
+                        @foreach($permissions as $key => $group)
+                            <span class="py-0">{{ __("permissions.roles.{$key}.role") }}</span>
+                            @foreach($group as $permission)
+                                {{ Aire::input('permissions[]')->type('checkbox')->data('toggle', 'toggle')->data('style', 'mb-1 w-100')->data('on', __("permissions.roles.{$key}.permissions.{$permission->name}"))->data('off', __("permissions.roles.{$key}.permissions.{$permission->name}"))->data('onstyle', 'success')->data('offstyle', 'light')->value($permission->id)->checked(isset($user) && in_array($permission->id, $user->directPermissions))->withoutGroup() }}
+                            @endforeach
+                        @endforeach
+                    @else
+                        Nenhuma permissão encontrada
+                    @endif
+                </div>
             </div>
         </div>
     </div>

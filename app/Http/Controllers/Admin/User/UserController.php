@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Admin\User;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Traits\Authorizable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -38,7 +41,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $roles = Role::where('visible', 1)->orderBy('name')->get();
+        $permissions = $this->sortPermissions(Permission::all());
+
+        return view('admin.user.create', compact('roles', 'permissions'));
     }
 
     /**
@@ -58,12 +64,13 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        $user->save();
+        $roles = $request->roles ? array_merge($request->roles, ['admin']) : ['admin'];
 
-        $user->assignRole('admin');
+        $user->save();
+        $user->syncRoles($roles);
+        $user->syncPermissions($request->permissions);
 
         session()->flash('message', ['type' => 'success', 'message' => "Usuário <strong>{$user->name}</strong> cadastrado!"]);
-
         return response()->json(['redirect' => route('admin.user.index')]);
     }
 
@@ -88,9 +95,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $roles = Role::where('visible', 1)->orderBy('name')->get();
+        $permissions = $this->sortPermissions(Permission::all());
         $user = User::findOrFail($id);
+        $user->directPermissions = $user->getDirectPermissions()->pluck('id')->toArray();
 
-        return view('admin.user.edit', compact('user'));
+        return view('admin.user.edit', compact('user', 'roles', 'permissions'));
     }
 
     /**
@@ -111,10 +121,13 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
         }
 
+        $roles = $request->roles ? array_merge($request->roles, ['admin']) : ['admin'];
+
         $user->save();
+        $user->syncRoles($roles);
+        $user->syncPermissions($request->permissions);
 
         session()->flash('message', ['type' => 'success', 'message' => "Usuário <strong>{$user->name}</strong> alterado!"]);
-
         return response()->json(['redirect' => route('admin.user.index')]);
     }
 
@@ -180,5 +193,29 @@ class UserController extends Controller
         }
 
         return view('admin.user.index_list', compact('data', 'order'));
+    }
+
+    /**
+     * Organize permissions on a multidimensional array
+     *
+     * @param array $permissionList
+     * @return array
+     */
+    public function sortPermissions(Collection $permissionList)
+    {
+        $permissions = [];
+        foreach ($permissionList as $key => $permission) {
+            $index = $permission->group;
+
+            if (!isset($permissions[$index])) {
+                $permissions[$index] = [
+                    $permission
+                ];
+            } else {
+                $permissions[$index][] = $permission;
+            }
+        }
+
+        return $permissions;
     }
 }

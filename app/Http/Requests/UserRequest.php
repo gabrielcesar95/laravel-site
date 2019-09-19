@@ -44,7 +44,21 @@ class UserRequest extends FormRequest
             ],
             'password_confirmation' => [
                 'required_with:password'
-            ]
+            ],
+            'roles' => [
+                'nullable',
+                'array'
+            ],
+            'roles.*' => [
+                'exists:' . config('permission.table_names.roles') . ',id'
+            ],
+            'permissions' => [
+                'nullable',
+                'array'
+            ],
+            'permissions.*' => [
+                'exists:' . config('permission.table_names.permissions') . ',id'
+            ],
         ];
     }
 }

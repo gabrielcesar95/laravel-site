@@ -10,9 +10,19 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('user_create')->bind($user)->autoComplete('off') }}
+    {{ Aire::open()->id('user_create')->bind($role)->autoComplete('off') }}
     {{ Aire::input('name', 'Nome')->groupClass('form-group')->setAttribute('disabled', true) }}
-    {{ Aire::input('email', 'E-Mail')->groupClass('form-group')->setAttribute('disabled', true) }}
-    {{ Aire::input('active', 'Situação')->type('checkbox')->groupClass('form-group')->data('toggle', 'toggle')->data('width', '100%')->data('on', 'Ativo')->data('off', 'Inativo')->data('onstyle', 'success')->data('offstyle', 'danger')->value(1)->checked($user->active)->setAttribute('disabled', true) }}
+
+    @if($permissions)
+        <div class="overflow-auto" style="max-height: 300px;" data-simplebar>
+            @foreach($permissions as $key => $group)
+                <span class="py-0">{{ __("permissions.roles.{$key}.role") }}</span>
+                @foreach($group as $permission)
+                    {{ Aire::input('permissions[]')->type('checkbox')->data('toggle', 'toggle')->data('style', 'mb-1 w-100')->data('on', __("permissions.roles.{$key}.permissions.{$permission->name}"))->data('off', __("permissions.roles.{$key}.permissions.{$permission->name}"))->data('onstyle', 'dark')->data('offstyle', 'light')->value($permission->id)->checked(isset($role->permissions) && $role->permissions->contains($permission->id))->withoutGroup()->setAttribute('disabled', true) }}
+                @endforeach
+            @endforeach
+        </div>
+    @endif
+
     {{ Aire::close() }}
 @stop

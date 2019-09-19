@@ -17,7 +17,6 @@ class PermissionsTablesSeeder extends Seeder
     {
         $this->seedRoles();
         $this->seedPermissions();
-        $this->assignRolesToUsers();
         $this->assignRolePermissions();
     }
 
@@ -66,13 +65,6 @@ class PermissionsTablesSeeder extends Seeder
         }
         if (Permission::where('name', 'role@delete')->where('group', 'role')->count() < 1) {
             Permission::create(['name' => 'role@delete', 'group' => 'role']);
-        }
-    }
-
-    private function assignRolesToUsers()
-    {
-        if ($admin = User::where('email', '95gabrielcesar@gmail.com')->first()) {
-            $admin->assignRole(['admin', 'super']);
         }
     }
 

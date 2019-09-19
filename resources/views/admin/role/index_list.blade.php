@@ -54,17 +54,15 @@
                                 <i class="mdi mdi-pencil"></i>
                             </button>
                         @endcan
-                        @can('role@delete')
-                            <div class="btn-group" role="group">
-                                <button id="row-ID-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="row-ID-dropdown">
-                                    @if($row->id !== Auth::id())
-                                        <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.role.delete', $row->id) }}" href="#">Deletar</span>
-                                    @endif
-                                </div>
+                        <div class="btn-group" role="group">
+                            <button id="row-ID-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="row-ID-dropdown">
+                                @if(auth()->user()->can('role@delete') && $row->visible)
+                                    <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.role.delete', $row->id) }}" href="#">Deletar</span>
+                                @endif
                             </div>
-                        @endcan
+                        </div>
                     </div>
                 </td>
             </tr>

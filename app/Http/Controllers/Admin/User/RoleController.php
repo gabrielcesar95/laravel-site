@@ -26,7 +26,11 @@ class RoleController extends Controller
             'column' => 'name',
             'direction' => 'asc'
         ];
-        $data = Role::where('visible', 1)->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
+        if (auth()->user()->can('super')) {
+            $data = Role::orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
+        } else {
+            $data = Role::where('visible', 1)->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
+        }
 
         return view('admin.role.index', compact('data', 'order'));
     }
@@ -57,7 +61,7 @@ class RoleController extends Controller
             $role->syncPermissions($request->permissions);
         }
 
-        session()->flash('message', ['type' => 'success', 'message' => "Grupo <strong>{$role->name}</strong> cadastrado!"]);
+        session()->flash('message', ['type' => 'success', 'message' => "Grupo de Acesso <strong>{$role->name}</strong> cadastrado!"]);
 
         return response()->json(['redirect' => route('admin.role.index')]);
     }
@@ -70,11 +74,11 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        $user = Role::findOrFail($id);
+        $role = Role::findOrFail($id);
 
         $permissions = $this->sortPermissions(Permission::all());
 
-        return view('admin.role.show', compact('user', 'permissions'));
+        return view('admin.role.show', compact('role', 'permissions'));
     }
 
     /**
@@ -101,20 +105,18 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request, $id)
     {
-        $user = Role::findOrFail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->active = $request->active;
+        $role = Role::findOrFail($id);
+        $role->name = $request->name;
 
-        if ($request->password) {
-            $user->password = Hash::make($request->password);
+        if ($request->permissions) {
+            $role->syncPermissions($request->permissions);
         }
 
-        $user->save();
+        $role->save();
 
-        session()->flash('message', ['type' => 'success', 'message' => "Usuário <strong>{$user->name}</strong> alterado!"]);
+        session()->flash('message', ['type' => 'success', 'message' => "Grupo de Acesso <strong>{$role->name}</strong> alterado!"]);
 
-        return response()->json(['redirect' => route('admin.user.index')]);
+        return response()->json(['redirect' => route('admin.role.index')]);
     }
 
     public function delete($id)
@@ -133,9 +135,13 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $role = Role::findOrFail($id);
-        $role->delete();
+        if (!$role->visible) {
+            session()->flash('message', ['type' => 'error', 'message' => "Grupos de Acesso ocultos não podem ser excluídos"]);
+        } else {
+            $role->delete();
 
-        session()->flash('message', ['type' => 'success', 'message' => "Grupo de Acesso <strong>{$role->name}</strong> deletado!"]);
+            session()->flash('message', ['type' => 'success', 'message' => "Grupo de Acesso <strong>{$role->name}</strong> deletado!"]);
+        }
 
         return response()->json(['redirect' => route('admin.role.index')]);
     }
@@ -154,22 +160,41 @@ class RoleController extends Controller
         $page = $request->get('_page') ?? 1;
 
         if ($params) {
-            $data = Role::where('visible', 1)->where(function ($query) use ($params, $order) {
-                foreach ($params as $param => $props) {
-                    if (is_array($props)) {
-                        switch ($props['operator']) {
-                            case 'LIKE':
-                                $query->where($param, 'LIKE', "%{$props['value']}%");
-                                break;
+            if (auth()->user()->can('super')) {
+                $data = Role::where(function ($query) use ($params, $order) {
+                    foreach ($params as $param => $props) {
+                        if (is_array($props)) {
+                            switch ($props['operator']) {
+                                case 'LIKE':
+                                    $query->where($param, 'LIKE', "%{$props['value']}%");
+                                    break;
 
-                            default:
-                                $query->where($param, $props['operator'] ?? '=', $props['value']);
+                                default:
+                                    $query->where($param, $props['operator'] ?? '=', $props['value']);
+                            }
+                        } else {
+                            $query->where($param, $props);
                         }
-                    } else {
-                        $query->where($param, $props);
                     }
-                }
-            })->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'), ['*'], 'page', $page);
+                })->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'), ['*'], 'page', $page);
+            } else {
+                $data = Role::where('visible', 1)->where(function ($query) use ($params, $order) {
+                    foreach ($params as $param => $props) {
+                        if (is_array($props)) {
+                            switch ($props['operator']) {
+                                case 'LIKE':
+                                    $query->where($param, 'LIKE', "%{$props['value']}%");
+                                    break;
+
+                                default:
+                                    $query->where($param, $props['operator'] ?? '=', $props['value']);
+                            }
+                        } else {
+                            $query->where($param, $props);
+                        }
+                    }
+                })->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'), ['*'], 'page', $page);
+            }
         } else {
             $data = Role::orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
         }
