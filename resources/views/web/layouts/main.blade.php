@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>@yield('title')</title>
 
-    <link rel="stylesheet" href="{{ mix('web/assets/css/web.css') }}">
-{{--    <script type="text/javascript" src="{{ mix('web/assets/js/app.js') }}"></script>--}}
+    <link rel="stylesheet" href="{{ asset(mix('web/assets/css/web.css')) }}">
+    {{--    <script type="text/javascript" src="{{ asset(mix('web/assets/js/app.js')) }}"></script>--}}
 </head>
 <body>
 

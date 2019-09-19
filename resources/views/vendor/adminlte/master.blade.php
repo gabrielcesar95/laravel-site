@@ -10,10 +10,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- Compiled Mix CSS --}}
-    <link rel="stylesheet" href="{{ mix('admin/assets/css/admin.css') }}">
-    <link rel="stylesheet" href="{{ mix('admin/assets/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset(mix('admin/assets/css/admin.css')) }}">
+    <link rel="stylesheet" href="{{ asset(mix('admin/assets/css/styles.css')) }}">
     <!-- Compiled Mix JS -->
-    <script type="text/javascript" src="{{ mix('admin/assets/js/scripts.js') }}"></script>
+    <script type="text/javascript" src="{{ asset(mix('admin/assets/js/scripts.js')) }}"></script>
 
     @include('adminlte::plugins', ['type' => 'css'])
 
