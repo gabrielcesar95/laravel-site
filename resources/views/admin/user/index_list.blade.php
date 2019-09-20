@@ -30,7 +30,7 @@
                     @endif
                 </div>
             </th>
-            <th scope="col">
+            <th scope="col" class="d-none d-md-table-cell">
                 <div class="d-flex align-items-center">
                     <a href="" class="text-bold text-white" data-search-order="email" data-search-order-direction="{{ (isset($order) && $order['column'] == 'email' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'email' ? 'data-search-order-active' : '') }}>
                         E-mail
@@ -44,7 +44,7 @@
                     @endif
                 </div>
             </th>
-            <th scope="col">
+            <th scope="col" class="d-none d-md-table-cell">
                 <div class="d-flex align-items-center">
                     <a href="" class="text-bold text-white" data-search-order="last_login" data-search-order-direction="{{ (isset($order) && $order['column'] == 'last_login' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'last_login' ? 'data-search-order-active' : '') }}>
                         Último Acesso
@@ -70,8 +70,12 @@
             <tr>
                 <td>{{ $row->id }}</td>
                 <td>{{ $row->name }}</td>
-                <td>{{ $row->email }}</td>
-                <td>A programar: Logs de acesso</td>
+                <td class="d-none d-md-table-cell">{{ $row->email }}</td>
+                <td class="d-none d-md-table-cell">
+                    @php
+                        $date = Spatie\Activitylog\Models\Activity::causedBy($row)->where('description', 'login')->orderBy('created_at', 'desc')->first()->created_at ?? '';
+                    @endphp
+                    {{ $date ? date_format($date, 'd/m/Y H:i:s') : '' }}</td>
                 <td class="text-right">
                     <div class="btn-group" role="group" aria-label="Ações">
                         @can('user@show')

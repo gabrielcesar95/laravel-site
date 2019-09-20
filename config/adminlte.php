@@ -116,6 +116,8 @@ return [
 
     'register_url' => 'registrar',
 
+    'password_reset_url' => 'senha/resetar',
+
     /*
     |--------------------------------------------------------------------------
     | Menu Items

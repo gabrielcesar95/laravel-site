@@ -55,24 +55,29 @@
                             <!-- Navbar Right Menu -->
                                 <div class="navbar-custom-menu">
                                     <ul class="nav navbar-nav">
-                                        <li>
-                                            @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
-                                                <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
-                                                    <i class="mdi mdi-power"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ auth()->user()->name }}</a>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="mdi mdi-account "></i> Meu Perfil
                                                 </a>
-                                            @else
-                                                <a href="#"
-                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                                >
-                                                    <i class="mdi mdi-power"></i> {{ trans('adminlte::adminlte.log_out') }}
-                                                </a>
-                                                <form id="logout-form" action="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" method="POST" style="display: none;">
-                                                    @if(config('adminlte.logout_method'))
-                                                        {{ method_field(config('adminlte.logout_method')) }}
-                                                    @endif
-                                                    {{ csrf_field() }}
-                                                </form>
-                                            @endif
+
+                                                @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
+                                                    <a class="dropdown-item" href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
+                                                        <i class="mdi mdi-power"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                                    </a>
+                                                @else
+                                                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                        <i class="mdi mdi-power"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                                    </a>
+                                                    <form id="logout-form" action="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" method="POST" style="display: none;">
+                                                        @if(config('adminlte.logout_method'))
+                                                            {{ method_field(config('adminlte.logout_method')) }}
+                                                        @endif
+                                                        {{ csrf_field() }}
+                                                    </form>
+                                                @endif
+                                            </div>
                                         </li>
                                     @if(config('adminlte.right_sidebar') and (config('adminlte.layout') != 'top-nav'))
                                         <!-- Control Sidebar Toggle Button -->

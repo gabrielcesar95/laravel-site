@@ -29,11 +29,11 @@
 
     <section class="mt-2">
         <div class="btn-toolbar mb-1" role="toolbar" aria-label="Ações Disponíveis">
-            <button class="btn btn-info text-white d-flex mb-auto" type="button" data-toggle="collapse" data-target="#filters-accordion" aria-expanded="true" aria-controls="filters-accordion">
+            <button class="btn btn-info text-white col-12 col-md-auto d-flex mb-1 mb-md-auto" type="button" data-toggle="collapse" data-target="#filters-accordion" aria-expanded="true" aria-controls="filters-accordion">
                 <i class="mdi mdi-filter mr-1"></i> Filtros
             </button>
             @can('role@create')
-                <button class="btn btn-success ml-auto d-flex align-items-center" data-trigger-popup="{{ route('admin.role.create') }}" data-popup-size="sm">
+                <button class="btn btn-success ml-auto d-flex align-items-center col-12 col-md-auto" data-trigger-popup="{{ route('admin.role.create') }}" data-popup-size="sm">
                     <i class="mdi mdi-plus-circle mr-1"></i> Novo Grupo
                 </button>
             @endcan
