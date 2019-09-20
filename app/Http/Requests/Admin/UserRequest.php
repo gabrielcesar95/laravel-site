@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +13,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->user()->can('user@create') || auth()->user()->can('user@edit');
     }
 
     /**
@@ -26,7 +26,6 @@ class UserRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                'min:5',
                 'max:255'
             ],
             'email' => [
@@ -71,7 +70,6 @@ class UserRequest extends FormRequest
     {
         return [
             'name.required' => 'O campo Nome é obrigatório',
-            'name.min' => 'O campo Nome deve ter no mínimo :min caracteres',
             'name.max' => 'O campo Nome deve ter no mínimo :max caracteres',
             'email.required' => 'O campo e-mail é obrigatório',
             'email.email' => 'O e-mail digitado é inválido',

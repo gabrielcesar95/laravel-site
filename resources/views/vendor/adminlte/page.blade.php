@@ -58,9 +58,9 @@
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ auth()->user()->name }}</a>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">
+                                                <button class="dropdown-item" data-trigger-popup="{{ route('admin.profile.edit') }}">
                                                     <i class="mdi mdi-account "></i> Meu Perfil
-                                                </a>
+                                                </button>
 
                                                 @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
                                                     <a class="dropdown-item" href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">

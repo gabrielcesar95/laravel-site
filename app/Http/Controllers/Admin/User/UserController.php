@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\User;
 
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\Admin\UserRequest;
 use App\Models\User;
 use App\Traits\Authorizable;
 use Illuminate\Database\Eloquent\Collection;

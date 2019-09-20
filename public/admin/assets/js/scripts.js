@@ -23121,7 +23121,7 @@ Popper.Defaults = Defaults;
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-* sweetalert2 v8.17.5
+* sweetalert2 v8.17.6
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -23434,15 +23434,23 @@ var states = {
 var hasClass = function hasClass(elem, className) {
   return elem.classList.contains(className);
 };
-var applyCustomClass = function applyCustomClass(elem, customClass, className) {
-  // Clean up previous custom classes
+
+var removeCustomClasses = function removeCustomClasses(elem) {
   toArray(elem.classList).forEach(function (className) {
     if (!(objectValues(swalClasses).indexOf(className) !== -1) && !(objectValues(iconTypes).indexOf(className) !== -1)) {
       elem.classList.remove(className);
     }
   });
+};
+
+var applyCustomClass = function applyCustomClass(elem, customClass, className) {
+  removeCustomClasses(elem);
 
   if (customClass && customClass[className]) {
+    if (typeof customClass[className] !== 'string' && !customClass[className].forEach) {
+      return warn("Invalid type of customClass.".concat(className, "! Expected string or iterable object, got \"").concat(_typeof(customClass[className]), "\""));
+    }
+
     addClass(elem, customClass[className]);
   }
 };
@@ -26012,7 +26020,7 @@ Object.keys(instanceMethods).forEach(function (key) {
   };
 });
 SweetAlert.DismissReason = DismissReason;
-SweetAlert.version = '8.17.5';
+SweetAlert.version = '8.17.6';
 
 var Swal = SweetAlert;
 Swal["default"] = Swal;
@@ -26756,7 +26764,9 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '.modal-dia
       });
     },
     success: function success(response) {
-      if (response.redirect) {
+      if (response.refresh) {
+        location.reload();
+      } else if (response.redirect) {
         window.location.href = response.redirect;
       }
     },
@@ -26775,9 +26785,6 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '.modal-dia
           }).html('&times;'))));
           form.find('[name="' + key + '"]').addClass('is-invalid');
         });
-      } else {
-        console.log([status, xhr]);
-        alert(status + ':\n' + xhr);
       }
     },
     complete: function complete(xhr, status) {
@@ -26795,7 +26802,7 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '.modal-dia
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! G:\Projetos\laravel-site\resources\views\admin\assets\js\scripts.js */"./resources/views/admin/assets/js/scripts.js");
+module.exports = __webpack_require__(/*! C:\Projetos\laravel-site\resources\views\admin\assets\js\scripts.js */"./resources/views/admin/assets/js/scripts.js");
 
 
 /***/ })

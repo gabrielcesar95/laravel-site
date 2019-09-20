@@ -5,9 +5,16 @@
  ********************************* ADMIN ******************************
  **********************************************************************
 */
+
+use App\Http\Controllers\Admin\DashboardController;
+
 Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
     /* ******************************* DASHBOARD **************************** */
     Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::group(['prefix' => 'perfil', 'as' => 'profile.'], function () {
+        Route::get('/', 'ProfileController@edit')->name('edit');
+        Route::post('/', 'ProfileController@update')->name('update');
+    });
 
     /* ********************************* USERS ****************************** */
     Route::group(['prefix' => 'usuarios', 'namespace' => 'User', 'as' => 'user.'], function () {

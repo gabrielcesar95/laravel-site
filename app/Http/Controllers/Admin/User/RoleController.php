@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RoleRequest;
+use App\Http\Requests\Admin\RoleRequest;
 use App\Models\Role;
 use App\Traits\Authorizable;
 use Illuminate\Support\Arr;
