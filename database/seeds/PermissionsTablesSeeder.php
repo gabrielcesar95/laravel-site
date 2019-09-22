@@ -66,6 +66,13 @@ class PermissionsTablesSeeder extends Seeder
         if (Permission::where('name', 'role@delete')->where('group', 'role')->count() < 1) {
             Permission::create(['name' => 'role@delete', 'group' => 'role']);
         }
+
+        if (Permission::where('name', 'logs@activities')->where('group', 'logs')->count() < 1) {
+            Permission::create(['name' => 'logs@activities', 'group' => 'logs']);
+        }
+        if (Permission::where('name', 'logs@access')->where('group', 'logs')->count() < 1) {
+            Permission::create(['name' => 'logs@access', 'group' => 'logs']);
+        }
     }
 
     private function assignRolePermissions()

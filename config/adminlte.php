@@ -147,6 +147,13 @@ return [
             'url' => 'adm/grupos',
             'icon' => 'key-variant',
         ],
+        ['header' => 'Administração'],
+        [
+            'text' => 'Logs',
+            'icon' => 'history',
+            'url' => 'adm/logs',
+            'can' => 'logs@index',
+        ],
     ],
 
     /*
