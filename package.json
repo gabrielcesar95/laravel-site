@@ -29,7 +29,7 @@
         "jquery": "^3.4",
         "popper.js": "^1.15",
         "simplebar": "^4.3.0-alpha.0",
-        "sweetalert2": "^8.17.5",
+        "sweetalert2": "^8.17.6",
         "toastr": "^2.1.4"
     }
 }

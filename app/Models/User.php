@@ -21,6 +21,7 @@ class User extends Authenticatable
     protected static $logAttributes = ['name', 'email', 'password', 'roles', 'permissions'];
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
+    protected static $logName = 'User';
 
     /**
      * The attributes that are mass assignable.
