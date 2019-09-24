@@ -52,4 +52,22 @@ Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
         Route::delete('/deletar/{id}', 'RoleController@destroy')->name('destroy');
     });
 
+    /* ********************************* CATEGORIES ****************************** */
+    Route::group(['prefix' => 'categorias', 'as' => 'category.'], function () {
+        // LIST/SEARCH
+        Route::get('/', 'CategoryController@index')->name('index');
+        Route::match(['get', 'post'], 'busca', 'CategoryController@filter')->name('search');
+        // CREATE
+        Route::get('/cadastrar', 'CategoryController@create')->name('create');
+        Route::post('/cadastrar', 'CategoryController@store')->name('store');
+        // READ
+        Route::get('/{id}', 'CategoryController@show')->name('show');
+        // UPDATE
+        Route::get('/alterar/{id}', 'CategoryController@edit')->name('edit');
+        Route::put('/alterar/{id}', 'CategoryController@update')->name('update');
+        // DELETE
+        Route::get('/deletar/{id}', 'CategoryController@delete')->name('delete');
+        Route::delete('/deletar/{id}', 'CategoryController@destroy')->name('destroy');
+    });
+
 });

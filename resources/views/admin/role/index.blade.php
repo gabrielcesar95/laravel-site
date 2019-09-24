@@ -4,7 +4,7 @@
 
 @section('content_header')
     <div class="row px-3">
-        <h1 class="mr-auto">Grupos de Acesso</h1>
+        <h1 class="mr-auto">@yield('title')</h1>
     </div>
 @stop
 

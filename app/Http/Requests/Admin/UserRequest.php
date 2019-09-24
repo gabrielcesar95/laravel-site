@@ -70,13 +70,13 @@ class UserRequest extends FormRequest
     {
         return [
             'name.required' => 'O campo Nome é obrigatório',
-            'name.max' => 'O campo Nome deve ter no mínimo :max caracteres',
+            'name.max' => 'O campo Nome deve ter no máximo :max caracteres',
             'email.required' => 'O campo e-mail é obrigatório',
             'email.email' => 'O e-mail digitado é inválido',
             'email.unique' => 'O e-mail digitado já está cadastrado',
             'active.boolean' => 'Valor inválido para o campo Ativo',
             'password.confirmed' => 'Os valores de Senha e Confirmação de Senha devem ser iguais',
-            'password.min' => 'O campo Senha deve ter no mínimo :min caracteres',
+            'password.min' => 'O campo Senha deve ter no máximo :min caracteres',
             'password_confirmation.required_with' => 'O campo Confirmação de Senha é obrigatório',
             'roles.array' => 'Valor inválido para os campos de Grupos de Acesso',
             'roles.*.exists' => 'O Grupo de Acesso selecionado não existe',

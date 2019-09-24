@@ -14,7 +14,7 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('user_update')->route('admin.role.update', $role->id)->method('PUT')->bind($role)->autoComplete('off') }}
+    {{ Aire::open()->id('role_update')->route('admin.role.update', $role->id)->method('PUT')->bind($role)->autoComplete('off') }}
     @include('admin.role.form')
     {{ Aire::close() }}
 @stop
@@ -24,7 +24,7 @@
         <button class="btn btn-light" data-dismiss="modal">
             <i class="mdi mdi-close-circle mr-1"></i> Cancelar
         </button>
-        <button class="btn btn-primary" data-trigger-submit="user_update">
+        <button class="btn btn-primary" data-trigger-submit="role_update">
             <i class="mdi mdi-content-save mr-1"></i> Salvar
         </button>
     </div>

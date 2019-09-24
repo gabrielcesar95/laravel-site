@@ -1,7 +1,7 @@
 @extends('admin.layouts.popup')
 
-@section('title', 'Novo Grupo de Acesso')
-@section('icon', 'key-plus')
+@section('title', 'Edição de Categoria')
+@section('icon', 'playlist-edit')
 
 @section('header')
     <h5 class="modal-title text-bold" id="modal-label">
@@ -14,8 +14,8 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('role_create')->route('admin.role.store')->autoComplete('off') }}
-    @include('admin.role.form')
+    {{ Aire::open()->id('category_update')->route('admin.category.update', $category->id)->method('PUT')->bind($category)->autoComplete('off') }}
+    @include('admin.category.form')
     {{ Aire::close() }}
 @stop
 
@@ -24,7 +24,7 @@
         <button class="btn btn-light" data-dismiss="modal">
             <i class="mdi mdi-close-circle mr-1"></i> Cancelar
         </button>
-        <button class="btn btn-primary" data-trigger-submit="role_create">
+        <button class="btn btn-primary" data-trigger-submit="category_update">
             <i class="mdi mdi-content-save mr-1"></i> Salvar
         </button>
     </div>

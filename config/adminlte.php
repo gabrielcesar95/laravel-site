@@ -147,6 +147,12 @@ return [
             'url' => 'adm/grupos',
             'icon' => 'key-variant',
         ],
+        ['header' => 'Configurações'],
+        [
+            'text' => 'Categorias',
+            'url' => 'adm/categorias',
+            'icon' => 'format-list-bulleted-type',
+        ],
     ],
 
     /*
