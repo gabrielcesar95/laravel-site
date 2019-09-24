@@ -31,7 +31,7 @@
                     @endif
                 </div>
             </th>
-            <th scope="col">
+            <th scope="col" class="d-none d-md-table-cell">
                 <span class="text-bold text-white">
                     @lang('logs.causer')
                 </span>
@@ -68,7 +68,7 @@
                 <td class="text-right">
                     <div class="btn-group" role="group" aria-label="Ações">
                         @can('logs@show')
-                            <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.user.show', $row->id) }}" data-toggle="tooltip" data-placement="top" title="Visualizar">
+                            <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.logs.show', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Visualizar">
                                 <i class="mdi mdi-eye"></i>
                             </button>
                         @endcan

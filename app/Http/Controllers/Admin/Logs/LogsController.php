@@ -40,12 +40,68 @@ class LogsController extends Controller
      */
     public function show($id)
     {
-        $user = Activity::findOrFail($id);
-        $roles = $user->roles->where('visible', 1);
-        $permissions = $this->sortPermissions(Permission::all());
-        $user->directPermissions = $user->getDirectPermissions()->pluck('id')->toArray();
+        $log = Activity::findOrFail($id);
 
-        return view('admin.logs.show', compact('user', 'roles', 'permissions'));
+        switch ($log->description) {
+            case 'created':
+                $log->badge = [
+                    'icon' => 'plus-circle',
+                    'class' => 'success',
+                    'description' => __("logs.descriptions.{$log->description}")
+                ];
+                break;
+            case 'updated':
+                $log->badge = [
+                    'icon' => 'pencil',
+                    'class' => 'primary',
+                    'description' => __("logs.descriptions.{$log->description}")
+                ];
+                break;
+            case 'deleted':
+                $log->badge = [
+                    'icon' => 'delete',
+                    'class' => 'danger',
+                    'description' => __("logs.descriptions.{$log->description}")
+                ];
+                break;
+            case 'login':
+                $log->badge = [
+                    'icon' => 'login',
+                    'class' => 'secondary',
+                    'description' => __("logs.descriptions.{$log->description}")
+                ];
+                break;
+            case 'logout':
+                $log->badge = [
+                    'icon' => 'power',
+                    'class' => 'secondary',
+                    'description' => __("logs.descriptions.{$log->description}")
+                ];
+                break;
+            case 'login_failed':
+                $log->badge = [
+                    'icon' => 'message-alert',
+                    'class' => 'warning',
+                    'description' => __("logs.descriptions.{$log->description}")
+                ];
+                break;
+            case 'password_reset':
+                $log->badge = [
+                    'icon' => 'lock-reset',
+                    'class' => 'info',
+                    'description' => __("logs.descriptions.{$log->description}")
+                ];
+                break;
+
+            default:
+                $log->badge = [
+                    'icon' => 'circle-outline',
+                    'class' => 'light',
+                    'description' => __("logs.descriptions.{$log->description}")
+                ];
+        }
+
+        return view('admin.logs.show', compact('log'));
     }
 
     public function filter(Request $request)
