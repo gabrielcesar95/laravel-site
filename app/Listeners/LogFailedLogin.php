@@ -26,7 +26,6 @@ class LogFailedLogin
     public function handle($event)
     {
         activity()
-            ->performedOn($event->user)
             ->withProperties(
                 [
                     'ip' => request()->ip(),
