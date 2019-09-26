@@ -89,7 +89,7 @@
         @empty
             <tr>
                 <td colspan="5" class="text-danger text-center">
-                    <span class="d-block text-bold">Nenhum grupo de acesso encontrado</span>
+                    <span class="d-block text-bold">Nenhuma categoria encontrada</span>
                     <div class="btn-toolbar mt-1 justify-content-center" role="toolbar" aria-label="Ações">
                         <button class="btn btn-sm btn-outline-danger d-flex align-items-center" data-search-clear>
                             <i class="mdi mdi-filter-remove mr-1"></i> Limpar Filtros

@@ -26792,6 +26792,21 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '.modal-dia
     }
   });
 });
+jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('change', '.custom-file input[type="file"]', function (event) {
+  var files = jquery__WEBPACK_IMPORTED_MODULE_1___default()(this)[0].files;
+  var label = jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).siblings('.custom-file-label');
+  var total_files = files.length;
+
+  if (total_files) {
+    if (total_files > 1) {
+      label.text(total_files + ' arquivos selecionados');
+    } else {
+      label.text(files[0].name);
+    }
+  } else {
+    label.text('Selecionar Arquivo(s)');
+  }
+});
 
 /***/ }),
 
@@ -26802,7 +26817,7 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '.modal-dia
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Projetos\laravel-site\resources\views\admin\assets\js\scripts.js */"./resources/views/admin/assets/js/scripts.js");
+module.exports = __webpack_require__(/*! G:\Projetos\laravel-site\resources\views\admin\assets\js\scripts.js */"./resources/views/admin/assets/js/scripts.js");
 
 
 /***/ })

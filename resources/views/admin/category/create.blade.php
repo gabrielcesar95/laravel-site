@@ -14,7 +14,7 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('category_create')->route('admin.category.store')->autoComplete('off') }}
+    {{ Aire::open()->id('category_create')->route('admin.category.store')->multipart()->autoComplete('off') }}
     @include('admin.category.form')
     {{ Aire::close() }}
 @stop

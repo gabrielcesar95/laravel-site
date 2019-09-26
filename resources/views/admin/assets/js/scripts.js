@@ -291,3 +291,21 @@ $(document).on('submit', '.modal-dialog form', function (event) {
     });
     
 });
+
+
+$(document).on('change', '.custom-file input[type="file"]', function (event) {
+    let files = $(this)[0].files;
+    let label = $(this).siblings('.custom-file-label');
+    let total_files = files.length;
+    
+    
+    if (total_files) {
+        if (total_files > 1) {
+            label.text(total_files + ' arquivos selecionados');
+        } else {
+            label.text(files[0].name);
+        }
+    } else {
+        label.text('Selecionar Arquivo(s)');
+    }
+});

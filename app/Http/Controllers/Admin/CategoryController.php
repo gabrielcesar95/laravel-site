@@ -8,6 +8,7 @@ use App\Traits\Authorizable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -47,13 +48,16 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        dd($request->all());
+        $category = new Category();
+        $category->name = $request->name;
+        $category->uri = Str::slug($request->name);
+        $category->description = $request->description;
 
-        $category = Category::create(['name' => $request->name]);
-
-        if ($request->permissions) {
-            $category->syncPermissions($request->permissions);
+        if ($request->hasFile('cover')) {
+            $category->cover = $request->cover->store('categories');
         }
+
+        dd($category);
 
         session()->flash('message', ['type' => 'success', 'message' => "Grupo de Acesso <strong>{$category->name}</strong> cadastrado!"]);
 

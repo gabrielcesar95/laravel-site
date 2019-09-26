@@ -14,7 +14,7 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('category_update')->route('admin.category.update', $category->id)->method('PUT')->bind($category)->autoComplete('off') }}
+    {{ Aire::open()->id('category_update')->route('admin.category.update', $category->id)->method('PUT')->bind($category)->multipart()->autoComplete('off') }}
     @include('admin.category.form')
     {{ Aire::close() }}
 @stop
