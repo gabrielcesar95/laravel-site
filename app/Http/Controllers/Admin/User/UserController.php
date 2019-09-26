@@ -83,8 +83,11 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+        $roles = $user->roles->where('visible', 1);
+        $permissions = $this->sortPermissions(Permission::all());
+        $user->directPermissions = $user->getDirectPermissions()->pluck('id')->toArray();
 
-        return view('admin.user.show', compact('user'));
+        return view('admin.user.show', compact('user', 'roles', 'permissions'));
     }
 
     /**

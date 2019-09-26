@@ -70,4 +70,13 @@ Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
         Route::delete('/deletar/{id}', 'CategoryController@destroy')->name('destroy');
     });
 
+    /* ********************************* LOGS ****************************** */
+    Route::group(['prefix' => 'logs', 'namespace' => 'Logs', 'as' => 'logs.'], function () {
+        // LIST/SEARCH
+        Route::get('/', 'LogsController@index')->name('index');
+        Route::match(['get', 'post'], 'busca', 'LogsController@filter')->name('search');
+        // READ
+        Route::get('/{id}', 'LogsController@show')->name('show');
+    });
+
 });

@@ -25,7 +25,7 @@ class LogSuccessfulLogout
      */
     public function handle($event)
     {
-        activity()
+        activity('Auth')
             ->performedOn($event->user)
             ->withProperties(
                 [

@@ -153,6 +153,13 @@ return [
             'url' => 'adm/categorias',
             'icon' => 'format-list-bulleted-type',
         ],
+        ['header' => 'Administração'],
+        [
+            'text' => 'Logs',
+            'icon' => 'history',
+            'url' => 'adm/logs',
+            'can' => 'logs@index',
+        ],
     ],
 
     /*

@@ -13,4 +13,5 @@ class Role extends BaseRole
     protected static $logAttributes = ['name', 'permissions'];
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
+    protected static $logName = 'Role';
 }
