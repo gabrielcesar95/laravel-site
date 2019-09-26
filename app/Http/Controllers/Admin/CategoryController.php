@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\CategoryRequest;
 use App\Models\Category;
 use App\Traits\Authorizable;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -50,17 +51,16 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->name = $request->name;
-        $category->uri = Str::slug($request->name);
         $category->description = $request->description;
 
+        $category->save();
+
         if ($request->hasFile('cover')) {
-            $category->cover = $request->cover->store('categories');
+            $category->cover = $request->cover->storeAs('categories', $category->slug . ".{$request->cover->getClientOriginalExtension()}");
+            $category->save();
         }
 
-        dd($category);
-
-        session()->flash('message', ['type' => 'success', 'message' => "Grupo de Acesso <strong>{$category->name}</strong> cadastrado!"]);
-
+        session()->flash('message', ['type' => 'success', 'message' => "Categoria <strong>{$category->name}</strong> cadastrada!"]);
         return response()->json(['redirect' => route('admin.category.index')]);
     }
 
@@ -108,7 +108,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        session()->flash('message', ['type' => 'success', 'message' => "Grupo de Acesso <strong>{$category->name}</strong> alterado!"]);
+        session()->flash('message', ['type' => 'success', 'message' => "Categoria <strong>{$category->name}</strong> alterada!"]);
 
         return response()->json(['redirect' => route('admin.category.index')]);
     }
@@ -129,13 +129,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
-        if (!$category->visible) {
-            session()->flash('message', ['type' => 'error', 'message' => "Grupos de Acesso ocultos não podem ser excluídos"]);
-        } else {
-            $category->delete();
+        $category->delete();
 
-            session()->flash('message', ['type' => 'success', 'message' => "Grupo de Acesso <strong>{$category->name}</strong> deletado!"]);
-        }
+        session()->flash('message', ['type' => 'success', 'message' => "Categoria <strong>{$category->name}</strong> deletada!"]);
 
         return response()->json(['redirect' => route('admin.category.index')]);
     }

@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->string('name', 256);
-            $table->string('uri', 256);
+            $table->string('slug', 256);
             $table->string('subtitle', 384)->nullable();
             $table->text('content');
             $table->string('cover', 256)->nullable();

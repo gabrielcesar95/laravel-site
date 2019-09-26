@@ -57,9 +57,9 @@
                 <td>{{ $row->id }}</td>
                 <td>{{ $row->name }}</td>
                 <td>
-                    <a class="btn btn-outline-primary" href="{{ url($row->uri) }}">
+                    <a class="btn btn-outline-primary" href="{{ url($row->slug) }}">
                         <i class="mdi mdi-open-in-new      "></i>
-                        {{ $row->uri }}
+                        {{ $row->slug }}
                     </a>
                 </td>
                 <td class="text-right">
