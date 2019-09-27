@@ -57,8 +57,8 @@
                 <td>{{ $row->id }}</td>
                 <td>{{ $row->name }}</td>
                 <td>
-                    <a class="btn btn-outline-primary" href="{{ url($row->slug) }}">
-                        <i class="mdi mdi-open-in-new      "></i>
+                    <a class="btn btn-outline-primary" href="{{ url($row->slug) }}" target="_blank">
+                        <i class="mdi mdi-open-in-new"></i>
                         {{ $row->slug }}
                     </a>
                 </td>
