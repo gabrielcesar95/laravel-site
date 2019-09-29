@@ -9,6 +9,8 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -100,13 +102,19 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         $category = Category::findOrFail($id);
-        $category->name = $request->name;
 
-        if ($request->permissions) {
-            $category->syncPermissions($request->permissions);
-        }
+        $category->name = $request->name;
+        $category->description = $request->description;
 
         $category->save();
+
+        if ($request->hasFile('cover')) {
+            if ($category->cover && Storage::exists($category->cover)) {
+                Storage::delete($category->cover);
+            }
+            $category->cover = $request->cover->storeAs('categories', $category->slug . ".{$request->cover->getClientOriginalExtension()}");
+            $category->save();
+        }
 
         session()->flash('message', ['type' => 'success', 'message' => "Categoria <strong>{$category->name}</strong> alterada!"]);
 

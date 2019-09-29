@@ -5,6 +5,11 @@
 
     <div class="form-group col-12">
         <label for="cover" id="cover-label">Imagem de Capa</label>
+
+        @if(isset($category) && $category->cover)
+            <img src="{{ url('storage/'.$category->cover) }}" alt="{{ $category->name }}" class="img-thumbnail mb-1">
+        @endif
+
         <div class="input-group">
             <div class="custom-file">
                 <input type="file" id="cover" name="cover" class="custom-file-input" aria-describedby="cover-label">

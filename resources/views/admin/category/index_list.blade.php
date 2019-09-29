@@ -70,7 +70,7 @@
                             </button>
                         @endcan
                         @can('role@edit')
-                            <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.category.edit', $row->id) }}" data-popup-size="sm" data-toggle="tooltip" data-placement="top" title="Editar">
+                            <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.category.edit', $row->id) }}" data-toggle="tooltip" data-placement="top" title="Editar">
                                 <i class="mdi mdi-pencil"></i>
                             </button>
                         @endcan
