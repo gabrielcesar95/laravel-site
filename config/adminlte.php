@@ -136,6 +136,11 @@ return [
             'url' => 'adm',
             'icon' => 'chart-line',
         ],
+        [
+            'text' => 'Postagens',
+            'url' => 'adm/postagens',
+            'icon' => 'post',
+        ],
         ['header' => 'Usuários'],
         [
             'text' => 'Usuários',

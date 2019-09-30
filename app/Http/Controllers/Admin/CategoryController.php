@@ -158,41 +158,22 @@ class CategoryController extends Controller
         $page = $request->get('_page') ?? 1;
 
         if ($params) {
-            if (auth()->user()->can('super')) {
-                $data = Category::where(function ($query) use ($params, $order) {
-                    foreach ($params as $param => $props) {
-                        if (is_array($props)) {
-                            switch ($props['operator']) {
-                                case 'LIKE':
-                                    $query->where($param, 'LIKE', "%{$props['value']}%");
-                                    break;
+            $data = Category::where(function ($query) use ($params, $order) {
+                foreach ($params as $param => $props) {
+                    if (is_array($props)) {
+                        switch ($props['operator']) {
+                            case 'LIKE':
+                                $query->where($param, 'LIKE', "%{$props['value']}%");
+                                break;
 
-                                default:
-                                    $query->where($param, $props['operator'] ?? '=', $props['value']);
-                            }
-                        } else {
-                            $query->where($param, $props);
+                            default:
+                                $query->where($param, $props['operator'] ?? '=', $props['value']);
                         }
+                    } else {
+                        $query->where($param, $props);
                     }
-                })->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'), ['*'], 'page', $page);
-            } else {
-                $data = Category::where('visible', 1)->where(function ($query) use ($params, $order) {
-                    foreach ($params as $param => $props) {
-                        if (is_array($props)) {
-                            switch ($props['operator']) {
-                                case 'LIKE':
-                                    $query->where($param, 'LIKE', "%{$props['value']}%");
-                                    break;
-
-                                default:
-                                    $query->where($param, $props['operator'] ?? '=', $props['value']);
-                            }
-                        } else {
-                            $query->where($param, $props);
-                        }
-                    }
-                })->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'), ['*'], 'page', $page);
-            }
+                }
+            })->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'), ['*'], 'page', $page);
         } else {
             $data = Category::orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
         }

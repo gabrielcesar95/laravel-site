@@ -1,6 +1,6 @@
 @extends('admin.layouts.popup')
 
-@section('title', 'Deletar Categoria')
+@section('title', 'Deletar Postagem')
 
 @section('header')
     <h5 class="modal-title text-bold text-danger" id="modal-label">@yield('title')</h5>
@@ -13,18 +13,18 @@
     <div id="alerts"></div>
 
     <p>
-        Confirma a exclusão da categoria
-        <span class="text-bold">{{ $category->name }}</span>
+        Confirma a exclusão da postagem
+        <span class="text-bold">{{ $post->name }}</span>
         ?
     </p>
 
-    {{ Aire::open()->id('category_delete')->route('admin.category.destroy', $category->id) }}
+    {{ Aire::open()->id('post_delete')->route('admin.post.destroy', $post->id) }}
     {{ Aire::close() }}
 @stop
 
 @section('footer')
     <div class="btn-toolbar w-100 justify-content-between" role="toolbar" aria-label="Ações Disponíveis">
         <button class="btn btn-light" data-dismiss="modal">Cancelar</button>
-        <button class="btn btn-danger" data-trigger-submit="category_delete">Confirmar</button>
+        <button class="btn btn-danger" data-trigger-submit="post_delete">Confirmar</button>
     </div>
 @stop

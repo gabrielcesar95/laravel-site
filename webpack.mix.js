@@ -69,6 +69,7 @@ mix
     ], 'public/admin/assets/css/styles.css')
     .copyDirectory('resources/views/admin/assets/css/skins', 'public/admin/assets/css/skins')
     .copyDirectory('resources/views/admin/assets/fonts', 'public/admin/assets/fonts')
+    .copyDirectory('node_modules/ckeditor', 'public/admin/assets/js/ckeditor')
     .options({
         processCssUrls: false,
     })

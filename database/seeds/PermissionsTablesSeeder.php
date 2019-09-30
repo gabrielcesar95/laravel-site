@@ -67,11 +67,11 @@ class PermissionsTablesSeeder extends Seeder
             Permission::create(['name' => 'role@delete', 'group' => 'role']);
         }
 
-        if (Permission::where('name', 'logs@activities')->where('group', 'logs')->count() < 1) {
-            Permission::create(['name' => 'logs@activities', 'group' => 'logs']);
+        if (Permission::where('name', 'logs@index')->where('group', 'logs')->count() < 1) {
+            Permission::create(['name' => 'logs@index', 'group' => 'logs']);
         }
-        if (Permission::where('name', 'logs@access')->where('group', 'logs')->count() < 1) {
-            Permission::create(['name' => 'logs@access', 'group' => 'logs']);
+        if (Permission::where('name', 'logs@show')->where('group', 'logs')->count() < 1) {
+            Permission::create(['name' => 'logs@show', 'group' => 'logs']);
         }
 
         if (Permission::where('name', 'category@index')->where('group', 'category')->count() < 1) {
@@ -88,6 +88,22 @@ class PermissionsTablesSeeder extends Seeder
         }
         if (Permission::where('name', 'category@delete')->where('group', 'category')->count() < 1) {
             Permission::create(['name' => 'category@delete', 'group' => 'category']);
+        }
+
+        if (Permission::where('name', 'post@index')->where('group', 'post')->count() < 1) {
+            Permission::create(['name' => 'post@index', 'group' => 'post']);
+        }
+        if (Permission::where('name', 'post@show')->where('group', 'post')->count() < 1) {
+            Permission::create(['name' => 'post@show', 'group' => 'post']);
+        }
+        if (Permission::where('name', 'post@create')->where('group', 'post')->count() < 1) {
+            Permission::create(['name' => 'post@create', 'group' => 'post']);
+        }
+        if (Permission::where('name', 'post@edit')->where('group', 'post')->count() < 1) {
+            Permission::create(['name' => 'post@edit', 'group' => 'post']);
+        }
+        if (Permission::where('name', 'post@delete')->where('group', 'post')->count() < 1) {
+            Permission::create(['name' => 'post@delete', 'group' => 'post']);
         }
     }
 

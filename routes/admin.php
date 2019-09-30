@@ -70,6 +70,24 @@ Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
         Route::delete('/deletar/{id}', 'CategoryController@destroy')->name('destroy');
     });
 
+    /* *********************************** POSTS ********************************* */
+    Route::group(['prefix' => 'postagens', 'as' => 'post.'], function () {
+        // LIST/SEARCH
+        Route::get('/', 'PostController@index')->name('index');
+        Route::match(['get', 'post'], 'busca', 'PostController@filter')->name('search');
+        // CREATE
+        Route::get('/cadastrar', 'PostController@create')->name('create');
+        Route::post('/cadastrar', 'PostController@store')->name('store');
+        // READ
+        Route::get('/{id}', 'PostController@show')->name('show');
+        // UPDATE
+        Route::get('/alterar/{id}', 'PostController@edit')->name('edit');
+        Route::put('/alterar/{id}', 'PostController@update')->name('update');
+        // DELETE
+        Route::get('/deletar/{id}', 'PostController@delete')->name('delete');
+        Route::delete('/deletar/{id}', 'PostController@destroy')->name('destroy');
+    });
+
     /* ********************************* LOGS ****************************** */
     Route::group(['prefix' => 'logs', 'namespace' => 'Logs', 'as' => 'logs.'], function () {
         // LIST/SEARCH
