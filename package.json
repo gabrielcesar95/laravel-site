@@ -25,12 +25,13 @@
         "@mdi/font": "^4.4.95",
         "bootstrap": "^4.3",
         "bootstrap4-toggle": "^3.5",
+        "ckeditor": "^4.12.1",
         "icheck-bootstrap": "^3.0",
+        "inputmask": "^4.0.9",
         "jquery": "^3.4",
         "popper.js": "^1.15",
         "simplebar": "^4.3.0-alpha.0",
         "sweetalert2": "^8.17.6",
-        "toastr": "^2.1.4",
-        "ckeditor": "^4.12.1"
+        "toastr": "^2.1.4"
     }
 }

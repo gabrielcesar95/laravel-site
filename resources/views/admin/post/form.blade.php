@@ -1,9 +1,10 @@
 <div id="alerts"></div>
 <div class="form-row">
     {{ Aire::input('name', 'Nome')->id('name')->groupClass('form-group col-12') }}
-    {{ Aire::textArea('description', 'Descrição')->id('description')->groupClass('form-group col-12') }}
+    {{ Aire::input('subtitle', 'Subtítulo')->id('subtitle')->groupClass('form-group col-12') }}
+    {{ Aire::textArea('content', 'Conteúdo')->id('content')->groupClass('form-group col-12') }}
 
-    <div class="form-group col-12">
+    <div class="form-group col-lg-6">
         <label for="cover" id="cover-label">Imagem de Capa</label>
 
         @if(isset($post) && $post->cover)
@@ -17,11 +18,18 @@
             </div>
         </div>
     </div>
+
+    {{ Aire::dateTime('posted_at', 'Data de Postagem')->id('posted_at')->groupClass('form-group col-lg-6')->class('mask-datetime') }}
+
 </div>
 
 <script>
 	$(function () {
+		CKEDITOR.replace('content');
 
-		CKEDITOR.replace('description');
+		CKEDITOR.instances.content.on('change', function () {
+			$('#content').val(this.getData());
+		});
+
 	});
 </script>

@@ -5,15 +5,23 @@ window.$ = window.jQuery = $;
 window.toastr = require('toastr');
 window.SimpleBar = require('simplebar/dist/simplebar');
 window.Swal = require('sweetalert2');
-
 window.CKEDITOR_BASEPATH = '../admin/assets/js/ckeditor/';
 
 require('ckeditor');
 require('bootstrap4-toggle');
+require('inputmask/dist/min/jquery.inputmask.bundle.min');
+
+/*
+ **********************************************************************
+ *************************** GENERAL CONFIG ***************************
+ **********************************************************************
+*/
 
 $(function () {
     setTooltips();
+    setMasks();
 });
+
 
 /*
  **********************************************************************
@@ -77,6 +85,9 @@ function setToggles() {
     $('[data-toggle="toggle"]').bootstrapToggle();
 }
 
+function setMasks() {
+    $('.mask-datetime').inputmask({'mask': '99/99/9999 99:99'});
+}
 
 /*
  **********************************************************************
@@ -195,6 +206,7 @@ $(document).on('click', '[data-trigger-popup]', function (event) {
             
             setTooltips();
             setToggles();
+            setMasks();
         },
     })
     
@@ -294,7 +306,6 @@ $(document).on('submit', '.modal-dialog form', function (event) {
     });
     
 });
-
 
 $(document).on('change', '.custom-file input[type="file"]', function (event) {
     let files = $(this)[0].files;

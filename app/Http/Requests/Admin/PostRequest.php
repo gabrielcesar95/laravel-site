@@ -13,7 +13,7 @@ class PostRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->user()->can('post@create') || auth()->user()->can('post@edit');
     }
 
     /**
