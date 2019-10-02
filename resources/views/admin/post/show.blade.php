@@ -10,26 +10,42 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('user_create')->bind($post)->autoComplete('off') }}
-    {{ Aire::input('name', 'Nome')->groupClass('form-group')->setAttribute('disabled', true) }}
-
-    @if(isset($post) && $post->cover)
-        <span>Imagem de Capa</span>
-        <img src="{{ url('storage/'.$post->cover) }}" alt="{{ $post->name }}" class="img-thumbnail mb-1">
-    @endif
-
-    <div class="form-group">
-        <label for="slug">Link</label>
-        <div class="input-group mb-3">
-            {{ Aire::input('slug', 'Link')->value(url($post->slug))->groupClass('form-group')->withoutGroup()->setAttribute('disabled', true) }}
-            <div class="input-group-append">
-                <a class="input-group-text mdi mdi-open-in-new" href="{{ url($post->slug) }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Acessar">
-                </a>
+    {{ Aire::open()->id('post_show')->bind($post)->autoComplete('off') }}
+    <div class="form-row">
+        {{ Aire::input('name', 'Nome')->id('name')->groupClass('form-group col-12')->setAttribute('disabled', true) }}
+        {{ Aire::input('subtitle', 'Subtítulo')->id('subtitle')->groupClass('form-group col-12')->setAttribute('disabled', true) }}
+        <div class="form-group col-12">
+            <label for="slug">Link</label>
+            <div class="input-group mb-3">
+                {{ Aire::input('slug', 'Link')->value(route('web.post', [$post->slug]))->groupClass('form-group')->withoutGroup()->setAttribute('disabled', true) }}
+                <div class="input-group-append">
+                    <a class="input-group-text mdi mdi-open-in-new" href="{{ route('web.post', [$post->slug]) }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Acessar">
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    {{ Aire::textArea('description', 'Descrição')->groupClass('form-group')->setAttribute('disabled', true) }}
+    <div class="form-row">
+        <div class="col-12">
+            <label>Conteúdo</label>
+            <div class="form-group post-show-content" data-simplebar>
+                {!! $post->content !!}
+            </div>
+        </div>
+    </div>
 
+    <div class="form-row">
+        <div class="form-group col-lg-6">
+            <label for="cover" id="cover-label">Imagem de Capa</label>
+            @if(isset($post) && $post->cover)
+                <img src="{{ url('storage/'.$post->cover) }}" alt="{{ $post->name }}" class="img-thumbnail mb-1">
+            @endif
+        </div>
+
+        {{ Aire::input('active', 'Situação')->type('checkbox')->groupClass('form-group col-lg-3')->data('toggle', 'toggle')->data('width', '100%')->data('on', 'Publicada')->data('off', 'Oculta')->data('onstyle', 'success')->data('offstyle', 'danger')->value(1)->checked($post->posted_at)->setAttribute('disabled', true) }}
+        {{-- {{ Aire::input('posted_at', 'Data de Postagem')->id('posted_at')->groupClass('form-group col-lg-6')->class('mask-datetime')->setAttribute('disabled', true) }} --}}
+
+    </div>
     {{ Aire::close() }}
 @stop

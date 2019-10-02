@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Activitylog\Models\Activity;
 
+//TODO: Retirar do namespace Logs
+
 class LogsController extends Controller
 {
     use Authorizable;
@@ -25,7 +27,7 @@ class LogsController extends Controller
     {
         $order = [
             'column' => 'created_at',
-            'direction' => 'asc'
+            'direction' => 'desc'
         ];
         $data = Activity::orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
 

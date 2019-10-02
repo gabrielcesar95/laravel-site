@@ -50,4 +50,14 @@ Route::group(['name' => 'auth'], function () {
 
 Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
     Route::get('/', 'HomeController@index')->name('home');
+
+
+    Route::group(['prefix' => 'blog', 'as' => 'post.'], function () {
+        // LIST/SEARCH
+        Route::get('/', 'PostController@index')->name('index');
+        Route::match(['get', 'post'], 'busca', 'PostController@filter')->name('search');
+        // READ
+        Route::get('/{slug}', 'PostController@show')->name('show');
+    });
+
 });

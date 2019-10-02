@@ -16,3 +16,8 @@
 .custom-file .custom-file-label:after{
     content: 'Buscar';
 }
+
+.post-show-content{
+    max-height: 300px;
+    overflow: auto;
+}

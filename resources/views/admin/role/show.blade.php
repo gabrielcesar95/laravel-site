@@ -10,7 +10,7 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('user_show')->bind($role)->autoComplete('off') }}
+    {{ Aire::open()->id('role_show')->bind($role)->autoComplete('off') }}
     {{ Aire::input('name', 'Nome')->groupClass('form-group')->setAttribute('disabled', true) }}
 
     @if($permissions)

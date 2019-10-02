@@ -9,6 +9,8 @@ return [
         'All' => 'Todos',
         'Auth' => 'Autenticação',
         'User' => 'Usuários',
+        'Post' => 'Postagens',
+        'Category' => 'Categorias',
     ],
     'descriptions' => [
         'All' => 'Todos',

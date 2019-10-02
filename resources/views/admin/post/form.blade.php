@@ -19,7 +19,8 @@
         </div>
     </div>
 
-    {{ Aire::dateTime('posted_at', 'Data de Postagem')->id('posted_at')->groupClass('form-group col-lg-6')->class('mask-datetime') }}
+    {{ Aire::input('posted', 'Situação')->type('checkbox')->groupClass('form-group col-lg-3')->data('toggle', 'toggle')->data('style', 'w-100')->data('on', 'Publicada')->data('off', 'Oculta')->data('onstyle', 'success')->data('offstyle', 'danger')->value(1)->checked(isset($post) && $post->posted_at) }}
+    {{-- {{ Aire::input('posted_at', 'Data de Publicação')->id('posted_at')->groupClass('form-group col-lg-3')->class('mask-datetime') }} --}}
 
 </div>
 

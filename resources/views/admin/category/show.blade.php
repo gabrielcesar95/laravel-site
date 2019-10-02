@@ -10,7 +10,7 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('user_create')->bind($category)->autoComplete('off') }}
+    {{ Aire::open()->id('category_show')->bind($category)->autoComplete('off') }}
     {{ Aire::input('name', 'Nome')->groupClass('form-group')->setAttribute('disabled', true) }}
 
     @if(isset($category) && $category->cover)

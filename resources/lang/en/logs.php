@@ -8,6 +8,8 @@ return [
     'log_names' => [
         'Auth' => 'Auth',
         'User' => 'Users',
+        'Post' => 'Posts',
+        'Category' => 'Categories',
     ],
     'descriptions' => [
         'login' => 'Logged in',

@@ -7,6 +7,7 @@ use App\Traits\Authorizable;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Http\Requests\Admin\PostRequest;
+use Illuminate\Support\Arr;
 
 class PostController extends Controller
 {
@@ -46,16 +47,18 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        dd($request->all());
-
         $post = new Post();
         $post->name = $request->name;
-        $post->description = $request->description;
-
+        $post->subtitle = $request->subtitle;
+        $post->content = $request->get('content');
+        $post->user_id = auth()->user()->id;
+        if ($request->posted) {
+            $post->posted_at = date('d/m/Y H:i');
+        }
         $post->save();
 
         if ($request->hasFile('cover')) {
-            $post->cover = $request->cover->storeAs('categories', $post->slug . ".{$request->cover->getClientOriginalExtension()}");
+            $post->cover = $request->cover->storeAs('posts', $post->slug . ".{$request->cover->getClientOriginalExtension()}");
             $post->save();
         }
 
@@ -101,15 +104,24 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         $post->name = $request->name;
-        $post->description = $request->description;
+        $post->subtitle = $request->subtitle;
+        $post->content = $request->get('content');
+        $post->user_id = auth()->user()->id;
 
+        if ($request->posted) {
+            if (!$post->posted_at) {
+                $post->posted_at = date('d/m/Y H:i');
+            }
+        } else {
+            $post->posted_at = null;
+        }
         $post->save();
 
         if ($request->hasFile('cover')) {
             if ($post->cover && Storage::exists($post->cover)) {
                 Storage::delete($post->cover);
             }
-            $post->cover = $request->cover->storeAs('categories', $post->slug . ".{$request->cover->getClientOriginalExtension()}");
+            $post->cover = $request->cover->storeAs('posts', $post->slug . ".{$request->cover->getClientOriginalExtension()}");
             $post->save();
         }
 

@@ -30,7 +30,7 @@
                     @endif
                 </div>
             </th>
-            <th scope="col">
+            <th scope="col" class="d-none d-md-table-cell">
                 <div class="d-flex align-items-center">
                     <a href="" class="text-bold text-white" data-search-order="uri" data-search-order-direction="{{ (isset($order) && $order['column'] == 'uri' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'uri' ? 'data-search-order-active' : '') }}>
                         Caminho
@@ -56,7 +56,7 @@
             <tr>
                 <td>{{ $row->id }}</td>
                 <td>{{ $row->name }}</td>
-                <td>
+                <td class="d-none d-md-table-cell">
                     <a class="btn btn-outline-primary" href="{{ url($row->slug) }}" target="_blank">
                         <i class="mdi mdi-open-in-new"></i>
                         {{ $row->slug }}
