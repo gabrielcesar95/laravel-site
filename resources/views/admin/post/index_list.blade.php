@@ -57,7 +57,7 @@
                 <td>{{ $row->id }}</td>
                 <td>{{ $row->name }}</td>
                 <td class="d-none d-md-table-cell">
-                    <a class="btn btn-outline-primary" href="{{ url($row->slug) }}" target="_blank">
+                    <a class="btn btn-outline-primary" href="{{ route('web.post.show', $row->slug) }}" target="_blank">
                         <i class="mdi mdi-open-in-new"></i>
                         {{ $row->slug }}
                     </a>
@@ -89,7 +89,7 @@
         @empty
             <tr>
                 <td colspan="5" class="text-danger text-center">
-                    <span class="d-block text-bold">Nenhuma categoria encontrada</span>
+                    <span class="d-block text-bold">Nenhuma postagem encontrada</span>
                     <div class="btn-toolbar mt-1 justify-content-center" role="toolbar" aria-label="Ações">
                         <button class="btn btn-sm btn-outline-danger d-flex align-items-center" data-search-clear>
                             <i class="mdi mdi-filter-remove mr-1"></i> Limpar Filtros

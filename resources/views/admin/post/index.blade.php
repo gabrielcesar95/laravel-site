@@ -21,6 +21,7 @@
                             {{ Aire::submit()->class('w-100 d-flex mt-auto align-items-center justify-content-center')->labelHtml('<i class="mdi mdi-magnify"></i><span class="sr-only">Buscar</span>')->style('height: calc(1.6em + 0.75rem + 2px);') }}
                         </div>
                     </div>
+
                     {{ Aire::close() }}
                 </div>
             </div>

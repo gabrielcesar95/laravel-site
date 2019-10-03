@@ -57,6 +57,10 @@ class PostController extends Controller
         }
         $post->save();
 
+        if ($request->categories) {
+            $post->categories()->sync($request->categories);
+        }
+
         if ($request->hasFile('cover')) {
             $post->cover = $request->cover->storeAs('posts', $post->slug . ".{$request->cover->getClientOriginalExtension()}");
             $post->save();
@@ -116,6 +120,8 @@ class PostController extends Controller
             $post->posted_at = null;
         }
         $post->save();
+
+        $post->categories()->sync($request->categories);
 
         if ($request->hasFile('cover')) {
             if ($post->cover && Storage::exists($post->cover)) {

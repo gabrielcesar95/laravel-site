@@ -17,9 +17,9 @@
         <div class="form-group col-12">
             <label for="slug">Link</label>
             <div class="input-group mb-3">
-                {{ Aire::input('slug', 'Link')->value(route('web.post', [$post->slug]))->groupClass('form-group')->withoutGroup()->setAttribute('disabled', true) }}
+                {{ Aire::input('slug', 'Link')->value(route('web.post.show', [$post->slug]))->groupClass('form-group')->withoutGroup()->setAttribute('disabled', true) }}
                 <div class="input-group-append">
-                    <a class="input-group-text mdi mdi-open-in-new" href="{{ route('web.post', [$post->slug]) }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Acessar">
+                    <a class="input-group-text mdi mdi-open-in-new" href="{{ route('web.post.show', [$post->slug]) }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Acessar">
                     </a>
                 </div>
             </div>

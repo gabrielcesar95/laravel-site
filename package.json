@@ -17,7 +17,7 @@
         "laravel-mix": "^4.1.4",
         "lodash": "^4.17",
         "resolve-url-loader": "^2.3",
-        "sass": "^1.22.12",
+        "sass": "^1.23.0",
         "sass-loader": "^7.3",
         "vue-template-compiler": "^2.6.10"
     },
@@ -30,8 +30,10 @@
         "inputmask": "^4.0.9",
         "jquery": "^3.4",
         "popper.js": "^1.15",
+        "select2": "^4.0",
+        "@ttskch/select2-bootstrap4-theme": "^1.2.3",
         "simplebar": "^4.3.0-alpha.0",
-        "sweetalert2": "^8.17.6",
+        "sweetalert2": "^8.18.0",
         "toastr": "^2.1.4"
     }
 }

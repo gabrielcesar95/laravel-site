@@ -32,6 +32,14 @@ class PostRequest extends FormRequest
                 'nullable',
                 'max: 384',
             ],
+            'categories' => [
+                'required',
+                'array',
+                'min:1'
+            ],
+            'categories.*' => [
+                'integer'
+            ],
             'content' => [
                 'required',
             ],
@@ -59,6 +67,10 @@ class PostRequest extends FormRequest
             'name.max' => 'O campo Nome deve ter no máximo :max caracteres',
             'subtitle.required' => 'O campo Subtítulo é obrigatório',
             'subtitle.max' => 'O campo Subtítulo deve ter no máximo :max caracteres',
+            'categories.required' => 'O campo Categorias é obrigatório',
+            'categories.array' => 'Valor inválido para o campo Categorias',
+            'categories.min' => 'Selecione ao menos :min Categoria(s)',
+            'categories.*.integer' => 'Valor inválido para o campo Categorias',
             'content.required' => 'O campo Conteúdo é obrigatório',
             'cover.image' => 'O campo Imagem de Capa deve receber uma imagem (jpeg, png, bmp, gif, svg, or webp)',
             'cover.max' => 'O campo Imagem de Capa deve ter no máximo :max caracteres',
