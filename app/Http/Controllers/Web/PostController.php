@@ -18,6 +18,6 @@ class PostController extends Controller
             abort(404);
         }
 
-        return $post;
+        return view('web.post', compact('post'));
     }
 }
