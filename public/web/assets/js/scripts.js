@@ -17817,6 +17817,71 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.$ = window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_1___default.a;
+/*
+ **********************************************************************
+ *************************** GENERAL CONFIG ***************************
+ **********************************************************************
+*/
+
+jquery__WEBPACK_IMPORTED_MODULE_1___default.a.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_1___default()('meta[name="csrf-token"]').attr('content')
+  }
+});
+/*
+ **********************************************************************
+ *************************** EVENT HANDLERS ***************************
+ **********************************************************************
+*/
+
+jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '[data-ajax]', function (event) {
+  event.preventDefault();
+  var form = jquery__WEBPACK_IMPORTED_MODULE_1___default()(this);
+  var request = {
+    method: form.attr('method'),
+    action: form.attr('action'),
+    data: new FormData(form[0]),
+    alerts_div: form.find('.alerts')
+  };
+  jquery__WEBPACK_IMPORTED_MODULE_1___default.a.ajax({
+    type: request.method,
+    url: request.action,
+    timeout: 10000,
+    dataType: "json",
+    processData: false,
+    contentType: false,
+    async: true,
+    data: request.data,
+    beforeSend: function beforeSend() {},
+    success: function success(response) {
+      if (response.refresh) {
+        location.reload();
+      } else if (response.redirect) {
+        window.location.href = response.redirect;
+      }
+    },
+    error: function error(xhr, status) {
+      if (xhr.status == 422 && xhr.responseJSON.errors) {
+        request.alerts_div.find('div.alert').remove();
+        jquery__WEBPACK_IMPORTED_MODULE_1___default.a.each(xhr.responseJSON.errors, function (key, error) {
+          request.alerts_div.append(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<div>').addClass('alert alert-danger alert-dismissable fade show mb-1 py-1').attr({
+            'role': 'alert'
+          }).append(error).append(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<button>').addClass('close').attr({
+            'type': 'button',
+            'data-dismiss': 'alert',
+            'aria-label': 'Fechar'
+          }).append(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<span>').attr({
+            'aria-hidden': 'true'
+          }).html('&times;'))));
+          form.find('[name="' + key + '"], [name="' + key + '[]"]').addClass('is-invalid');
+        });
+      }
+    },
+    complete: function complete(xhr, status) {
+      loading.close();
+    }
+  });
+});
 
 /***/ }),
 

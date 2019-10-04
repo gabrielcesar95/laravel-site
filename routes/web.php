@@ -55,9 +55,11 @@ Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
     Route::group(['prefix' => 'blog', 'as' => 'post.'], function () {
         // LIST/SEARCH
         Route::get('/', 'PostController@index')->name('index');
-        Route::match(['get', 'post'], 'busca', 'PostController@filter')->name('search');
         // READ
         Route::get('/{slug}', 'PostController@show')->name('show');
+
+        Route::post('/{slug}/comentar', 'PostController@comment')->name('comment');
+
     });
 
 });
