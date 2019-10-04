@@ -19,7 +19,7 @@
             <th scope="col">
                 <div class="d-flex align-items-center">
                     <a href="" class="text-bold text-white" data-search-order="name" data-search-order-direction="{{ (isset($order) && $order['column'] == 'name' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'name' ? 'data-search-order-active' : '') }}>
-                        Nome
+                        Data
                     </a>
                     @if(isset($order) && $order['column'] == 'name')
                         @if($order['direction'] == 'desc')
@@ -33,7 +33,7 @@
             <th scope="col" class="d-none d-md-table-cell">
                 <div class="d-flex align-items-center">
                     <a href="" class="text-bold text-white" data-search-order="uri" data-search-order-direction="{{ (isset($order) && $order['column'] == 'uri' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'uri' ? 'data-search-order-active' : '') }}>
-                        Caminho
+                        Autor
                     </a>
                     @if(isset($order) && $order['column'] == 'uri')
                         @if($order['direction'] == 'desc')
@@ -55,22 +55,19 @@
         @forelse($data as $row)
             <tr>
                 <td>{{ $row->id }}</td>
-                <td>{{ $row->name }}</td>
+                <td>{{ $row->created_at }}</td>
                 <td class="d-none d-md-table-cell">
-                    <a class="btn btn-outline-primary" href="{{ route('web.post.show', $row->slug) }}" target="_blank">
-                        <i class="mdi mdi-open-in-new"></i>
-                        {{ $row->slug }}
-                    </a>
+                    {{ $row->user->name }}
                 </td>
                 <td class="text-right">
                     <div class="btn-group" role="group" aria-label="Ações">
                         @can('role@show')
-                            <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.post.show', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Visualizar">
+                            <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.comment.show', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Visualizar">
                                 <i class="mdi mdi-eye"></i>
                             </button>
                         @endcan
                         @can('role@edit')
-                            <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.post.edit', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Editar">
+                            <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.comment.edit', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Editar">
                                 <i class="mdi mdi-pencil"></i>
                             </button>
                         @endcan
@@ -78,11 +75,8 @@
                             <button id="row-{{ $row->id }}-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             </button>
                             <div class="dropdown-menu" aria-labelledby="row-{{ $row->id }}-dropdown">
-                                @if(auth()->user()->can('comment@index'))
-                                    <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.post.delete', $row->id) }}" href="#">Comentários</span>
-                                @endif
                                 @if(auth()->user()->can('role@delete'))
-                                    <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.post.delete', $row->id) }}" href="#">Deletar</span>
+                                    <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.comment.delete', $row->id) }}" href="#">Deletar</span>
                                 @endif
                             </div>
                         </div>
@@ -92,7 +86,7 @@
         @empty
             <tr>
                 <td colspan="5" class="text-danger text-center">
-                    <span class="d-block text-bold">Nenhuma postagem encontrada</span>
+                    <span class="d-block text-bold">Nenhum comentário encontrado</span>
                     <div class="btn-toolbar mt-1 justify-content-center" role="toolbar" aria-label="Ações">
                         <button class="btn btn-sm btn-outline-danger d-flex align-items-center" data-search-clear>
                             <i class="mdi mdi-filter-remove mr-1"></i> Limpar Filtros

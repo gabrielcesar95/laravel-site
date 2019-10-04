@@ -141,6 +141,11 @@ return [
             'url' => 'adm/postagens',
             'icon' => 'post',
         ],
+        [
+            'text' => 'Comentários',
+            'url' => 'adm/comentarios',
+            'icon' => 'comment-multiple-outline',
+        ],
         ['header' => 'Usuários'],
         [
             'text' => 'Usuários',

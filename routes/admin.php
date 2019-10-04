@@ -88,6 +88,25 @@ Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
         Route::delete('/deletar/{id}', 'PostController@destroy')->name('destroy');
     });
 
+    /* ********************************* Comments ******************************** */
+    Route::group(['prefix' => 'comentarios', 'as' => 'comment.'], function () {
+        // LIST/SEARCH
+        Route::get('/', 'CommentController@index')->name('index');
+        Route::match(['get', 'post'], 'busca', 'CommentController@filter')->name('search');
+        // CREATE
+        Route::get('/cadastrar', 'CommentController@create')->name('create');
+        Route::post('/cadastrar', 'CommentController@store')->name('store');
+        // READ
+        Route::get('/{id}', 'CommentController@show')->name('show');
+        // UPDATE
+        Route::get('/alterar/{id}', 'CommentController@edit')->name('edit');
+        Route::put('/alterar/{id}', 'CommentController@update')->name('update');
+        // DELETE
+        Route::get('/deletar/{id}', 'CommentController@delete')->name('delete');
+        Route::delete('/deletar/{id}', 'CommentController@destroy')->name('destroy');
+    });
+
+
     /* ********************************* LOGS ****************************** */
     Route::group(['prefix' => 'logs', 'namespace' => 'Logs', 'as' => 'logs.'], function () {
         // LIST/SEARCH

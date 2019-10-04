@@ -1,7 +1,7 @@
 @extends('admin.layouts.popup')
 
-@section('title', 'Nova Postagem')
-@section('icon', 'post')
+@section('title', 'Novo Comentário')
+@section('icon', 'comment-plus-outline')
 
 @section('header')
     <h5 class="modal-title text-bold" id="modal-label">
@@ -14,8 +14,8 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('post_create')->route('admin.post.store')->multipart()->autoComplete('off') }}
-    @include('admin.post.form')
+    {{ Aire::open()->id('comment_create')->route('admin.comment.store')->multipart()->autoComplete('off') }}
+    @include('admin.comment.form')
     {{ Aire::close() }}
 @stop
 
@@ -24,7 +24,7 @@
         <button class="btn btn-light" data-dismiss="modal">
             <i class="mdi mdi-close-circle mr-1"></i> Cancelar
         </button>
-        <button class="btn btn-primary" data-trigger-submit="post_create">
+        <button class="btn btn-primary" data-trigger-submit="comment_create">
             <i class="mdi mdi-content-save mr-1"></i> Salvar
         </button>
     </div>

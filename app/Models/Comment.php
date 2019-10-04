@@ -12,4 +12,16 @@ class Comment extends Model
     {
         return $this->morphTo();
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        $date = new \DateTime($value);
+
+        return date_format($date, 'd/m/Y H:i');
+    }
 }

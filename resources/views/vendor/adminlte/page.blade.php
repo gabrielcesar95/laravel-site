@@ -160,7 +160,7 @@
 
 @section('adminlte_js')
     <script src="{{ asset(mix('admin/assets/js/adminLTE.js')) }}"></script>
-    @include('admin.layouts.alerts')
+    @include('layouts.alerts')
 
     @stack('js')
     @yield('js')

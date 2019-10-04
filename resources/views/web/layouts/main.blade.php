@@ -13,13 +13,15 @@
 
 @yield('content')
 
+<script type="text/javascript" src="{{ mix('web/assets/js/scripts.js') }}"></script>
+@include('layouts.alerts')
+
 @stack('js')
 @yield('js')
 
 @stack('css')
 @yield('css')
 
-<script type="text/javascript" src="{{ mix('web/assets/js/scripts.js') }}"></script>
 
 </body>
 </html>

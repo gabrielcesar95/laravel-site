@@ -2,7 +2,7 @@ import 'bootstrap';
 import $ from 'jquery';
 
 window.$ = window.jQuery = $;
-
+window.toastr = require('toastr');
 
 /*
  **********************************************************************
@@ -88,7 +88,7 @@ $(document).on('submit', '[data-ajax]', function (event) {
             }
         },
         complete: function (xhr, status) {
-            loading.close();
+        
         }
     });
     

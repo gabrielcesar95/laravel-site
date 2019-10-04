@@ -75,9 +75,9 @@
                             </button>
                         @endcan
                         <div class="btn-group" role="group">
-                            <button id="row-ID-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button id="row-{{ $row->id }}-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="row-ID-dropdown">
+                            <div class="dropdown-menu" aria-labelledby="row-{{ $row->id }}-dropdown">
                                 @if(auth()->user()->can('role@delete'))
                                     <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.category.delete', $row->id) }}" href="#">Deletar</span>
                                 @endif

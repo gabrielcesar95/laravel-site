@@ -80,7 +80,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        return view('admin.post.show', compact('post', 'permissions'));
+        return view('admin.post.show', compact('post'));
     }
 
     /**
@@ -93,7 +93,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        return view('admin.post.edit', compact('post', 'permissions'));
+        return view('admin.post.edit', compact('post'));
     }
 
     /**
