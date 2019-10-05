@@ -30,35 +30,6 @@ class CommentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.comment.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\CommentRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(CommentRequest $request)
-    {
-        $comment = new Post();
-        $comment->name = $request->name;
-        $comment->subtitle = $request->subtitle;
-        $comment->content = $request->get('content');
-        $comment->user_id = auth()->user()->id;
-        $comment->save();
-
-        session()->flash('message', ['type' => 'success', 'message' => "Comentário cadastrado!"]);
-        return response()->json(['redirect' => route('admin.comment.index')]);
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param int $id
@@ -66,22 +37,9 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        $comment = Post::findOrFail($id);
+        $comment = Comment::findOrFail($id);
 
         return view('admin.comment.show', compact('comment'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $comment = Post::findOrFail($id);
-
-        return view('admin.comment.edit', compact('comment'));
     }
 
     /**
@@ -93,12 +51,11 @@ class CommentController extends Controller
      */
     public function update(CommentRequest $request, $id)
     {
-        $comment = Post::findOrFail($id);
+        dd($request->all());
 
-        $comment->name = $request->name;
-        $comment->subtitle = $request->subtitle;
-        $comment->content = $request->get('content');
-        $comment->user_id = auth()->user()->id;
+        $comment = Comment::findOrFail($id);
+
+        $comment->approved = $request->approved;
         $comment->save();
 
         session()->flash('message', ['type' => 'success', 'message' => "Comentário alterado!"]);

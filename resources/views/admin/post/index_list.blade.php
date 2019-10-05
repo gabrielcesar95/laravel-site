@@ -89,12 +89,12 @@
                 </td>
                 <td class="text-right">
                     <div class="btn-group" role="group" aria-label="Ações">
-                        @can('role@show')
+                        @can('post@show')
                             <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.post.show', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Visualizar">
                                 <i class="mdi mdi-eye"></i>
                             </button>
                         @endcan
-                        @can('role@edit')
+                        @can('post@edit')
                             <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.post.edit', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Editar">
                                 <i class="mdi mdi-pencil"></i>
                             </button>
@@ -106,7 +106,7 @@
                                 @if(auth()->user()->can('comment@index'))
                                     <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.post.delete', $row->id) }}" href="#">Comentários</span>
                                 @endif
-                                @if(auth()->user()->can('role@delete'))
+                                @if(auth()->user()->can('post@delete'))
                                     <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.post.delete', $row->id) }}" href="#">Deletar</span>
                                 @endif
                             </div>

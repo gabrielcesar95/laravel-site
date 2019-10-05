@@ -10,22 +10,7 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('comment_show')->bind($comment)->autoComplete('off') }}
-    <div class="form-row">
-        {{ Aire::input('name', 'Nome')->id('name')->groupClass('form-group col-12')->setAttribute('disabled', true) }}
-        {{ Aire::input('subtitle', 'Subtítulo')->id('subtitle')->groupClass('form-group col-12')->setAttribute('disabled', true) }}
-        <div class="form-group col-12">
-            <label for="slug">Link</label>
-            <div class="input-group mb-3">
-                {{ Aire::input('slug', 'Link')->value(route('web.comment.show', [$comment->slug]))->groupClass('form-group')->withoutGroup()->setAttribute('disabled', true) }}
-                <div class="input-group-append">
-                    <a class="input-group-text mdi mdi-open-in-new" href="{{ route('web.comment.show', [$comment->slug]) }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Acessar">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    {{ Aire::open()->id('comment_show')->route('admin.comment.update', [$comment->id])->bind($comment)->autoComplete('off') }}
     <div class="form-row">
         <div class="col-12">
             <label>Conteúdo</label>
@@ -36,15 +21,30 @@
     </div>
 
     <div class="form-row">
-        <div class="form-group col-lg-6">
-            <label for="cover" id="cover-label">Imagem de Capa</label>
-            @if(isset($comment) && $comment->cover)
-                <img src="{{ url('storage/'.$comment->cover) }}" alt="{{ $comment->name }}" class="img-thumbnail mb-1">
-            @endif
-        </div>
-
-        {{ Aire::input('active', 'Situação')->type('checkbox')->groupClass('form-group col-lg-3')->data('toggle', 'toggle')->data('width', '100%')->data('on', 'Publicada')->data('off', 'Oculta')->data('onstyle', 'success')->data('offstyle', 'danger')->value(1)->checked($comment->approved)->setAttribute('disabled', true) }}
-
+        {{ Aire::input('commentable_type', 'Tipo')->id('name')->groupClass('form-group col-6')->value($comment->commentable_type)->setAttribute('disabled', true) }}
+        {{ Aire::input('commentable_slug', 'Local')->value($comment->commentable->name)->groupClass('form-group col-6')->setAttribute('disabled', true) }}
+        {{ Aire::input('user', 'Autor')->value($comment->user->name)->groupClass('form-group col-12')->setAttribute('disabled', true) }}
+        {{ Aire::hidden('action') }}
     </div>
     {{ Aire::close() }}
 @stop
+
+@section('footer')
+    <div class="btn-toolbar w-100 justify-content-between" role="toolbar" aria-label="Ações Disponíveis">
+        <button class="btn btn-light mr-auto" data-dismiss="modal">
+            <i class="mdi mdi-close-circle mr-1"></i> Cancelar
+        </button>
+        <button class="btn btn-danger mr-1" id="btn_delete" data-trigger-submit="comment_show">
+            <i class="mdi mdi-trash-can mr-1"></i> Excluir
+        </button>
+        <button class="btn btn-success" id="btn_approve" data-trigger-submit="comment_show">
+            <i class="mdi mdi-check-circle-outline mr-1"></i> Aprovar
+        </button>
+    </div>
+@stop
+
+<script>
+	$(function () {
+        //TODO: Alterar valor do input [name="action"] ao clicar em #btn_delete ou #btn_approve
+	});
+</script>

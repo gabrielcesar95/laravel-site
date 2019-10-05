@@ -16,12 +16,12 @@
                     @endif
                 </div>
             </th>
-            <th scope="col">
+            <th scope="col" class="d-none d-md-table-cell">
                 <div class="d-flex align-items-center">
-                    <a href="" class="text-bold text-white" data-search-order="name" data-search-order-direction="{{ (isset($order) && $order['column'] == 'name' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'name' ? 'data-search-order-active' : '') }}>
+                    <a href="" class="text-bold text-white" data-search-order="created_at" data-search-order-direction="{{ (isset($order) && $order['column'] == 'created_at' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'created_at' ? 'data-search-order-active' : '') }}>
                         Data
                     </a>
-                    @if(isset($order) && $order['column'] == 'name')
+                    @if(isset($order) && $order['column'] == 'created_at')
                         @if($order['direction'] == 'desc')
                             <i class="ml-1 mdi mdi-arrow-down"></i>
                         @else
@@ -44,6 +44,20 @@
                     @endif
                 </div>
             </th>
+            <th scope="col">
+                <div class="d-flex align-items-center">
+                    <a href="" class="text-bold text-white" data-search-order="uri" data-search-order-direction="{{ (isset($order) && $order['column'] == 'uri' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'uri' ? 'data-search-order-active' : '') }}>
+                        Situação
+                    </a>
+                    @if(isset($order) && $order['column'] == 'uri')
+                        @if($order['direction'] == 'desc')
+                            <i class="ml-1 mdi mdi-arrow-down"></i>
+                        @else
+                            <i class="ml-1 mdi mdi-arrow-up"></i>
+                        @endif
+                    @endif
+                </div>
+            </th>
             <th scope="col" class="text-right">
                 <span class="text-bold text-white">
                     Ações
@@ -55,27 +69,33 @@
         @forelse($data as $row)
             <tr>
                 <td>{{ $row->id }}</td>
-                <td>{{ $row->created_at }}</td>
+                <td class="d-none d-md-table-cell">{{ $row->created_at }}</td>
                 <td class="d-none d-md-table-cell">
                     {{ $row->user->name }}
                 </td>
+                <td>
+                    @if($row->approved)
+                        <span class="badge badge-pill badge-success ml-auto px-2 py-2" data-toggle="tooltip" title="Aprovado">
+                            <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                    @else
+                        <span class="badge badge-pill badge-danger ml-auto px-2 py-2" data-toggle="tooltip" title="Aguardando Aprovação">
+                            <i class="mdi mdi-close-circle-outline"></i>
+                        </span>
+                    @endif
+                </td>
                 <td class="text-right">
                     <div class="btn-group" role="group" aria-label="Ações">
-                        @can('role@show')
+                        @can('comment@show')
                             <button type="button" class="btn btn-info text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.comment.show', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Visualizar">
                                 <i class="mdi mdi-eye"></i>
-                            </button>
-                        @endcan
-                        @can('role@edit')
-                            <button type="button" class="btn btn-primary text-white d-flex align-items-center justify-content-center" data-trigger-popup="{{ route('admin.comment.edit', $row->id) }}" data-popup-size="lg" data-toggle="tooltip" data-placement="top" title="Editar">
-                                <i class="mdi mdi-pencil"></i>
                             </button>
                         @endcan
                         <div class="btn-group" role="group">
                             <button id="row-{{ $row->id }}-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             </button>
                             <div class="dropdown-menu" aria-labelledby="row-{{ $row->id }}-dropdown">
-                                @if(auth()->user()->can('role@delete'))
+                                @if(auth()->user()->can('comment@delete'))
                                     <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.comment.delete', $row->id) }}" href="#">Deletar</span>
                                 @endif
                             </div>

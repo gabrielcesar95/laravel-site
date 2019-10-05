@@ -33,7 +33,7 @@
             <button class="btn btn-info text-white col-12 col-md-auto d-flex mb-1 mb-md-auto" type="button" data-toggle="collapse" data-target="#filters-accordion" aria-expanded="true" aria-controls="filters-accordion">
                 <i class="mdi mdi-filter mr-1"></i> Filtros
             </button>
-            @can('role@create')
+            @can('post@create')
                 <button class="btn btn-success ml-auto d-flex align-items-center col-12 col-md-auto" data-trigger-popup="{{ route('admin.post.create') }}" data-popup-size="lg">
                     <i class="mdi mdi-plus-circle mr-1"></i> Nova Postagem
                 </button>
