@@ -28167,7 +28167,7 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('change', '.custom-fi
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Projetos\laravel-site\resources\views\admin\assets\js\scripts.js */"./resources/views/admin/assets/js/scripts.js");
+module.exports = __webpack_require__(/*! G:\Projetos\laravel-site\resources\views\admin\assets\js\scripts.js */"./resources/views/admin/assets/js/scripts.js");
 
 
 /***/ })

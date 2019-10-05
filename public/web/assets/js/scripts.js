@@ -18398,9 +18398,9 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('submit', '[data-ajax
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Projetos\laravel-site\resources\views\web\assets\js\scripts.js */"./resources/views/web/assets/js/scripts.js");
-__webpack_require__(/*! C:\Projetos\laravel-site\resources\views\web\assets\sass\web.scss */"./resources/views/web/assets/sass/web.scss");
-module.exports = __webpack_require__(/*! C:\Projetos\laravel-site\resources\views\admin\assets\sass\admin.scss */"./resources/views/admin/assets/sass/admin.scss");
+__webpack_require__(/*! G:\Projetos\laravel-site\resources\views\web\assets\js\scripts.js */"./resources/views/web/assets/js/scripts.js");
+__webpack_require__(/*! G:\Projetos\laravel-site\resources\views\web\assets\sass\web.scss */"./resources/views/web/assets/sass/web.scss");
+module.exports = __webpack_require__(/*! G:\Projetos\laravel-site\resources\views\admin\assets\sass\admin.scss */"./resources/views/admin/assets/sass/admin.scss");
 
 
 /***/ })

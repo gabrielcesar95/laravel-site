@@ -44,6 +44,20 @@
                     @endif
                 </div>
             </th>
+            <th scope="col" class="d-none d-md-table-cell">
+                <div class="d-flex align-items-center">
+                    <a href="" class="text-bold text-white" data-search-order="posted_at" data-search-order-direction="{{ (isset($order) && $order['column'] == 'posted_at' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'posted_at' ? 'data-search-order-active' : '') }}>
+                        Publicação
+                    </a>
+                    @if(isset($order) && $order['column'] == 'posted_at')
+                        @if($order['direction'] == 'desc')
+                            <i class="ml-1 mdi mdi-arrow-down"></i>
+                        @else
+                            <i class="ml-1 mdi mdi-arrow-up"></i>
+                        @endif
+                    @endif
+                </div>
+            </th>
             <th scope="col" class="text-right">
                 <span class="text-bold text-white">
                     Ações
@@ -61,6 +75,17 @@
                         <i class="mdi mdi-open-in-new"></i>
                         {{ $row->slug }}
                     </a>
+                </td>
+                <td>
+                    @if($row->posted_at)
+                        <span class="badge badge-pill badge-success ml-auto px-3 py-2" data-toggle="tooltip" title="Publicada em {{ $row->posted_at }}">
+                            <i class="mdi mdi-check-circle-outline"></i> Publicada
+                        </span>
+                    @else
+                        <span class="badge badge-pill badge-danger ml-auto px-3 py-2">
+                            <i class="mdi mdi-close-circle-outline"></i> Não Publicada
+                        </span>
+                    @endif
                 </td>
                 <td class="text-right">
                     <div class="btn-group" role="group" aria-label="Ações">

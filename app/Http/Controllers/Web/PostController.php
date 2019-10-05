@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\CommentRequest;
 use App\Models\Comment;
 use App\Models\Post;
+use Carbon\Carbon;
+use Cassandra\Date;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,10 +16,16 @@ class PostController extends Controller
     {
         //TODO: Incrementar contador de views a cada visita
 
-        $post = Post::where('posted_at', '<', date('Y-m-d H:i'))->where('slug', $slug)->first();
+        $post = Post::where('slug', $slug)->first();
 
         if (!$post) {
-            return redirect()->back();
+            session()->flash('message', ['type' => 'warning', 'message' => "Postagem não encontrada!"]);
+            return redirect()->route('web.home');
+        }
+
+        if (!$post->posted_at || new \DateTime($post->getOriginal('posted_at')) > now()) {
+            session()->flash('message', ['type' => 'warning', 'message' => "Postagem não encontrada!"]);
+            return redirect()->route('web.home');
         }
 
         return view('web.post', compact('post'));
