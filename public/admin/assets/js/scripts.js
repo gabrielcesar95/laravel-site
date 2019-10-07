@@ -28065,7 +28065,14 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('click', '[data-trigg
     data: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).data('popup-data'),
     size: jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).data('popup-size')
   };
+  var parent = jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).parents('.modal');
   var modal = jquery__WEBPACK_IMPORTED_MODULE_1___default()('.modal:first');
+
+  if (parent.length > 0) {
+    modal.parent().append(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<div>').addClass('modal'));
+    modal = jquery__WEBPACK_IMPORTED_MODULE_1___default()('.modal:last');
+  }
+
   jquery__WEBPACK_IMPORTED_MODULE_1___default.a.get({
     url: options.url,
     data: options.data,
@@ -28157,6 +28164,24 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('change', '.custom-fi
     label.text('Selecionar Arquivo(s)');
   }
 });
+jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on({
+  'show.bs.modal': function showBsModal() {
+    var zIndex = 1040 + 10 * jquery__WEBPACK_IMPORTED_MODULE_1___default()('.modal:visible').length;
+    jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).css('z-index', zIndex);
+    setTimeout(function () {
+      jquery__WEBPACK_IMPORTED_MODULE_1___default()('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+    }, 0);
+  },
+  'hidden.bs.modal': function hiddenBsModal() {
+    if (jquery__WEBPACK_IMPORTED_MODULE_1___default()('.modal:visible').length > 0) {
+      // restore the modal-open class to the body element, so that scrolling works
+      // properly after de-stacking a modal.
+      setTimeout(function () {
+        jquery__WEBPACK_IMPORTED_MODULE_1___default()(document.body).addClass('modal-open');
+      }, 0);
+    }
+  }
+}, '.modal');
 
 /***/ }),
 

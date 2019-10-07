@@ -37,8 +37,13 @@
     <div class="container">
 
         <div class="row">
-
-            <!-- Post Content Column -->
+            @if(!$post->posted_at || new \DateTime($post->getOriginal('posted_at')) > now())
+                <div class="col-12 mt-2 alert alert-warning" role="alert">
+                    Essa postagem ainda não está publicada. Para publicar acesse:
+                    <a href="{{ route('admin.post.index') }}" class="alert-link">Painel de postagens</a>
+                </div>
+        @endif
+        <!-- Post Content Column -->
             <article class="col-12">
 
                 <!-- Title -->

@@ -23,7 +23,7 @@ class PostController extends Controller
             return redirect()->route('web.home');
         }
 
-        if (!$post->posted_at || new \DateTime($post->getOriginal('posted_at')) > now()) {
+        if ((!auth()->user() || !auth()->user()->can('post@show')) && (!$post->posted_at || new \DateTime($post->getOriginal('posted_at')) > now())) {
             session()->flash('message', ['type' => 'warning', 'message' => "Postagem não encontrada!"]);
             return redirect()->route('web.home');
         }

@@ -80,6 +80,7 @@ Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
         Route::post('/cadastrar', 'PostController@store')->name('store');
         // READ
         Route::get('/{id}', 'PostController@show')->name('show');
+        Route::get('/{id}/comentarios', 'PostController@comments')->name('comments');
         // UPDATE
         Route::get('/alterar/{id}', 'PostController@edit')->name('edit');
         Route::put('/alterar/{id}', 'PostController@update')->name('update');

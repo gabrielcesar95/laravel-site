@@ -83,6 +83,11 @@ class PostController extends Controller
         return view('admin.post.show', compact('post'));
     }
 
+    public function comments()
+    {
+        return view('admin.post.comments');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

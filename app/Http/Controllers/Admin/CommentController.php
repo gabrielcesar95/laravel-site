@@ -8,6 +8,8 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Traits\Authorizable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class CommentController extends Controller
 {
@@ -51,11 +53,23 @@ class CommentController extends Controller
      */
     public function update(CommentRequest $request, $id)
     {
-        dd($request->all());
-
         $comment = Comment::findOrFail($id);
 
-        $comment->approved = $request->approved;
+        switch ($request->action) {
+            case 'approve':
+                $comment->approved = 1;
+
+                break;
+
+            case 'delete':
+
+                break;
+
+            default:
+                session()->flash('message', ['type' => 'warning', 'message' => "Ação inesperada"]);
+                return response()->json(['redirect' => route('admin.comment.index')]);
+        }
+
         $comment->save();
 
         session()->flash('message', ['type' => 'success', 'message' => "Comentário alterado!"]);
@@ -65,7 +79,7 @@ class CommentController extends Controller
 
     public function delete($id)
     {
-        $comment = Post::findOrFail($id);
+        $comment = Comment::findOrFail($id);
 
         return view('admin.comment.delete', compact('comment'));
     }
@@ -78,7 +92,7 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Post::findOrFail($id);
+        $comment = Comment::findOrFail($id);
         $comment->delete();
 
         session()->flash('message', ['type' => 'success', 'message' => "Comentário deletado!"]);
@@ -99,13 +113,20 @@ class CommentController extends Controller
 
         $page = $request->get('_page') ?? 1;
 
+        dd($params);
+
         if ($params) {
             $data = Comment::where(function ($query) use ($params, $order) {
                 foreach ($params as $param => $props) {
                     if (is_array($props)) {
                         switch ($props['operator']) {
                             case 'LIKE':
-                                $query->where($param, 'LIKE', "%{$props['value']}%");
+                                if (Str::contains($param, '__')) {
+                                    //TODO: separar string $param na ocorrencia de '__'. Relação primeiro e campo depois. Uma vez separado fazer o where conforme '$query->where(relacao->campo 'LIKE', "%{$props['value']}%");'
+                                    $query->where($param, 'LIKE', "%{$props['value']}%");
+                                } else {
+                                    $query->where($param, 'LIKE', "%{$props['value']}%");
+                                }
                                 break;
 
                             default:

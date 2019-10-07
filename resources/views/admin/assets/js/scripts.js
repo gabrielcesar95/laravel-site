@@ -227,6 +227,7 @@ $(document).ajaxError(function (event, xhr, settings) {
 });
 
 $(document).on('click', '[data-trigger-popup]', function (event) {
+    
     event.preventDefault();
     
     let options = {
@@ -235,14 +236,22 @@ $(document).on('click', '[data-trigger-popup]', function (event) {
         size: $(this).data('popup-size')
     };
     
+    let parent = $(this).parents('.modal');
     let modal = $('.modal:first');
+    
+    if (parent.length > 0) {
+        modal.parent().append(
+            $('<div>')
+                .addClass('modal')
+        );
+        modal = $('.modal:last');
+    }
     
     $.get({
         url: options.url,
         data: options.data,
         dataType: 'html',
         success: function (view) {
-            
             modal.html(view).modal();
             
             modal.find('.modal-dialog').addClass(options.size ? 'modal-' + options.size : '');
@@ -367,3 +376,22 @@ $(document).on('change', '.custom-file input[type="file"]', function (event) {
         label.text('Selecionar Arquivo(s)');
     }
 });
+
+$(document).on({
+    'show.bs.modal': function () {
+        var zIndex = 1040 + (10 * $('.modal:visible').length);
+        $(this).css('z-index', zIndex);
+        setTimeout(function () {
+            $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+        }, 0);
+    },
+    'hidden.bs.modal': function () {
+        if ($('.modal:visible').length > 0) {
+            // restore the modal-open class to the body element, so that scrolling works
+            // properly after de-stacking a modal.
+            setTimeout(function () {
+                $(document.body).addClass('modal-open');
+            }, 0);
+        }
+    }
+}, '.modal');

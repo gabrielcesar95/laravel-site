@@ -104,7 +104,7 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="row-{{ $row->id }}-dropdown">
                                 @if(auth()->user()->can('comment@index'))
-                                    <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.post.delete', $row->id) }}" href="#">Comentários</span>
+                                    <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.post.comments', $row->id) }}" href="#">Comentários</span>
                                 @endif
                                 @if(auth()->user()->can('post@delete'))
                                     <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.post.delete', $row->id) }}" href="#">Deletar</span>
