@@ -118,6 +118,8 @@ return [
 
     'password_reset_url' => 'senha/resetar',
 
+    'password_email_url' => 'senha/email',
+
     /*
     |--------------------------------------------------------------------------
     | Menu Items

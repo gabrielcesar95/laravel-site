@@ -6,8 +6,6 @@
  **********************************************************************
 */
 
-use App\Http\Controllers\Admin\DashboardController;
-
 Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
     /* ******************************* DASHBOARD **************************** */
     Route::get('/', 'DashboardController@index')->name('dashboard');

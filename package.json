@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "@mdi/font": "^4.4.95",
+        "@ttskch/select2-bootstrap4-theme": "^1.2.3",
         "bootstrap": "^4.3",
         "bootstrap4-toggle": "^3.5",
         "ckeditor": "^4.12.1",
@@ -31,9 +32,8 @@
         "jquery": "^3.4",
         "popper.js": "^1.15",
         "select2": "^4.0",
-        "@ttskch/select2-bootstrap4-theme": "^1.2.3",
-        "simplebar": "^4.3.0-alpha.0",
-        "sweetalert2": "^8.18.0",
+        "simplebar": "^4.3.0-alpha.1",
+        "sweetalert2": "^8.18.1",
         "toastr": "^2.1.4"
     }
 }

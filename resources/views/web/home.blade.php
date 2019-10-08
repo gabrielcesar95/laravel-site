@@ -2,6 +2,8 @@
 
 @section('title', env('APP_NAME'))
 
+@include('web.layouts.navbar')
+
 @section('content')
     <section class="container bg-primary text-white py-4">
         <h1 class="text-center">Home Page</h1>

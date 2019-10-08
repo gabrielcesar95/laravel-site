@@ -25,14 +25,16 @@ class LogSuccessfulLogout
      */
     public function handle($event)
     {
-        activity('Auth')
-            ->performedOn($event->user)
-            ->withProperties(
-                [
-                    'ip' => request()->ip(),
-                    'user_agent' => request()->userAgent()
-                ]
-            )
-            ->log('logout');
+        if ($event->user) {
+            activity('Auth')
+                ->performedOn($event->user)
+                ->withProperties(
+                    [
+                        'ip' => request()->ip(),
+                        'user_agent' => request()->userAgent()
+                    ]
+                )
+                ->log('logout');
+        }
     }
 }

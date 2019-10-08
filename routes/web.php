@@ -13,7 +13,6 @@
 
 use Illuminate\Support\Facades\Auth;
 
-
 /*
  **********************************************************************
  ********************************* AUTH *******************************
@@ -38,7 +37,7 @@ Route::group(['name' => 'auth'], function () {
 
     // Email Verification
     Route::get('email/verificar', 'Auth\VerificationController@show')->name('verification.notice');
-    Route::get('email/verificar/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+    Route::get('email/verificar/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('email/reenviar', 'Auth\VerificationController@resend')->name('verification.resend');
 });
 
@@ -51,7 +50,6 @@ Route::group(['name' => 'auth'], function () {
 Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
-
     Route::group(['prefix' => 'blog', 'as' => 'post.'], function () {
         // LIST/SEARCH
         Route::get('/', 'PostController@index')->name('index');
@@ -61,5 +59,4 @@ Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
         Route::post('/{slug}/comentar', 'PostController@comment')->name('comment');
 
     });
-
 });
