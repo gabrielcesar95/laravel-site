@@ -31,5 +31,42 @@ return [
                 'role@delete' => 'Exclusão'
             ]
         ],
+        'logs' => [
+            'role' => 'Logs',
+            'permissions' => [
+                'logs@index' => 'Listagem/Busca',
+                'logs@show' => 'Dados Detalhados',
+            ]
+        ],
+        'category' => [
+            'role' => 'Categorias',
+            'permissions' => [
+                'category@index' => 'Listagem/Busca',
+                'category@show' => 'Dados Detalhados',
+                'category@create' => 'Cadastro',
+                'category@edit' => 'Edição',
+                'category@delete' => 'Exclusão'
+            ]
+        ],
+        'post' => [
+            'role' => 'Postagens',
+            'permissions' => [
+                'post@index' => 'Listagem/Busca',
+                'post@show' => 'Dados Detalhados',
+                'post@create' => 'Cadastro',
+                'post@edit' => 'Edição',
+                'post@delete' => 'Exclusão'
+            ]
+        ],
+        'comment' => [
+            'role' => 'Comentários',
+            'permissions' => [
+                'comment@index' => 'Listagem/Busca',
+                'comment@show' => 'Dados Detalhados',
+                'comment@create' => 'Cadastro',
+                'comment@edit' => 'Edição',
+                'comment@delete' => 'Exclusão'
+            ]
+        ],
     ],
 ];

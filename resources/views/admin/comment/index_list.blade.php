@@ -32,24 +32,20 @@
             </th>
             <th scope="col" class="d-none d-md-table-cell">
                 <div class="d-flex align-items-center">
-                    <a href="" class="text-bold text-white" data-search-order="uri" data-search-order-direction="{{ (isset($order) && $order['column'] == 'uri' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'uri' ? 'data-search-order-active' : '') }}>
-                        Autor
-                    </a>
-                    @if(isset($order) && $order['column'] == 'uri')
-                        @if($order['direction'] == 'desc')
-                            <i class="ml-1 mdi mdi-arrow-down"></i>
-                        @else
-                            <i class="ml-1 mdi mdi-arrow-up"></i>
-                        @endif
-                    @endif
+                    <span class="text-bold text-white">Autor</span>
                 </div>
             </th>
             <th scope="col">
                 <div class="d-flex align-items-center">
-                    <a href="" class="text-bold text-white" data-search-order="uri" data-search-order-direction="{{ (isset($order) && $order['column'] == 'uri' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'uri' ? 'data-search-order-active' : '') }}>
+                    <span class="text-bold text-white">Postagem</span>
+                </div>
+            </th>
+            <th scope="col" class="d-none d-md-table-cell">
+                <div class="d-flex align-items-center">
+                    <a href="" class="text-bold text-white" data-search-order="approved" data-search-order-direction="{{ (isset($order) && $order['column'] == 'approved' && $order['direction'] == 'asc') ? 'desc' : 'asc' }}" {{ (isset($order) && $order['column'] == 'approved' ? 'data-search-order-active' : '') }}>
                         Situação
                     </a>
-                    @if(isset($order) && $order['column'] == 'uri')
+                    @if(isset($order) && $order['column'] == 'approved')
                         @if($order['direction'] == 'desc')
                             <i class="ml-1 mdi mdi-arrow-down"></i>
                         @else
@@ -74,6 +70,9 @@
                     {{ $row->user->name }}
                 </td>
                 <td>
+                    {{ $row->commentable->name }}
+                </td>
+                <td class="d-none d-md-table-cell">
                     @if($row->approved)
                         <span class="badge badge-pill badge-success ml-auto px-2 py-2" data-toggle="tooltip" title="Aprovado">
                             <i class="mdi mdi-check-circle-outline"></i>
@@ -105,7 +104,7 @@
             </tr>
         @empty
             <tr>
-                <td colspan="5" class="text-danger text-center">
+                <td colspan="6" class="text-danger text-center">
                     <span class="d-block text-bold">Nenhum comentário encontrado</span>
                     <div class="btn-toolbar mt-1 justify-content-center" role="toolbar" aria-label="Ações">
                         <button class="btn btn-sm btn-outline-danger d-flex align-items-center" data-search-clear>

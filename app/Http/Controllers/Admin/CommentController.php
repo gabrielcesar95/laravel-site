@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CommentRequest;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Traits\Authorizable;
@@ -51,23 +50,15 @@ class CommentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CommentRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $comment = Comment::findOrFail($id);
 
-        switch ($request->action) {
-            case 'approve':
-                $comment->approved = 1;
-
-                break;
-
-            case 'delete':
-
-                break;
-
-            default:
-                session()->flash('message', ['type' => 'warning', 'message' => "Ação inesperada"]);
-                return response()->json(['redirect' => route('admin.comment.index')]);
+        if ($request->action == 'approve') {
+            $comment->approved = 1;
+        } else {
+            session()->flash('message', ['type' => 'warning', 'message' => "Ação inesperada"]);
+            return response()->json(['redirect' => route('admin.comment.index')]);
         }
 
         $comment->save();
@@ -113,24 +104,45 @@ class CommentController extends Controller
 
         $page = $request->get('_page') ?? 1;
 
-        dd($params);
-
         if ($params) {
             $data = Comment::where(function ($query) use ($params, $order) {
                 foreach ($params as $param => $props) {
+
                     if (is_array($props)) {
                         switch ($props['operator']) {
                             case 'LIKE':
                                 if (Str::contains($param, '__')) {
-                                    //TODO: separar string $param na ocorrencia de '__'. Relação primeiro e campo depois. Uma vez separado fazer o where conforme '$query->where(relacao->campo 'LIKE', "%{$props['value']}%");'
-                                    $query->where($param, 'LIKE', "%{$props['value']}%");
+                                    $clause = explode('__', $param);
+                                    $query->whereHas($clause[0], function ($query) use ($clause, $props) {
+                                        $query->where($clause[1], 'LIKE', "%{$props['value']}%");
+                                    });
                                 } else {
                                     $query->where($param, 'LIKE', "%{$props['value']}%");
                                 }
                                 break;
 
+                            case 'checked':
+                                $props['value'] = isset($props['value']) && $props['value'] == 1 ? '1' : '0';
+
+                                if (Str::contains($param, '__')) {
+                                    $clause = explode('__', $param);
+                                    $query->whereHas($clause[0], function ($query) use ($clause, $props) {
+                                        $query->where($clause[1], $props['operator'] ?? '=', "%{$props['value']}%");
+                                    });
+                                } else {
+                                    $query->where($param, '=', $props['value']);
+                                }
+                                break;
+
                             default:
-                                $query->where($param, $props['operator'] ?? '=', $props['value']);
+                                if (Str::contains($param, '__')) {
+                                    $clause = explode('__', $param);
+                                    $query->whereHas($clause[0], function ($query) use ($clause, $props) {
+                                        $query->where($clause[1], $props['operator'] ?? '=', "%{$props['value']}%");
+                                    });
+                                } else {
+                                    $query->where($param, $props['operator'] ?? '=', $props['value']);
+                                }
                         }
                     } else {
                         $query->where($param, $props);

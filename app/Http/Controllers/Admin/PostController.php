@@ -83,9 +83,12 @@ class PostController extends Controller
         return view('admin.post.show', compact('post'));
     }
 
-    public function comments()
+    public function comments($id)
     {
-        return view('admin.post.comments');
+        $post = Post::findOrFail($id);
+        $comments = $post->comments;
+
+        return view('admin.post.comments', compact('comments'));
     }
 
     /**

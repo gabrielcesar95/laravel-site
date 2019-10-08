@@ -15,10 +15,12 @@
                 <div class="col-12 p-0">
                     {{ Aire::open()->route('admin.comment.search')->autoComplete('off')->method('get')->data('search-form', true) }}
                     <div class="form-row">
-                        {{ Aire::input('name[value]', 'Nome')->groupClass('col-md-4 col-lg-3') }}
-                        {{ Aire::hidden('name[operator]')->value('LIKE') }}
                         {{ Aire::input('user__name[value]', 'Autor')->groupClass('col-md-4 col-lg-3') }}
                         {{ Aire::hidden('user__name[operator]')->value('LIKE') }}
+
+                        {{ Aire::input('approved[value]', 'Situação')->type('checkbox')->data('toggle', 'toggle')->data('style', 'w-100 mt-auto')->data('on', 'Aprovado')->data('off', 'Não Aprovado')->data('onstyle', 'primary')->data('offstyle', 'light')->value(1)->groupClass('col-md-3') }}
+                        {{ Aire::hidden('approved[operator]')->value('checked') }}
+
                         <div class="col-md-1 d-flex mt-2 mt-md-0">
                             {{ Aire::submit()->class('w-100 d-flex mt-auto align-items-center justify-content-center')->labelHtml('<i class="mdi mdi-magnify"></i><span class="sr-only">Buscar</span>')->style('height: calc(1.6em + 0.75rem + 2px);') }}
                         </div>

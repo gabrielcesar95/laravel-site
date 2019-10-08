@@ -76,7 +76,7 @@
                         {{ $row->slug }}
                     </a>
                 </td>
-                <td>
+                <td class="d-none d-md-table-cell">
                     @if($row->posted_at)
                         <span class="badge badge-pill badge-success ml-auto px-3 py-2" data-toggle="tooltip" title="Publicada em {{ $row->posted_at }}">
                             <i class="mdi mdi-check-circle-outline"></i> Publicada
@@ -104,7 +104,7 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="row-{{ $row->id }}-dropdown">
                                 @if(auth()->user()->can('comment@index'))
-                                    <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.post.comments', $row->id) }}" href="#">Comentários</span>
+                                    <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.post.comments', $row->id) }}" data-popup-size="lg" href="#">Comentários</span>
                                 @endif
                                 @if(auth()->user()->can('post@delete'))
                                     <span class="dropdown-item c-pointer" data-trigger-popup="{{ route('admin.post.delete', $row->id) }}" href="#">Deletar</span>
