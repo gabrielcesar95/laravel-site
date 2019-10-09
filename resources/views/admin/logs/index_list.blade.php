@@ -62,7 +62,7 @@
             <tr>
                 <td>@lang("logs.log_names.$row->log_name")</td>
                 <td>@lang("logs.descriptions.$row->description")</td>
-                <td class="d-none d-md-table-cell">{{ $row->causer->name ?? $row->causer->id }}</td>
+                <td class="d-none d-md-table-cell">{{ $row->causer ? $row->causer->name ?? $row->causer->id : '' }}</td>
                 <td class="d-none d-md-table-cell">
                     {{ date_format($row->created_at, 'd/m/Y H:i:s') }}</td>
                 <td class="text-right">
@@ -78,7 +78,7 @@
         @empty
             <tr>
                 <td colspan="5" class="text-danger text-center">
-                    <span class="d-block text-bold">Nenhum usuário encontrado</span>
+                    <span class="d-block text-bold">Nenhum registro encontrado</span>
                     <div class="btn-toolbar mt-1 justify-content-center" role="toolbar" aria-label="Ações">
                         <button class="btn btn-sm btn-outline-danger d-flex align-items-center" data-search-clear>
                             <i class="mdi mdi-filter-remove mr-1"></i> Limpar Filtros

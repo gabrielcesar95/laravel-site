@@ -137,7 +137,7 @@ class LogsController extends Controller
                 }
             })->orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'), ['*'], 'page', $page);
         } else {
-            $data = Activity::orderBy($order['column'], $order['direction'])->paginate(env('APP_RESULTS_PER_PAGE'));
+            $data = Activity::orderByRaw("{$order['column']} {$order['direction']}")->paginate(env('APP_RESULTS_PER_PAGE'));
         }
 
         return view('admin.logs.index_list', compact('data', 'order'));

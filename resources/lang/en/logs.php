@@ -14,6 +14,7 @@ return [
     'descriptions' => [
         'login' => 'Logged in',
         'logout' => 'Logged out',
+        'password_reset' => 'Resetted Password',
         'created' => 'Creation',
         'updated' => 'Update',
         'deleted' => 'Delete',

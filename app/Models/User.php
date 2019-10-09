@@ -23,7 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
     protected static $logName = 'User';
-
+    protected static $ignoreChangedAttributes = ['remember_token'];
     /**
      * The attributes that are mass assignable.
      *
