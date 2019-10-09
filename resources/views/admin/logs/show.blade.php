@@ -20,7 +20,7 @@
     {{ Aire::open()->id('log_show')->bind($log)->autoComplete('off') }}
     <div class="form-row">
         <div class="col-12 col-lg-6">
-            {{ Aire::input('causer', 'Responsável')->value($log->causer->name)->groupClass('form-group')->setAttribute('disabled', true) }}
+            {{ Aire::input('causer', 'Responsável')->value($log->causer ? $log->causer->name : '[Responsável não atribuído]')->groupClass('form-group')->setAttribute('disabled', true) }}
         </div>
         <div class="col-6 col-lg-3">
             {{ Aire::input('log_name', 'Módulo')->value(__("logs.log_names.{$log->log_name}"))->groupClass('form-group')->setAttribute('disabled', true) }}

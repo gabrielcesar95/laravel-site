@@ -16,6 +16,7 @@ return [
         'All' => 'Todos',
         'login' => 'Acessou o sistema',
         'logout' => 'Saiu do sistema',
+        'password_reset' => 'Redefiniu a senha',
         'created' => 'Cadastro',
         'updated' => 'Edição',
         'deleted' => 'Exclusão',

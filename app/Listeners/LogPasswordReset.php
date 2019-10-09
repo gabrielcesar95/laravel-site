@@ -26,6 +26,7 @@ class LogPasswordReset
     public function handle($event)
     {
         activity('Auth')
+            ->causedBy($event->user)
             ->performedOn($event->user)
             ->withProperties(
                 [
