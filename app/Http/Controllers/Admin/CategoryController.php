@@ -76,7 +76,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        return view('admin.category.show', compact('category', 'permissions'));
+        return view('admin.category.show', compact('category'));
     }
 
     /**
@@ -89,7 +89,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        return view('admin.category.edit', compact('category', 'permissions'));
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
