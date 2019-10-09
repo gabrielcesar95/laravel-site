@@ -39,7 +39,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'provider_name', 'provider_id', 'password', 'remember_token',
     ];
 
     /**
@@ -50,6 +50,16 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function providers()
+    {
+        return $this->hasMany(UserProvider::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 
     public function setActiveAttribute($param)
     {

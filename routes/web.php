@@ -39,6 +39,10 @@ Route::group(['name' => 'auth'], function () {
     Route::get('email/verificar', 'Auth\VerificationController@show')->name('verification.notice');
     Route::get('email/verificar/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::get('email/reenviar', 'Auth\VerificationController@resend')->name('verification.resend');
+
+    //Socialite
+    Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login.provider')->where('driver', implode('|', config('auth.socialite.drivers')));
+    Route::get('login/{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback')->where('driver', implode('|', config('auth.socialite.drivers')));
 });
 
 /*
