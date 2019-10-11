@@ -69,6 +69,12 @@
                             {{ __('GitHub') }}
                         </a>
                     </div>
+                    <div class="col-sm-6">
+                        <a href="{{ route('login.provider', 'facebook') }}" class="btn btn-light w-100">
+                            <i class="mdi mdi-facebook"></i>
+                            {{ __('Facebook') }}
+                        </a>
+                    </div>
                 </div>
             </form>
             <br>
