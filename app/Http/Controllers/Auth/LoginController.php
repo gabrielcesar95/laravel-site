@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\UserProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -42,6 +45,65 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        return Session::get('preUrl') ? Session::get('preUrl') :   $this->redirectTo;
+        return Session::get('preUrl') ? Session::get('preUrl') : $this->redirectTo;
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider($driver, $scopes = [])
+    {
+        return Socialite::driver($driver)->scopes($scopes)->redirect();
+    }
+
+    /**
+     * Obtain the user information from provider.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback($driver)
+    {
+        try {
+            $oAuthUser = Socialite::driver($driver)->user();
+        } catch (\Exception $e) {
+            return redirect()->route('login');
+        }
+
+        if ($user = User::where('email', $oAuthUser->getEmail())->first()) {
+            auth()->login($user, true);
+
+            $this->createProvider($driver, $oAuthUser, $user);
+        } else {
+            $user = new User;
+
+            $user->name = $oAuthUser->getName();
+            $user->email = $oAuthUser->getEmail();
+            $user->email_verified_at = now();
+            $user->avatar = $oAuthUser->getAvatar();
+            $user->save();
+
+            $user->assignRole('user');
+
+            $this->createProvider($driver, $oAuthUser, $user);
+
+            auth()->login($user, true);
+        }
+
+        return redirect($this->redirectTo());
+    }
+
+    private function createProvider($driver, $oAuthUser, $user)
+    {
+        UserProvider::where('user_id', $user->id)->where('provider_name', $driver)->delete();
+
+        $provider = new UserProvider;
+        $provider->user_id = $user->id;
+        $provider->provider_name = $driver;
+        $provider->provider_id = $oAuthUser->getId();
+        $provider->token = $oAuthUser->token ?? null;
+        $provider->refresh_token = $oAuthUser->refresh_token ?? null;
+        $provider->save();
     }
 }

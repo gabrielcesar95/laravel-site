@@ -1,5 +1,9 @@
 @extends('adminlte::master')
 
+@section('metas')
+    <meta name="google-signin-client_id" content="{{ env('GOOGLE_CLIENT_ID') }}.apps.googleusercontent.com">
+@endsection
+
 @section('adminlte_css')
     {{--    <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">--}}
     @yield('css')
@@ -8,6 +12,7 @@
 @section('body_class', 'login-page')
 
 @section('body')
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <div class="login-box">
         <div class="login-logo">
             <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
@@ -45,13 +50,31 @@
                             <label for="remember">{{ trans('adminlte::adminlte.remember_me') }}</label>
                         </div>
                     </div>
-                    <!-- /.col -->
                     <div class="col-sm-4">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">
                             {{ trans('adminlte::adminlte.sign_in') }}
                         </button>
                     </div>
-                    <!-- /.col -->
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-6">
+                        <a href="{{ route('login.provider', 'google') }}" class="btn btn-light w-100">
+                            <i class="mdi mdi-google"></i>
+                            {{ __('Google') }}
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="{{ route('login.provider', 'github') }}" class="btn btn-light w-100">
+                            <i class="mdi mdi-github-circle"></i>
+                            {{ __('GitHub') }}
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="{{ route('login.provider', 'facebook') }}" class="btn btn-light w-100">
+                            <i class="mdi mdi-facebook"></i>
+                            {{ __('Facebook') }}
+                        </a>
+                    </div>
                 </div>
             </form>
             <br>
