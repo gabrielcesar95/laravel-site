@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Si</b>te',
+    'logo' => env('APP_LOGO', '<b>Si</b>te'),
 
-    'logo_mini' => '<b>S</b>t',
+    'logo_mini' => env('APP_LOGO_MINI', '<b>S</b>t'),
 
     /*
     |--------------------------------------------------------------------------

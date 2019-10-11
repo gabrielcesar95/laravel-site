@@ -107,7 +107,7 @@ Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
 
 
     /* ********************************* LOGS ****************************** */
-    Route::group(['prefix' => 'logs', 'namespace' => 'Logs', 'as' => 'logs.'], function () {
+    Route::group(['prefix' => 'logs', 'as' => 'logs.'], function () {
         // LIST/SEARCH
         Route::get('/', 'LogsController@index')->name('index');
         Route::match(['get', 'post'], 'busca', 'LogsController@filter')->name('search');

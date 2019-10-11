@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Logs;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Traits\Authorizable;
@@ -11,8 +11,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Activitylog\Models\Activity;
-
-//TODO: Retirar do namespace Logs
 
 class LogsController extends Controller
 {
