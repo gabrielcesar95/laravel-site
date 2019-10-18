@@ -14,6 +14,18 @@
     <div class="form-row">
         {{ Aire::input('name', 'Nome')->id('name')->groupClass('form-group col-12')->setAttribute('disabled', true) }}
         {{ Aire::input('subtitle', 'Subtítulo')->id('subtitle')->groupClass('form-group col-12')->setAttribute('disabled', true) }}
+
+        <div class="form-group col-12">
+            <label for="categories">Categorias</label>
+            <select name="categories[]" id="categories" class="select2" multiple disabled>
+                @forelse(\App\Models\Category::all() as $category)
+                    <option value="{{ $category->id }}" @if(isset($post) && $post->categories->pluck('id')->contains($category->id)) {{ 'selected' }} @endif>{{ $category->name }}</option>
+                @empty
+                    <option value="" disabled>Nenhuma categoria encontrada</option>
+                @endforelse
+            </select>
+        </div>
+
         <div class="form-group col-12">
             <label for="slug">Link</label>
             <div class="input-group mb-3">
