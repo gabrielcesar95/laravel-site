@@ -18,7 +18,7 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Meu Perfil</a>
+                        <a class="nav-link" href="{{ route('web.contact.create') }}">Contato</a>
                     </li>
 
                     @if(auth()->user()->hasRole('admin'))

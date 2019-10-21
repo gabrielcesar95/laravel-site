@@ -3,38 +3,26 @@
 @section('title', "{$post->name} - " . env('APP_NAME'))
 
 @section('content')
-    <body>
-
     @include('web.layouts.navbar')
 
-    <!-- Page Content -->
     <div class="container">
-
         <div class="row">
             @if(!$post->posted_at || new \DateTime($post->getOriginal('posted_at')) > now())
                 <div class="col-12 mt-2 alert alert-warning" role="alert">
                     Essa postagem ainda não está publicada. Para publicar acesse:
                     <a href="{{ route('admin.post.index') }}" class="alert-link">Painel de postagens</a>
                 </div>
-        @endif
-        <!-- Post Content Column -->
+            @endif
             <article class="col-12">
-
-                <!-- Title -->
                 <h1 class="mt-4">{{ $post->name }}</h1>
-
-                <!-- Author -->
                 <p class="lead">
                     por
                     {{ $post->user->name }}
                 </p>
-
-                <!-- Date/Time -->
                 <p>Publicado em {{ $post->posted_at }}</p>
 
                 <hr>
 
-                <!-- Cover -->
                 @if($post->cover)
                     <img class="img-fluid rounded" src="{{ url("storage/{$post->cover}") }}" alt="{{ $post->title }}" />
 
@@ -67,7 +55,6 @@
 
                 <h2>Comentários</h2>
 
-                <!-- Comments Form -->
                 <div class="card my-4">
                     <h5 class="card-header">Participe da Discussão:</h5>
                     <div class="card-body">
@@ -106,31 +93,21 @@
                     </div>
                 @endforelse
             </article>
-
         </div>
-        <!-- /.row -->
-
     </div>
-    <!-- /.container -->
 
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
-        </div>
-        <!-- /.container -->
-    </footer>
+    @include('web.layouts.footer')
 
-    @endsection
+@endsection
 
-    @push('js')
-        <script>
+@push('js')
+    <script>
 
-        </script>
-    @endpush
+    </script>
+@endpush
 
-    @push('css')
-        <style>
+@push('css')
+    <style>
 
-        </style>
-    @endpush
+    </style>
+@endpush

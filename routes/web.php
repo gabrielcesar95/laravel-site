@@ -61,6 +61,10 @@ Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
         Route::get('/{slug}', 'PostController@show')->name('show');
 
         Route::post('/{slug}/comentar', 'PostController@comment')->name('comment');
+    });
 
+    Route::group(['prefix' => 'contato', 'as' => 'contact.'], function () {
+        Route::get('/', 'ContactController@create')->name('create');
+        Route::post('/', 'ContactController@store')->name('store')->middleware('throttle:3');
     });
 });
