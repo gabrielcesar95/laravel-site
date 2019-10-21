@@ -22,18 +22,18 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "@mdi/font": "^4.4.95",
-        "@ttskch/select2-bootstrap4-theme": "^1.2.3",
+        "@mdi/font": "^4.5.95",
+        "@ttskch/select2-bootstrap4-theme": "^1.3.2",
         "bootstrap": "^4.3",
-        "bootstrap4-toggle": "^3.5",
+        "bootstrap4-toggle": "^3.6.1",
         "ckeditor": "^4.12.1",
         "icheck-bootstrap": "^3.0",
         "inputmask": "^4.0.9",
         "jquery": "^3.4",
-        "popper.js": "^1.15",
-        "select2": "^4.0",
+        "popper.js": "^1.16.0",
+        "select2": "^4.0.11",
         "simplebar": "^4.3.0-alpha.1",
-        "sweetalert2": "^8.18.1",
+        "sweetalert2": "^8.18.5",
         "toastr": "^2.1.4"
     }
 }
