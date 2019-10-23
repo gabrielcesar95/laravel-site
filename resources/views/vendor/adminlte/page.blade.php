@@ -51,8 +51,16 @@
                                     <i class="mdi mdi-menu"></i>
                                     <span class="sr-only">{{ trans('adminlte::adminlte.toggle_navigation') }}</span>
                                 </a>
-                            @endif
-                            <!-- Navbar Right Menu -->
+                                @endif
+
+                                <div class="dropdown dropleft ml-auto mr-1">
+                                    <button type="button" class="btn text-white" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="mdi mdi-bell"></i>
+                                    </button>
+{{--                                    <div class="dropdown-menu" aria-labelledby="notifications"></div>--}}
+                                </div>
+
+                                <!-- Navbar Right Menu -->
                                 <div class="navbar-custom-menu">
                                     <ul class="nav navbar-nav">
                                         <li class="nav-item dropdown">

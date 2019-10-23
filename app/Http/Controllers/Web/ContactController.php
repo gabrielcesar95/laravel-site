@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\ContactRequest;
 use App\Models\Contact;
+use App\Models\User;
+use App\Notifications\NewContact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use Spatie\Permission\Models\Permission;
 
 class ContactController extends Controller
 {
@@ -35,6 +39,14 @@ class ContactController extends Controller
         $contact->content = $request->get('content');
 
         $contact->save();
+
+        $users = User::whereHas('roles', function ($q) {
+            $q->where('name', 'admin');
+        })->get()->filter(function ($u) {
+            return $u->hasPermissionTo('contact@show');
+        });
+
+        Notification::send($users, new NewContact($contact));
 
         return redirect()->route('web.home')->with(['message' => ['type' => 'success', 'message' => "Mensagem enviada!"]]);
     }
