@@ -57,22 +57,16 @@
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-sm-6">
+                    <div class="col-12 mb-2">
                         <a href="{{ route('login.provider', 'google') }}" class="btn btn-light w-100">
                             <i class="mdi mdi-google"></i>
-                            {{ __('Google') }}
+                            {{ __('Sign in with Google') }}
                         </a>
                     </div>
-                    <div class="col-sm-6">
-                        <a href="{{ route('login.provider', 'github') }}" class="btn btn-light w-100">
-                            <i class="mdi mdi-github-circle"></i>
-                            {{ __('GitHub') }}
-                        </a>
-                    </div>
-                    <div class="col-sm-6">
+                    <div class="col-12">
                         <a href="{{ route('login.provider', 'facebook') }}" class="btn btn-light w-100">
-                            <i class="mdi mdi-facebook"></i>
-                            {{ __('Facebook') }}
+                            <i class="mdi mdi-facebook-box"></i>
+                            {{ __('Sign in with Facebook') }}
                         </a>
                     </div>
                 </div>
