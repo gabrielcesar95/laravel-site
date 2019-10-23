@@ -10,6 +10,7 @@ return [
         'User' => 'Users',
         'Post' => 'Posts',
         'Category' => 'Categories',
+        'Contact' => 'Contact Requests',
     ],
     'descriptions' => [
         'login' => 'Logged in',

@@ -121,6 +121,16 @@ class PermissionsTablesSeeder extends Seeder
         if (Permission::where('name', 'comment@delete')->where('group', 'comment')->count() < 1) {
             Permission::create(['name' => 'comment@delete', 'group' => 'comment']);
         }
+
+        if (Permission::where('name', 'contact@index')->where('group', 'contact')->count() < 1) {
+            Permission::create(['name' => 'contact@index', 'group' => 'contact']);
+        }
+        if (Permission::where('name', 'contact@show')->where('group', 'contact')->count() < 1) {
+            Permission::create(['name' => 'contact@show', 'group' => 'contact']);
+        }
+        if (Permission::where('name', 'contact@delete')->where('group', 'contact')->count() < 1) {
+            Permission::create(['name' => 'contact@delete', 'group' => 'contact']);
+        }
     }
 
     private function assignRolePermissions()

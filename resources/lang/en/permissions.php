@@ -68,5 +68,13 @@ return [
                 'comment@delete' => 'Delete'
             ]
         ],
+        'contact' => [
+            'role' => 'Contact Requests',
+            'permissions' => [
+                'contact@index' => 'List/Search',
+                'contact@show' => 'Detailed Data',
+                'contact@delete' => 'Delete'
+            ]
+        ],
     ],
 ];

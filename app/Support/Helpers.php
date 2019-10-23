@@ -4,7 +4,7 @@ namespace App\Support;
 
 class Helpers
 {
-    public static function removeSpecials(string $string)
+    public static function removeSpecials(?string $string)
     {
         return preg_replace('/[^A-Za-z0-9à-úÀ-Ú]/', '', $string);
     }

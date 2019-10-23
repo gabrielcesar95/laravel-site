@@ -68,5 +68,13 @@ return [
                 'comment@delete' => 'Exclusão'
             ]
         ],
+        'contact' => [
+            'role' => 'Requisições de Contato',
+            'permissions' => [
+                'contact@index' => 'Listagem/Busca',
+                'contact@show' => 'Dados Detalhados',
+                'contact@delete' => 'Exclusão'
+            ]
+        ],
     ],
 ];

@@ -11,6 +11,7 @@ return [
         'User' => 'Usuários',
         'Post' => 'Postagens',
         'Category' => 'Categorias',
+        'Contact' => 'Requisições de Contato',
     ],
     'descriptions' => [
         'All' => 'Todos',

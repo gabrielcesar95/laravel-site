@@ -167,6 +167,12 @@ return [
         ],
         ['header' => 'Administração'],
         [
+            'text' => 'Requisições de Contato',
+            'icon' => 'message-alert-outline',
+            'url' => 'adm/contatos',
+            'can' => 'contact@index',
+        ],
+        [
             'text' => 'Logs',
             'icon' => 'history',
             'url' => 'adm/logs',

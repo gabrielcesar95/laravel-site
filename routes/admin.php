@@ -105,6 +105,18 @@ Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
         Route::delete('/deletar/{id}', 'CommentController@destroy')->name('destroy');
     });
 
+    /* *********************************** CONTACTS ********************************* */
+    Route::group(['prefix' => 'contatos', 'as' => 'contact.'], function () {
+        // LIST/SEARCH
+        Route::get('/', 'ContactController@index')->name('index');
+        Route::match(['get', 'post'], 'busca', 'ContactController@filter')->name('search');
+        // READ
+        Route::get('/{id}', 'ContactController@show')->name('show');
+        // DELETE
+        Route::get('/deletar/{id}', 'ContactController@delete')->name('delete');
+        Route::delete('/deletar/{id}', 'ContactController@destroy')->name('destroy');
+    });
+
 
     /* ********************************* LOGS ****************************** */
     Route::group(['prefix' => 'logs', 'as' => 'logs.'], function () {
