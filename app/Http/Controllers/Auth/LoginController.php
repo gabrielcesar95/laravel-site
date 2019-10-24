@@ -71,13 +71,31 @@ class LoginController extends Controller
             return redirect()->route('login');
         }
 
-        if ($user = User::where('email', $oAuthUser->getEmail())->first()) {
+        $user = User::where('email', $oAuthUser->getEmail())->orWhereHas('providers', function ($q) use ($driver, $oAuthUser) {
+            $q->where('provider_name', $driver);
+            $q->where('provider_id', $oAuthUser->getId());
+        })->first();
+
+        if ($user) {
             auth()->login($user, true);
 
             $this->createProvider($driver, $oAuthUser, $user);
         } else {
-            $user = new User;
 
+            if (!$user->getEmail()) {
+                Session::put([
+                    'provider' => [
+                        'provider_name' => $driver,
+                        'provider_id' => $oAuthUser->getId(),
+                        'token' => $oAuthUser->token ?? null,
+                        'refresh_token' => $oAuthUser->refresh_token ?? null,
+                    ]
+                ]);
+
+                return redirect()->route('register')->withInput(['name' => $oAuthUser->getName(), 'avatar' => $oAuthUser->getAvatar()]);
+            }
+
+            $user = new User;
             $user->name = $oAuthUser->getName();
             $user->email = $oAuthUser->getEmail();
             $user->email_verified_at = now();

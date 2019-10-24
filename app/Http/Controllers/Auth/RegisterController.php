@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\UserProvider;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -64,12 +65,26 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = new User;
+        $user->avatar = $data['avatar'];
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
 
         $user->save();
         $user->assignRole('user');
+
+        if ($providerData = \Session::get('provider')) {
+            $user->providers()->where('provider_name', $providerData['provider_name'])->delete();
+            \Session::forget('provider');
+
+            $provider = new UserProvider();
+            $provider->user_id = $user->id;
+            $provider->provider_name = $providerData['provider_name'];
+            $provider->provider_id = $providerData['provider_id'];
+            $provider->token = $providerData['token'];
+            $provider->refresh_token = $providerData['refresh_token'];
+            $provider->save();
+        }
 
         return $user;
     }
