@@ -54,6 +54,13 @@ Route::group(['name' => 'auth'], function () {
 Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
+    Route::group(['prefix' => 'perfil', 'as' => 'profile.'], function () {
+        Route::get('/', function () {
+            return view('web.profile');
+        })->name('show');
+        Route::post('/', 'ProfileController@update')->name('update');
+    });
+
     Route::group(['prefix' => 'blog', 'as' => 'post.'], function () {
         // LIST/SEARCH
         Route::get('/', 'PostController@index')->name('index');

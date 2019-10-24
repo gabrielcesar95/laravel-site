@@ -21,11 +21,19 @@
                         <a class="nav-link" href="{{ route('web.contact.create') }}">Contato</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('web.profile.show') }}">Meu Perfil</a>
+                    </li>
+
                     @if(auth()->user()->hasRole('admin'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.dashboard') }}">Administração</a>
                         </li>
                     @endif
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}">Sair</a>
+                    </li>
                 @endguest
             </ul>
         </div>

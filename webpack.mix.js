@@ -80,6 +80,6 @@ mix
 ;
 
 mix.browserSync({
-    proxy: 'localhost:8000/adm',
+    proxy: 'localhost:8000',
     port: 8001
 });

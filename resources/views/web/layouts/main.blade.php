@@ -7,6 +7,7 @@
     <title>@yield('title')</title>
 
     <link rel="stylesheet" href="{{ asset(mix('web/assets/css/web.css')) }}">
+    <link rel="stylesheet" href="{{ asset(mix('web/assets/css/styles.css')) }}">
     {{--    <script type="text/javascript" src="{{ asset(mix('web/assets/js/app.js')) }}"></script>--}}
 </head>
 <body>
