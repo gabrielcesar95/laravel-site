@@ -14,7 +14,10 @@
 .skin-yellow .main-header .navbar .nav .open > a,
 .skin-yellow .main-header .navbar .nav .open > a:hover,
 .skin-yellow .main-header .navbar .nav .open > a:focus,
-.skin-yellow .main-header .navbar .nav > .active > a {
+.skin-yellow .main-header .navbar .nav > .active > a,
+#btn-notifications:hover,
+#btn-notifications:active,
+#btn-notifications:focus {
   background: rgba(0, 0, 0, 0.1);
   color: #f6f6f6;
 }

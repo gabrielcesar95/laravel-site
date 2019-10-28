@@ -26,7 +26,10 @@
 .skin-black .main-header .navbar .nav .open > a,
 .skin-black .main-header .navbar .nav .open > a:hover,
 .skin-black .main-header .navbar .nav .open > a:focus,
-.skin-black .main-header .navbar .nav > .active > a {
+.skin-black .main-header .navbar .nav > .active > a,
+#btn-notifications:hover,
+#btn-notifications:active,
+#btn-notifications:focus {
   background: #ffffff;
   color: #999999;
 }

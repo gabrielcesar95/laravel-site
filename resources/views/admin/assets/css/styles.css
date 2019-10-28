@@ -21,3 +21,8 @@
     max-height: 300px;
     overflow: auto;
 }
+
+button#btn-notifications:focus{
+    outline: 0;
+    box-shadow: none;
+}

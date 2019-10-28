@@ -216,7 +216,6 @@ $(document).on('click', '[data-search-clear]', function (event) {
 
 /* **************************** POP-UP ***************************** */
 
-
 $(document).ajaxError(function (event, xhr, settings) {
     switch (xhr.status) {
         case 401:
@@ -395,3 +394,23 @@ $(document).on({
         }
     }
 }, '.modal');
+
+/* ************************* NOTIFICATIONS ************************* */
+
+$(document).on('show.bs.dropdown', '#notifications-wrap', function (event) {
+    $.ajax({
+        type: 'get',
+        url: window.location.protocol + '//' + window.location.host + '/adm/notificacoes/listar',
+        timeout: 10000,
+        dataType: "json",
+        beforeSend: function () {
+        
+        },
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (xhr, status) {
+        
+        }
+    });
+});

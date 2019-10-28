@@ -53,11 +53,11 @@
                                 </a>
                                 @endif
 
-                                <div class="dropdown dropleft ml-auto mr-1">
-                                    <button type="button" class="btn text-white" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="dropdown ml-auto mr-1" id="notifications-wrap">
+                                    <button type="button" class="btn text-white" id="btn-notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="mdi mdi-bell"></i>
                                     </button>
-{{--                                    <div class="dropdown-menu" aria-labelledby="notifications"></div>--}}
+                                    <div class="dropdown-menu" id="notifications" aria-labelledby="btn-notifications"></div>
                                 </div>
 
                                 <!-- Navbar Right Menu -->

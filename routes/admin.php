@@ -87,7 +87,7 @@ Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
         Route::delete('/deletar/{id}', 'PostController@destroy')->name('destroy');
     });
 
-    /* ********************************* Comments ******************************** */
+    /* ********************************* COMMENTS ******************************** */
     Route::group(['prefix' => 'comentarios', 'as' => 'comment.'], function () {
         // LIST/SEARCH
         Route::get('/', 'CommentController@index')->name('index');
@@ -117,7 +117,6 @@ Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
         Route::delete('/deletar/{id}', 'ContactController@destroy')->name('destroy');
     });
 
-
     /* ********************************* LOGS ****************************** */
     Route::group(['prefix' => 'logs', 'as' => 'logs.'], function () {
         // LIST/SEARCH
@@ -125,6 +124,12 @@ Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
         Route::match(['get', 'post'], 'busca', 'LogsController@filter')->name('search');
         // READ
         Route::get('/{id}', 'LogsController@show')->name('show');
+    });
+
+    /* ********************************* NOTIFICATIONS ****************************** */
+    Route::group(['prefix' => 'notificacoes', 'as' => 'notifications.'], function () {
+        // LIST
+        Route::get('/listar', 'NotificationController@list')->name('list');
     });
 
 });
