@@ -1,6 +1,6 @@
 @extends('admin.layouts.popup')
 
-@section('title', 'Deletar Comentário')
+@section('title', 'Deletar Contato')
 
 @section('header')
     <h5 class="modal-title text-bold text-danger" id="modal-label">@yield('title')</h5>

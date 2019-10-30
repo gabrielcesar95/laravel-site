@@ -41,7 +41,14 @@ class NewContact extends Notification
     {
         return [
             'title' => 'Nova requisição de contato',
-            'subject' => $this->contact->subject
+            'date' => $this->contact->created_at,
+            'attr' => [
+                'data-trigger-popup' => route('admin.contact.show', $this->contact->id),
+                'data-popup-size' => 'lg',
+                'data-toggle' => 'tooltip',
+                'data-placement' => 'top',
+                'title' => 'Visualizar',
+            ]
         ];
     }
 }

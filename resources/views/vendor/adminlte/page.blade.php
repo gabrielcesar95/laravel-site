@@ -53,7 +53,7 @@
                                 </a>
                                 @endif
 
-                                <div class="dropdown ml-auto mr-1" id="notifications-wrap">
+                                <div class="dropdown dropdown-menu-md-left ml-1 mr-auto" id="notifications-wrap">
                                     <button type="button" class="btn text-white" id="btn-notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="mdi mdi-bell"></i>
                                     </button>

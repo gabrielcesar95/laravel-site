@@ -121,8 +121,7 @@ function setMasks() {
 function setSelects() {
     $('.select2').each(function () {
         let elem = $(this);
-        console.log(elem.attr("class").split(/\s+/));
-        
+
         elem.select2({
             theme: 'bootstrap4',
             language: 'pt-BR',
@@ -404,13 +403,63 @@ $(document).on('show.bs.dropdown', '#notifications-wrap', function (event) {
         timeout: 10000,
         dataType: "json",
         beforeSend: function () {
-        
+            $('#notifications').html(
+                $('<div>')
+                    .addClass('w-100 d-flex justify-content-center')
+                    .append(
+                        $('<div>')
+                            .addClass('spinner-border spinner-border-sm text-primary')
+                            .attr({
+                                'role': 'status'
+                            })
+                            .append(
+                                $('<span>')
+                                    .addClass('sr-only')
+                                    .text('Carregando')
+                            )
+                    )
+            );
         },
         success: function (response) {
-            console.log(response);
+            if (response.length < 1) {
+                $('#notifications').html(
+                    $('<span>')
+                        .addClass('dropdown-item-text')
+                        .text('Nenhuma notificação. Bom trabalho! 😉')
+                )
+            } else {
+                $('#notifications').html('');
+                
+                $(response).each(function (kn, notification) {
+                    $('#notifications')
+                        .append(
+                            $('<a>')
+                                .addClass('dropdown-item d-flex flex-column')
+                                .append(
+                                    $('<p>')
+                                        .addClass('text-bold mb-0')
+                                        .text(notification.data.title)
+                                )
+                                .append(
+                                    $('<small>')
+                                        .text(notification.data.date)
+                                )
+                        );
+                    
+                    if (notification.data.attr) {
+                        $('#notifications a:last').attr(notification.data.attr);
+                        
+                        if (!notification.data.attr.href) {
+                            $('#notifications a:last').attr('href', '#');
+                        }
+                    }
+                });
+            }
         },
-        error: function (xhr, status) {
-        
+        done: function () {
+            $('#notifications').html('');
         }
     });
+    
+    // TODO: Ao clicar na notificação, chamar ajax para salvar a visualização
 });

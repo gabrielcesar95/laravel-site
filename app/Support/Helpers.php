@@ -2,6 +2,8 @@
 
 namespace App\Support;
 
+use DateTime;
+
 class Helpers
 {
     public static function removeSpecials(?string $string)
@@ -19,5 +21,10 @@ class Helpers
         }
 
         return $phone;
+    }
+
+    public static function format_date(DateTime $date, $format = 'd/m/Y')
+    {
+        return $date->format($format);
     }
 }

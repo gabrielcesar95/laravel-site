@@ -27,4 +27,9 @@ class Contact extends Model
     {
         return Helpers::formatPhone($value);
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Helpers::format_date(new \DateTime($value), 'd/m/Y à\s H:i');
+    }
 }
