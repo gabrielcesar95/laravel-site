@@ -32,6 +32,7 @@ mix
     .styles([
         'resources/views/web/assets/css/styles.css',
     ], 'public/web/assets/css/styles.css')
+    .copyDirectory('resources/views/web/assets/img', 'public/web/assets/img')
     .options({
         processCssUrls: false,
     })

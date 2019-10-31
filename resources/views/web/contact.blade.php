@@ -1,6 +1,6 @@
 @extends('web.layouts.main')
 
-@section('title', env('APP_NAME') . ' - Contato')
+@section('title', 'Contato - ' . env('APP_NAME'))
 
 @section('content')
     @include('web.layouts.navbar')

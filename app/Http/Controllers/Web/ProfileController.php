@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Web;
 
-use App\Http\Requests\Admin\ProfileRequest;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\Web\ProfileRequest;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -21,6 +19,7 @@ class ProfileController extends Controller
 
         if ($profile->email != $request->email) {
             $profile->email_verified_at = null;
+            $verify = true;
         }
 
         $profile->name = $request->name;
@@ -29,9 +28,14 @@ class ProfileController extends Controller
         if ($request->password) {
             $profile->password = Hash::make($request->password);
         }
+
         $profile->save();
 
+        if (isset($verify) && $verify) {
+            $profile->sendEmailVerificationNotification();
+        }
+
         session()->flash('message', ['type' => 'success', 'message' => "Perfil editado!"]);
-        return response()->json(['refresh' => true]);
+        return redirect()->route('web.profile.show');
     }
 }
