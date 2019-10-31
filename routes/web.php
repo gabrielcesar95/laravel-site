@@ -55,9 +55,7 @@ Route::group(['namespace' => 'Web', 'as' => 'web.'], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::group(['prefix' => 'perfil', 'as' => 'profile.'], function () {
-        Route::get('/', function () {
-            return view('web.profile');
-        })->name('show');
+        Route::get('/', 'ProfileController@edit')->name('show');
         Route::post('/', 'ProfileController@update')->name('update');
     });
 

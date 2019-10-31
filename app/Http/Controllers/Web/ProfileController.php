@@ -10,7 +10,10 @@ class ProfileController extends Controller
 {
     public function edit()
     {
-        return view('admin.profile');
+        if (auth()->guest()) {
+            return redirect(route('web.home'));
+        }
+        return view('web.profile');
     }
 
     public function update(ProfileRequest $request)
