@@ -130,6 +130,8 @@ Route::group(['prefix' => 'adm', 'as' => 'admin.'], function () {
     Route::group(['prefix' => 'notificacoes', 'as' => 'notifications.'], function () {
         // LIST
         Route::get('/listar', 'NotificationController@list')->name('list');
+        Route::post('/visualizar/{id}', 'NotificationController@read')->name('read');
+
     });
 
 });

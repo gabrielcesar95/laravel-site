@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group col-lg-4">
                             <label class="form-control-label" for="requester_phone">Telefone</label>
-                            <input type="tel" name="requester_phone" id="requester_phone" class="form-control @error('requester_phone') is-invalid @enderror" value="{{ old('requester_phone') }}" maxlength="15">
+                            <input type="tel" name="requester_phone" id="requester_phone" class="form-control mask-phone @error('requester_phone') is-invalid @enderror" value="{{ old('requester_phone') }}" maxlength="15">
                             @error('requester_phone')
                             <div class="alert alert-danger mb-0 mt-1 py-1">{{ $message }}</div>
                             @enderror

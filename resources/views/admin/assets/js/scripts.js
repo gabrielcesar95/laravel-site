@@ -116,12 +116,22 @@ function setToggles() {
 
 function setMasks() {
     $('.mask-datetime').inputmask({'mask': '99/99/9999 99:99'});
+    $('.mask-zipcode').inputmask('99999-999', {
+        'oncomplete': function (a, b, c) {
+            zipCodeSearch($(this).val(), $(this).parents('.form-row'));
+        }
+    });
+    $('.mask-phone').inputmask({
+        mask: function () {
+            return ['(99) 9999-9999', '(99) 99999-9999'];
+        }
+    });
 }
 
 function setSelects() {
     $('.select2').each(function () {
         let elem = $(this);
-
+        
         elem.select2({
             theme: 'bootstrap4',
             language: 'pt-BR',
@@ -453,6 +463,8 @@ $(document).on('show.bs.dropdown', '#notifications-wrap', function (event) {
                             $('#notifications a:last').attr('href', '#');
                         }
                     }
+                    
+                    $('#notifications a:last').attr('data-id', notification.id);
                 });
             }
         },
@@ -461,5 +473,20 @@ $(document).on('show.bs.dropdown', '#notifications-wrap', function (event) {
         }
     });
     
-    // TODO: Ao clicar na notificação, chamar ajax para salvar a visualização
+    $(document).on('click', '#notifications .dropdown-item', function () {
+        let id = $(this).data('id');
+        
+        $.ajax({
+            type: "post",
+            url: window.location.protocol + '//' + window.location.host + '/adm/notificacoes/visualizar/' + id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: "json",
+            timeout: 10000,
+            success: function (response) {
+                console.log(response);
+            },
+        });
+    });
 });

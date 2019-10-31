@@ -28090,6 +28090,16 @@ function setMasks() {
   jquery__WEBPACK_IMPORTED_MODULE_1___default()('.mask-datetime').inputmask({
     'mask': '99/99/9999 99:99'
   });
+  jquery__WEBPACK_IMPORTED_MODULE_1___default()('.mask-zipcode').inputmask('99999-999', {
+    'oncomplete': function oncomplete(a, b, c) {
+      zipCodeSearch(jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).val(), jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).parents('.form-row'));
+    }
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_1___default()('.mask-phone').inputmask({
+    mask: function mask() {
+      return ['(99) 9999-9999', '(99) 99999-9999'];
+    }
+  });
 }
 
 function setSelects() {
@@ -28331,13 +28341,30 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('show.bs.dropdown', '
               jquery__WEBPACK_IMPORTED_MODULE_1___default()('#notifications a:last').attr('href', '#');
             }
           }
+
+          jquery__WEBPACK_IMPORTED_MODULE_1___default()('#notifications a:last').attr('data-id', notification.id);
         });
       }
     },
     done: function done() {
       jquery__WEBPACK_IMPORTED_MODULE_1___default()('#notifications').html('');
     }
-  }); // TODO: Ao clicar na notificação, chamar ajax para salvar a visualização
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on('click', '#notifications .dropdown-item', function () {
+    var id = jquery__WEBPACK_IMPORTED_MODULE_1___default()(this).data('id');
+    jquery__WEBPACK_IMPORTED_MODULE_1___default.a.ajax({
+      type: "post",
+      url: window.location.protocol + '//' + window.location.host + '/adm/notificacoes/visualizar/' + id,
+      headers: {
+        'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_1___default()('meta[name="csrf-token"]').attr('content')
+      },
+      dataType: "json",
+      timeout: 10000,
+      success: function success(response) {
+        console.log(response);
+      }
+    });
+  });
 });
 
 /***/ }),

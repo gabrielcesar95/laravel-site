@@ -4,6 +4,8 @@ import $ from 'jquery';
 window.$ = window.jQuery = $;
 window.toastr = require('toastr');
 
+require('inputmask/dist/min/jquery.inputmask.bundle.min');
+
 /*
  **********************************************************************
  *************************** GENERAL CONFIG ***************************
@@ -15,6 +17,30 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+
+$(document).ready(function () {
+    setMasks();
+});
+
+/*
+ **********************************************************************
+ ****************************** FUNCTIONS *****************************
+ **********************************************************************
+*/
+
+function setMasks() {
+    $('.mask-datetime').inputmask({'mask': '99/99/9999 99:99'});
+    $('.mask-zipcode').inputmask('99999-999', {
+        'oncomplete': function (a, b, c) {
+            zipCodeSearch($(this).val(), $(this).parents('.form-row'));
+        }
+    });
+    $('.mask-phone').inputmask({
+        mask: function () {
+            return ['(99) 9999-9999', '(99) 99999-9999'];
+        }
+    });
+}
 
 /*
  **********************************************************************

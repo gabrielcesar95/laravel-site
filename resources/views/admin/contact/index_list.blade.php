@@ -58,7 +58,7 @@
                 <td class="d-none d-md-table-cell">{{ $row->requester }}</td>
                 <td>{{ $row->subject }}</td>
                 <td class="d-none d-md-table-cell">
-                    {{ date_format($row->created_at, 'd/m/Y H:i:s') }}
+                    {{ $row->created_at }}
                 </td>
                 <td class="text-right">
                     <div class="btn-group" role="group" aria-label="Ações">

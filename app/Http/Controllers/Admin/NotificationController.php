@@ -13,4 +13,13 @@ class NotificationController extends Controller
 
         return $notifications;
     }
+
+    public function read(Request $request, $id)
+    {
+        $notification = auth()->user()->unreadNotifications->where('id', $id)->first();
+
+        return [
+            'success' => $notification->delete()
+        ];
+    }
 }
