@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\ProfileRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
