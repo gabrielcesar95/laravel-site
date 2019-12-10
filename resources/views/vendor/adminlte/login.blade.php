@@ -13,6 +13,7 @@
 
 @section('body')
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link rel="stylesheet" href="{{ asset(mix('web/assets/css/styles.css')) }}">
     <div class="login-box">
         <div class="login-logo">
             <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
@@ -20,13 +21,12 @@
         <!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">{{ trans('adminlte::adminlte.login_message') }}</p>
-            <form action="{{ url(config('adminlte.login_url', 'login')) }}" method="post">
+            <form action="{{ url(config('adminlte.login_url', 'login')) }}" method="post" id="login_form">
                 {{ csrf_field() }}
 
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                     <input type="email" name="email" class="form-control" value="{{ old('email') }}"
                         placeholder="{{ trans('adminlte::adminlte.email') }}">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     @if ($errors->has('email'))
                         <span class="help-block">
                             <strong>{{ $errors->first('email') }}</strong>
@@ -36,13 +36,19 @@
                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                     <input type="password" name="password" class="form-control"
                         placeholder="{{ trans('adminlte::adminlte.password') }}">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     @if ($errors->has('password'))
                         <span class="help-block">
                             <strong>{{ $errors->first('password') }}</strong>
                         </span>
                     @endif
                 </div>
+                @if ($errors->has('g-recaptcha-response'))
+                    <div>
+                        <span class="help-block text-danger">
+                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                        </span>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="icheck-primary">
@@ -70,7 +76,9 @@
                         </a>
                     </div>
                 </div>
+                {!!  GoogleReCaptchaV3::renderField('captcha_login_form','login') !!}
             </form>
+
             <br>
             <p>
                 <a href="{{ url(config('adminlte.password_reset_url', 'password/reset')) }}" class="text-center">
@@ -78,14 +86,20 @@
                 </a>
             </p>
             @if (config('adminlte.register_url', 'register'))
-                <p>
+                <p class="mb-0">
                     <a href="{{ url(config('adminlte.register_url', 'register')) }}" class="text-center">
                         {{ trans('adminlte::adminlte.register_a_new_membership') }}
                     </a>
                 </p>
             @endif
         </div>
-        <!-- /.login-box-body -->
+        <div style="margin-top: 5px; font-size: .8rem">
+            Este site é protegido por Google reCaptcha e suas
+            <a href="https://policies.google.com/privacy" target="_blank">Políticas de privacidade</a>
+            e
+            <a href="https://policies.google.com/terms" target="_blank">Termos de uso</a>
+            são aplicáveis.
+        </div>
     </div><!-- /.login-box -->
 @stop
 

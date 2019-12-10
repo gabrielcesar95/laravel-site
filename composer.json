@@ -20,7 +20,8 @@
         "laravel/tinker": "^1.0",
         "laravellegends/pt-br-validator": "6.0",
         "spatie/laravel-activitylog": "^3.8",
-        "spatie/laravel-permission": "^3.0"
+        "spatie/laravel-permission": "^3.0",
+        "timehunter/laravel-google-recaptcha-v3": "^2.2"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

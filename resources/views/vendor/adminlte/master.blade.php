@@ -35,5 +35,7 @@
 
 @yield('adminlte_js')
 
+{!!  GoogleReCaptchaV3::init() !!}
+
 </body>
 </html>

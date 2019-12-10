@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Laravel\Socialite\Facades\Socialite;
+use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
 class LoginController extends Controller
 {
@@ -41,6 +43,15 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         Session::put('preUrl', URL::previous());
+    }
+
+    public function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+            'g-recaptcha-response' => [new GoogleReCaptchaV3ValidationRule('login')]
+        ]);
     }
 
     public function redirectTo()
