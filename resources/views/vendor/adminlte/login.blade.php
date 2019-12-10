@@ -100,7 +100,7 @@
             <a href="https://policies.google.com/terms" target="_blank">Termos de uso</a>
             são aplicáveis.
         </div>
-    </div><!-- /.login-box -->
+    </div>
 @stop
 
 @section('adminlte_js')
