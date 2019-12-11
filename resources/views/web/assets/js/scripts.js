@@ -4,6 +4,8 @@ import $ from 'jquery';
 window.$ = window.jQuery = $;
 window.toastr = require('toastr');
 
+window.axios = require('axios').default;
+
 require('inputmask/dist/min/jquery.inputmask.bundle.min');
 
 /*
@@ -50,7 +52,7 @@ function setMasks() {
 
 $(document).on('submit', '[data-ajax]', function (event) {
     event.preventDefault();
-    
+
     let form = $(this);
     let request = {
         method: form.attr('method'),
@@ -58,7 +60,7 @@ $(document).on('submit', '[data-ajax]', function (event) {
         data: new FormData(form[0]),
         alerts_div: form.find('.alerts')
     };
-    
+
     $.ajax({
         type: request.method,
         url: request.action,
@@ -69,7 +71,7 @@ $(document).on('submit', '[data-ajax]', function (event) {
         async: true,
         data: request.data,
         beforeSend: function () {
-        
+
         },
         success: function (response) {
             if (response.refresh) {
@@ -108,14 +110,14 @@ $(document).on('submit', '[data-ajax]', function (event) {
                                     )
                             )
                     );
-                    
+
                     form.find('[name="' + key + '"], [name="' + key + '[]"]').addClass('is-invalid');
                 });
             }
         },
         complete: function (xhr, status) {
-        
+
         }
     });
-    
+
 });

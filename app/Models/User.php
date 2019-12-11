@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasPermissions;
@@ -18,6 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use SoftDeletes;
     use HasRoles;
     use LogsActivity;
+    use HasApiTokens;
 
     protected static $logAttributes = ['name', 'email', 'password', 'roles', 'permissions'];
     protected static $logOnlyDirty = true;
