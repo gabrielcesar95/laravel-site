@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\User as UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of users.
      *
      * @return \Illuminate\Http\Response
      */
@@ -19,27 +20,23 @@ class UserController extends Controller
         return new UserCollection(User::paginate());
     }
 
-    public function me(Request $request)
-    {
-        $user = \App\Models\User::findOrFail($request->user()->id);
-
-        return new \App\Http\Resources\User($user);
-    }
-
     /**
-     * Show the form for creating a new resource.
+     * Display the logged in user.
      *
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function me(Request $request)
     {
-        //
+        $user = User::findOrFail($request->user()->id);
+
+        return new UserResource($user);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created user in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -48,34 +45,23 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified user.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user, $id)
     {
-        $user = \App\Models\User::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        return new \App\Http\Resources\User($user);
+        return new UserResource($user);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified user in storage.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -84,9 +70,9 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified user from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
