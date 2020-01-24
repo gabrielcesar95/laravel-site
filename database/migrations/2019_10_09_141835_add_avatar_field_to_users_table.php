@@ -14,9 +14,7 @@ class AddAvatarFieldToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-//            $table->string('provider_name')->nullable()->after('id');
-//            $table->string('provider_id')->nullable()->after('provider_name');
-            $table->string('avatar')->nullable()->after('email');
+            $table->string('avatar', 600)->nullable()->after('email');
             $table->string('password')->nullable()->change();
         });
     }
@@ -30,7 +28,6 @@ class AddAvatarFieldToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('password')->change();
-//            $table->dropColumn(['provider_name', 'provider_id', 'avatar']);
             $table->dropColumn('avatar');
         });
     }
