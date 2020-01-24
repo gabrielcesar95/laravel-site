@@ -71,11 +71,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getAvatarAttribute()
     {
-        if (Str::startsWith($this->attributes['avatar'], ['http', 'https'])) {
-            return $this->attributes['avatar'];
+        if (isset($this->attributes['avatar'])) {
+            if (Str::startsWith($this->attributes['avatar'], ['http', 'https'])) {
+                return $this->attributes['avatar'];
+            }
+
+            return url($this->attributes['avatar']);
         }
 
-        return url($this->attributes['avatar']);
-
+        return null;
     }
 }
