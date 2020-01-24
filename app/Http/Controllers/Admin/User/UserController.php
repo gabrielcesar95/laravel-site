@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -62,6 +63,10 @@ class UserController extends Controller
 
         if ($request->password) {
             $user->password = Hash::make($request->password);
+        }
+
+        if ($request->hasFile('avatar')) {
+            $user->avatar = url("storage/" . $request->avatar->store('users'));
         }
 
         $roles = $request->roles ? array_merge($request->roles, ['admin']) : ['admin'];
@@ -116,9 +121,13 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->active = $request->active;
+
+        $user->name = $request->name ?? $user->name;
+        if ($request->email && $request->email != $user->email) {
+            $user->email_verified_at = null;
+            $user->email = $request->email;
+        }
+        $user->active = $request->active ?? $user->active;
 
         if ($request->password) {
             $user->password = Hash::make($request->password);
@@ -128,6 +137,13 @@ class UserController extends Controller
 
         if ($user->hasRole('super') && $super = Role::where('name', 'super')->first()) {
             $roles[] = $super->id;
+        }
+
+        if ($request->hasFile('avatar')) {
+            if ($user->cover && Storage::exists($user->cover)) {
+                Storage::delete($user->cover);
+            }
+            $user->avatar = url("storage/" . $request->avatar->store('users'));
         }
 
         $user->save();
