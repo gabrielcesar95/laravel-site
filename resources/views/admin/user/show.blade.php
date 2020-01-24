@@ -23,6 +23,13 @@
     {{ Aire::open()->id('user_create')->bind($user)->autoComplete('off') }}
     <div class="tab-content" id="tab-content">
         <div class="tab-pane fade show active" id="data" role="tabpanel" aria-labelledby="data-tab">
+            <div class="col-12 px-0">
+                <label for="avatar" id="avatar-label">Foto de Avatar</label>
+                @if(isset($user) && $user->avatar)
+                    <img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="img-thumbnail mb-1">
+                @endif
+            </div>
+
             {{ Aire::input('name', 'Nome')->groupClass('form-group')->setAttribute('disabled', true) }}
             {{ Aire::input('email', 'E-Mail')->groupClass('form-group')->setAttribute('disabled', true) }}
             {{ Aire::input('active', 'Situação')->type('checkbox')->groupClass('form-group')->data('toggle', 'toggle')->data('width', '100%')->data('on', 'Ativo')->data('off', 'Inativo')->data('onstyle', 'dark')->data('offstyle', 'danger')->value(1)->checked($user->active)->setAttribute('disabled', true) }}

@@ -66,7 +66,7 @@ class UserController extends Controller
         }
 
         if ($request->hasFile('avatar')) {
-            $user->avatar = url("storage/" . $request->avatar->store('users'));
+            $user->avatar = "storage/" . $request->avatar->store('users');
         }
 
         $roles = $request->roles ? array_merge($request->roles, ['admin']) : ['admin'];
@@ -140,10 +140,10 @@ class UserController extends Controller
         }
 
         if ($request->hasFile('avatar')) {
-            if ($user->cover && Storage::exists($user->cover)) {
-                Storage::delete($user->cover);
+            if ($user->avatar && Storage::exists($user->avatar)) {
+                Storage::delete($user->avatar);
             }
-            $user->avatar = url("storage/" . $request->avatar->store('users'));
+            $user->avatar = "storage/" . $request->avatar->store('users');
         }
 
         $user->save();

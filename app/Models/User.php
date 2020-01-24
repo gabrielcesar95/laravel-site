@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -66,5 +67,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function setActiveAttribute($param)
     {
         $this->attributes['active'] = $param ? 1 : 0;
+    }
+
+    public function getAvatarAttribute()
+    {
+        if (Str::startsWith($this->attributes['avatar'], ['http', 'https'])) {
+            return $this->attributes['avatar'];
+        }
+
+        return url($this->attributes['avatar']);
+
     }
 }

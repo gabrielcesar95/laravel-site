@@ -15,7 +15,23 @@
             {{ Aire::input('email', 'E-Mail')->groupClass('form-group col-md-5') }}
             {{ Aire::input('active', 'Situação')->type('checkbox')->groupClass('form-group col-md-2')->data('toggle', 'toggle')->data('style', 'w-100')->data('on', 'Ativo')->data('off', 'Inativo')->data('onstyle', 'success')->data('offstyle', 'danger')->value(1)->checked() }}
         </div>
+
         <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="cover" id="avatar-label">Foto de Avatar</label>
+
+                @if(isset($user) && $user->avatar)
+                    <img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="img-thumbnail mb-1">
+                @endif
+
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" id="avatar" name="avatar" class="custom-file-input" aria-describedby="avatar-label">
+                        <label class="custom-file-label" for="avatar">Selecionar Arquivo</label>
+                    </div>
+                </div>
+            </div>
+
             {{ Aire::password('password', 'Senha')->groupClass('form-group col-md-4')->value('') }}
             {{ Aire::password('password_confirmation', 'Confirme a Senha')->groupClass('form-group col-md-4')->value('') }}
         </div>
