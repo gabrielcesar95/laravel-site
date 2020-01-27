@@ -3,14 +3,13 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Post;
 
-class User extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -20,10 +19,10 @@ class User extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'avatar' => $this->avatar,
-            'email_verified' => $this->when($this->email_verified_at, true),
+            'active' => $this->active,
+            'email_verified_at' => $this->email_verified_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'posts' => $this->when($request->get('recursive'), Post::collection($this->posts)),
         ];
     }
 }
