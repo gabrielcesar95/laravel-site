@@ -17,9 +17,9 @@
         <span class="text-bold">{{ $user->name }}</span>
         ?
     </p>
-
-    {{ Aire::open()->id('user_delete')->route('admin.user.destroy', $user->id) }}
-    {{ Aire::close() }}
+    <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" id="user_delete">
+        @method('DELETE')
+    </form>
 @stop
 
 @section('footer')

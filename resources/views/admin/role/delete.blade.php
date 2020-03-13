@@ -14,12 +14,13 @@
 
     <p>
         Confirma a exclusão do grupo de acesso
-        <span class="text-bold">{{ $user->name }}</span>
+        <span class="text-bold">{{ $role->name }}</span>
         ?
     </p>
 
-    {{ Aire::open()->id('user_delete')->route('admin.role.destroy', $user->id) }}
-    {{ Aire::close() }}
+    <form action="{{ route('admin.role.destroy', $role->id) }}" method="POST" id="role_delete">
+        @method('DELETE')
+    </form>
 @stop
 
 @section('footer')

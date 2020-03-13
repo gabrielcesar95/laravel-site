@@ -18,13 +18,14 @@
         ?
     </p>
 
-    {{ Aire::open()->id('comment_delete')->route('admin.contact.destroy', $contact->id) }}
-    {{ Aire::close() }}
+    <form action="{{ route('admin.contact.destroy', $contact->id) }}" method="POST" id="contact_delete">
+        @method('DELETE')
+    </form>
 @stop
 
 @section('footer')
     <div class="btn-toolbar w-100 justify-content-between" role="toolbar" aria-label="Ações Disponíveis">
         <button class="btn btn-light" data-dismiss="modal">Cancelar</button>
-        <button class="btn btn-danger" data-trigger-submit="comment_delete">Confirmar</button>
+        <button class="btn btn-danger" data-trigger-submit="contact_delete">Confirmar</button>
     </div>
 @stop

@@ -18,8 +18,9 @@
         ?
     </p>
 
-    {{ Aire::open()->id('post_delete')->route('admin.post.destroy', $post->id) }}
-    {{ Aire::close() }}
+    <form action="{{ route('admin.post.destroy', $post->id) }}" method="POST" id="post_delete">
+        @method('DELETE')
+    </form>
 @stop
 
 @section('footer')
