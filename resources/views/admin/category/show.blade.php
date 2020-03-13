@@ -10,26 +10,32 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('category_show')->bind($category)->autoComplete('off') }}
-    {{ Aire::input('name', 'Nome')->groupClass('form-group')->setAttribute('disabled', true) }}
+    <form action="" method="POST" id="category_show" autocomplete="off">
 
-    @if(isset($category) && $category->cover)
-        <span>Imagem de Capa</span>
-        <img src="{{ url('storage/'.$category->cover) }}" alt="{{ $category->name }}" class="img-thumbnail mb-1">
-    @endif
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" name="name" id="name" value="{{ $category->name }}" disabled>
+        </div>
 
-    <div class="form-group">
-        <label for="slug">Link</label>
-        <div class="input-group mb-3">
-            {{ Aire::input('slug', 'Link')->value(url($category->slug))->groupClass('form-group')->withoutGroup()->setAttribute('disabled', true) }}
-            <div class="input-group-append">
-                <a class="input-group-text mdi mdi-open-in-new" href="{{ url($category->slug) }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Acessar">
-                </a>
+        @if(isset($category) && $category->cover)
+            <span>Imagem de Capa</span>
+            <img src="{{ url('storage/'.$category->cover) }}" alt="{{ $category->name }}" class="img-thumbnail mb-1">
+        @endif
+
+        <div class="form-group">
+            <label for="slug">Link</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="slug" value="{{ url($category->slug) }}" id="slug" disabled>
+                <div class="input-group-append">
+                    <a class="input-group-text mdi mdi-open-in-new" href="{{ url($category->slug) }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Acessar">
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
 
-    {{ Aire::textArea('description', 'Descrição')->groupClass('form-group')->setAttribute('disabled', true) }}
-
-    {{ Aire::close() }}
+        <div class="form-group">
+            <label class=" cursor-pointer" for="description">Descrição</label>
+            <textarea class="form-control" name="description" id="description" disabled>{{ $category->description }}</textarea>
+        </div>
+    </form>
 @stop

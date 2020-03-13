@@ -24,6 +24,12 @@ $(document).ready(function () {
     setSelects();
 });
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 // Select2 pt-BR Translation
 !function () {
     if (jQuery && jQuery.fn && jQuery.fn.select2 && jQuery.fn.select2.amd) var e = jQuery.fn.select2.amd;
@@ -59,16 +65,16 @@ $(document).ready(function () {
 */
 
 function ajaxSearch(options) {
-    
+
     if (options.page && options.data) {
         options.data = options.data + ('&_page=' + options.page);
     }
-    
+
     if (options.order && options.data) {
         options.data = options.data + ('&_order=' + options.order.column);
         options.data = options.data + ('&_order_direction=' + options.order.direction);
     }
-    
+
     $.ajax({
         type: options.method,
         url: options.action,
@@ -131,7 +137,7 @@ function setMasks() {
 function setSelects() {
     $('.select2').each(function () {
         let elem = $(this);
-        
+
         elem.select2({
             theme: 'bootstrap4',
             language: 'pt-BR',
@@ -149,7 +155,7 @@ function setSelects() {
 
 $(document).on('click', '[data-trigger-submit]', function (event) {
     event.preventDefault();
-    
+
     $('#' + $(this).data('trigger-submit')).submit();
 });
 
@@ -157,24 +163,24 @@ $(document).on('click', '[data-trigger-submit]', function (event) {
 
 $(document).on('submit', '[data-search-form]', function (event) {
     event.preventDefault();
-    
+
     let form = {
         method: $(this).attr('method'),
         action: $(this).attr('action'),
         data: $(this).serialize()
     };
-    
+
     ajaxSearch(form);
 });
 
 $(document).on('click', '[data-search-page]', function (event) {
     event.preventDefault();
-    
+
     let href = $(this).attr('href');
     let search_form = $(document).find('[data-search-form]');
     let page = href.substr(href.indexOf('?page=') + 6);
     let order = $('#main-list').find('th a[data-search-order-active]');
-    
+
     let options = {
         method: search_form.attr('method'),
         action: search_form.attr('action'),
@@ -190,7 +196,7 @@ $(document).on('click', '[data-search-page]', function (event) {
 
 $(document).on('click', '[data-search-order]', function (event) {
     event.preventDefault();
-    
+
     let search_form = $(document).find('[data-search-form]');
     let options = {
         method: search_form.attr('method'),
@@ -201,9 +207,9 @@ $(document).on('click', '[data-search-order]', function (event) {
             direction: $(this).data('search-order-direction')
         }
     };
-    
+
     ajaxSearch(options);
-    
+
 });
 
 $(document).on('click', '[data-search-clear]', function (event) {
@@ -212,14 +218,14 @@ $(document).on('click', '[data-search-clear]', function (event) {
         inputs: form.find('input[name$="[value]"]'),
         selects: form.find('select'),
     };
-    
+
     inputs.inputs.val('');
     $(inputs.selects).each(function (key, val) {
         let option = $(this).find('option:first');
-        
+
         $(this).val(option.val());
     });
-    
+
     form.submit();
 });
 
@@ -235,18 +241,18 @@ $(document).ajaxError(function (event, xhr, settings) {
 });
 
 $(document).on('click', '[data-trigger-popup]', function (event) {
-    
+
     event.preventDefault();
-    
+
     let options = {
         url: $(this).data('trigger-popup'),
         data: $(this).data('popup-data'),
         size: $(this).data('popup-size')
     };
-    
+
     let parent = $(this).parents('.modal');
     let modal = $('.modal:first');
-    
+
     if (parent.length > 0) {
         modal.parent().append(
             $('<div>')
@@ -254,28 +260,28 @@ $(document).on('click', '[data-trigger-popup]', function (event) {
         );
         modal = $('.modal:last');
     }
-    
+
     $.get({
         url: options.url,
         data: options.data,
         dataType: 'html',
         success: function (view) {
             modal.html(view).modal();
-            
+
             modal.find('.modal-dialog').addClass(options.size ? 'modal-' + options.size : '');
-            
+
             setTooltips();
             setToggles();
             setMasks();
             setSelects();
         },
     })
-    
+
 });
 
 $(document).on('submit', '.modal-dialog form', function (event) {
     event.preventDefault();
-    
+
     let form = $(this);
     let modal = $(this).parents('.modal-dialog');
     let request = {
@@ -284,7 +290,7 @@ $(document).on('submit', '.modal-dialog form', function (event) {
         data: new FormData(form[0]),
         alerts_div: modal.find('#alerts')
     };
-    
+
     $.ajax({
         type: request.method,
         url: request.action,
@@ -356,7 +362,7 @@ $(document).on('submit', '.modal-dialog form', function (event) {
                                     )
                             )
                     );
-                    
+
                     form.find('[name="' + key + '"], [name="' + key + '[]"]').addClass('is-invalid');
                 });
             }
@@ -365,15 +371,15 @@ $(document).on('submit', '.modal-dialog form', function (event) {
             loading.close();
         }
     });
-    
+
 });
 
 $(document).on('change', '.custom-file input[type="file"]', function (event) {
     let files = $(this)[0].files;
     let label = $(this).siblings('.custom-file-label');
     let total_files = files.length;
-    
-    
+
+
     if (total_files) {
         if (total_files > 1) {
             label.text(total_files + ' arquivos selecionados');
@@ -439,7 +445,7 @@ $(document).on('show.bs.dropdown', '#notifications-wrap', function (event) {
                 )
             } else {
                 $('#notifications').html('');
-                
+
                 $(response).each(function (kn, notification) {
                     $('#notifications')
                         .append(
@@ -455,15 +461,15 @@ $(document).on('show.bs.dropdown', '#notifications-wrap', function (event) {
                                         .text(notification.data.date)
                                 )
                         );
-                    
+
                     if (notification.data.attr) {
                         $('#notifications a:last').attr(notification.data.attr);
-                        
+
                         if (!notification.data.attr.href) {
                             $('#notifications a:last').attr('href', '#');
                         }
                     }
-                    
+
                     $('#notifications a:last').attr('data-id', notification.id);
                 });
             }
@@ -472,10 +478,10 @@ $(document).on('show.bs.dropdown', '#notifications-wrap', function (event) {
             $('#notifications').html('');
         }
     });
-    
+
     $(document).on('click', '#notifications .dropdown-item', function () {
         let id = $(this).data('id');
-        
+
         $.ajax({
             type: "post",
             url: window.location.protocol + '//' + window.location.host + '/adm/notificacoes/visualizar/' + id,

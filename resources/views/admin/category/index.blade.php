@@ -13,15 +13,21 @@
         <div class="accordion" id="filters">
             <div id="filters-accordion" class="collapse mb-1" aria-labelledby="filters-heading" data-parent="#filters">
                 <div class="col-12 p-0">
-                    {{ Aire::open()->route('admin.category.search')->autoComplete('off')->method('get')->data('search-form', true) }}
-                    <div class="form-row">
-                        {{ Aire::input('name[value]', 'Nome')->groupClass('col-md-4 col-lg-3') }}
-                        {{ Aire::hidden('name[operator]')->value('LIKE') }}
-                        <div class="col-md-1 d-flex mt-2 mt-md-0">
-                            {{ Aire::submit()->class('w-100 d-flex mt-auto align-items-center justify-content-center')->labelHtml('<i class="mdi mdi-magnify"></i><span class="sr-only">Buscar</span>')->style('height: calc(1.6em + 0.75rem + 2px);') }}
+                    <form action="{{ route('admin.category.search') }}" method="GET" autocomplete="off" data-search-form="true">
+                        <div class="form-row">
+                            <div class="col-md-4 col-lg-3">
+                                <label for="name[value]">Nome</label>
+                                <input type="text" class="form-control" name="name[value]" id="name[value]">
+                            </div>
+                            <input type="hidden" class="form-control" name="name[operator]" value="LIKE" id="name[operator]">
+                            <div class="col-md-1 d-flex mt-2 mt-md-0">
+                                <button class="w-100 d-flex mt-auto align-items-center justify-content-center btn btn-primary" type="submit" style="height: calc(1.6em + 0.75rem + 2px);">
+                                    <i class="mdi mdi-magnify"></i>
+                                    <span class="sr-only">Buscar</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    {{ Aire::close() }}
+                    </form>
                 </div>
             </div>
         </div>

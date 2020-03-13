@@ -17,9 +17,9 @@
         <span class="text-bold">{{ $category->name }}</span>
         ?
     </p>
-
-    {{ Aire::open()->id('category_delete')->route('admin.category.destroy', $category->id) }}
-    {{ Aire::close() }}
+    <form action="{{ route('admin.category.destroy', $category->id) }}" method="POST" id="category_delete">
+        @method('DELETE')
+    </form>
 @stop
 
 @section('footer')
