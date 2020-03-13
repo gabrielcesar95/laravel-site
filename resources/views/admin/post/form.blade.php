@@ -1,7 +1,13 @@
 <div id="alerts"></div>
 <div class="form-row">
-    {{ Aire::input('name', 'Nome')->id('name')->groupClass('form-group col-12') }}
-    {{ Aire::input('subtitle', 'Subtítulo')->id('subtitle')->groupClass('form-group col-12') }}
+    <div class="form-group col-12">
+        <label for="name">Nome</label>
+        <input type="text" class="form-control" name="name" id="name" value="{{ old('name', $post->name ?? '') }}">
+    </div>
+    <div class="form-group col-12">
+        <label for="subtitle">Subtítulo</label>
+        <input type="text" class="form-control" name="subtitle" id="subtitle" value="{{ old('subtitle', $post->subtitle ?? '') }}">
+    </div>
 
     <div class="form-group col-12">
         <label for="categories">Categorias</label>
@@ -37,11 +43,11 @@
 </div>
 
 <script>
-	$(function () {
-		CKEDITOR.replace('content');
+    $(function () {
+        CKEDITOR.replace('content');
 
-		CKEDITOR.instances.content.on('change', function () {
-			$('#content').val(this.getData());
-		});
-	});
+        CKEDITOR.instances.content.on('change', function () {
+            $('#content').val(this.getData());
+        });
+    });
 </script>

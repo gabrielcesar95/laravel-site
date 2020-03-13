@@ -14,9 +14,10 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('post_update')->route('admin.post.update', $post->id)->method('PUT')->bind($post)->multipart()->autoComplete('off') }}
-    @include('admin.post.form')
-    {{ Aire::close() }}
+    <form action="{{ route('admin.post.update', $post->id) }}" method="POST" id="post_update" enctype="multipart/form-data" autocomplete="off">
+        @method('PUT')
+        @include('admin.post.form')
+    </form>
 @stop
 
 @section('footer')

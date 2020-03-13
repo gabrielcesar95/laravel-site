@@ -14,9 +14,9 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('user_create')->route('admin.user.store')->autoComplete('off') }}
-    @include('admin.user.form')
-    {{ Aire::close() }}
+    <form action="{{ route('admin.user.store') }}" method="POST" id="user_create" enctype="multipart/form-data" autocomplete="off">
+        @include('admin.user.form')
+    </form>
 @stop
 
 @section('footer')

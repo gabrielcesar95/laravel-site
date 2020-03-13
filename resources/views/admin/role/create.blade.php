@@ -14,9 +14,9 @@
 @stop
 
 @section('content')
-    {{ Aire::open()->id('role_create')->route('admin.role.store')->autoComplete('off') }}
-    @include('admin.role.form')
-    {{ Aire::close() }}
+    <form action="{{ route('admin.role.store') }}" method="POST" id="role_create" enctype="multipart/form-data" autocomplete="off">
+        @include('admin.role.form')
+    </form>
 @stop
 
 @section('footer')
