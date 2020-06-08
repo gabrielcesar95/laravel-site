@@ -29,7 +29,7 @@
         "ckeditor": "^4.12.1",
         "icheck-bootstrap": "^3.0",
         "inputmask": "^4.0.9",
-        "jquery": "^3.4",
+        "jquery": "^3.5",
         "popper.js": "^1.16.0",
         "select2": "^4.0.12",
         "simplebar": "^4.3.0-alpha.1",
